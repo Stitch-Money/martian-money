@@ -7,7 +7,7 @@ export const siteName = "Martian Money";
 
 export default function Layout({ children }: { children: any }) {
   return (
-    <body>
+    <>
       <Head>
         <title>{ siteName }</title>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
@@ -22,6 +22,6 @@ export default function Layout({ children }: { children: any }) {
 
       <Footer />
 
-    </body>
+    </>
   )
 }
