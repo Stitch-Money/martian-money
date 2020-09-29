@@ -12,7 +12,7 @@ export default function Report(): JSX.Element {
             </Head>
             <section className="section">
                 <div className="container">
-                    <h1 className="title">Congrats! You're on your way!</h1>
+                    <h1 className="title">Congrats! You&apos;re on your way!</h1>
                     <div className="tile is-ancestor">
                         <IncomeExpenseChart/>
                         <TransactionCategoryChart />
@@ -25,6 +25,6 @@ export default function Report(): JSX.Element {
 
 export async function getStaticProps() {
     return {
-        props: {}, // will be passed to the page component as props
-    }
+        props: {} // will be passed to the page component as props
+    };
 }

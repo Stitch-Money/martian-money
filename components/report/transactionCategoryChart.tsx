@@ -2,27 +2,27 @@ import { Cell, LabelList, Pie, PieChart, PieLabelRenderProps, ResponsiveContaine
 import React from 'react';
 
 type transactionCategory = {
-    name: string,
+    name: string
     value: number
-}
+};
 
 export function TransactionCategoryChart(): JSX.Element {
     const data: transactionCategory[] = [
         {
-            name: "Groceries",
+            name: 'Groceries',
             value: 5000
         },
         {
-            name: "Rent",
+            name: 'Rent',
             value: 15000
         },
         {
-            name: "Entertainment",
+            name: 'Entertainment',
             value: 8000
         }
     ];
 
-    const COLORS = ['#691a1a','#870d0d','#cc7810','#a74808'];
+    const COLORS = ['#691a1a', '#870d0d', '#cc7810', '#a74808'];
 
     const renderLabel = (entry: PieLabelRenderProps) => entry.name;
 

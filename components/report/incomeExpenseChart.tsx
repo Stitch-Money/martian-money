@@ -3,19 +3,17 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend } fro
 import { number } from 'prop-types';
 
 export function IncomeExpenseChart(): JSX.Element {
-
     const data = useMemo(
         () => [
-            { month: "January 2020", income: 50000, expenses: 30000 },
-            { month: "February 2020", income: 52000, expenses: 58000 },
-            { month: "March 2020", income: 51000, expenses: 26000 }
+            { month: 'January 2020', income: 50000, expenses: 30000 },
+            { month: 'February 2020', income: 52000, expenses: 58000 },
+            { month: 'March 2020', income: 51000, expenses: 26000 }
         ],
         []
     );
 
     function getLabelFormatter(label: any) {
-        if (label instanceof number)
-            return label;
+        if (label instanceof number) { return label; }
         return label.charAt(0).toUpperCase() + label.slice(1);
     }
 
