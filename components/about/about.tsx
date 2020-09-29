@@ -5,11 +5,11 @@ export default function About() {
   return (
     <section className="section">
       <div className="container">
-        <div className="columns">
+        <div className="columns is-vcentered">
 
-          <div className="column">
-        <h2 className="title is-3">Don't get left behind</h2>
-        <p className="content is-large">Olympus Mons is calling, and the great migration has begun.
+          <div className="column ">
+        <h2 className="title is-3">Apply for your dome loan now!</h2>
+        <p className="content is-medium">Olympus Mons is calling, and the great migration has begun.
           It's time to leave behind our earthly possessions and launch ourselves at new horizons.
           <br/>
           <br/>
