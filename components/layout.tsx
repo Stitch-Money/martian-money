@@ -1,59 +1,25 @@
-import Head from 'next/head'
-import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
-import Link from 'next/link'
+import React from "react"
+import Head from "next/head"
 
-const name = 'Mars!'
-export const siteTitle = 'Prograde'
-
-export default function Layout({children, home }: { children: JSX.Element[] | JSX.Element, home: boolean }) {
+export default function Layout({ children }: { children: any }) {
   return (
-    <div className={styles.container}>
+    <body>
       <Head>
+        <title>Mars Capital</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="description"
-          content="Providing the financial services you'll need for your new Martian life!"
-        />
-        <meta name="og:title" content={siteTitle} />
+        <meta name="description" content="Providing the financial services you'll need for your new Martian life!" />
+        <meta name="og:title" content={"Mars Capital"} />
       </Head>
-      <header className={styles.header}>
-        {home ? (
-          <>
-            <img
-              src="/images/profile.jpg"
-              className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
-              alt={name}
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <img
-                  src="/images/profile.jpg"
-                  className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                  alt={name}
-                />
-              </a>
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
-      </header>
+      <div className={"navbar"}><h2>Mars Capital</h2></div>
       <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
+      <footer className={"footer"}>
+        <div className="content has-text-centered">
+          <p>
+            <strong>Mars Capital Demo</strong> by <a href="https://stitch.money/">Stitch</a>. The source code is
+            <a href="http://opensource.org/licenses/mit-license.php"> MIT</a>
+          </p>
         </div>
-      )}
-    </div>
+      </footer>
+    </body>
   )
 }
