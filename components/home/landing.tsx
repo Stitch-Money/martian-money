@@ -1,13 +1,9 @@
 import React from "react"
 import { siteName } from "../layout"
-import Link from "next/link";
-import { getStitchAuthorizationCodeUrl } from "./../../integrations/stitch-steps";
-import useSWR from 'swr';
+import StitchSSOLink from "../stitch-sso-link/stitch-sso-link";
 
 export default function Landing() {
-  const { data } = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
   
-  if (data) {
     return (
         <section className="hero">
             <div className="hero-body">
@@ -19,7 +15,7 @@ export default function Landing() {
                       Providing the financial services you&apos;ll need for your new Martian life!
                     </h2>
 
-                    <a className="button is-large is-primary">Apply now</a>
+                    <StitchSSOLink/>
                 </div>
             </div>
         </section>
