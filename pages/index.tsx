@@ -1,10 +1,12 @@
-import Layout from '../components/layout'
+import Layout, { siteName } from "../components/layout"
 import React from "react"
 
 export default function Home() {
   return (
     <Layout>
-      <div>This is the home page</div>
+      <div className="container">
+        <h1 className="title">{ siteName }</h1>
+      </div>
     </Layout>
   )
 }
