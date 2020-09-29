@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: any }) {
   return (
     <body>
       <Head>
-        <title>Mars Capital</title>
+        <title>{ siteName }</title>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
         <link rel="alternate icon" href="/favicon.ico" />
         <meta name="description" content="Providing the financial services you'll need for your new Martian life!" />
@@ -18,7 +18,7 @@ export default function Layout({ children }: { children: any }) {
 
       <Navbar />
 
-      <main className="main-container container">{children}</main>
+      <main className="main-container container">{ children }</main>
 
       <Footer />
 
