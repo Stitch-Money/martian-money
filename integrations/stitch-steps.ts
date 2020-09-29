@@ -32,7 +32,9 @@ async function retrieveTokenUsingAuthorizationCode(authorizationCode: string, co
 
 
 export async function getStitchAuthorizationCodeUrl() {
-    return await buildAuthorizationUrl();
+    const [stitchUrl] = await buildAuthorizationUrl();
+    
+    return stitchUrl;
 }
 
 export async function getStitchAccessToken(authorizationCode: string, codeVerifier: string) {

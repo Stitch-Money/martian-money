@@ -1,4 +1,4 @@
-export const stitchClientId: string = "test-18fbd892-3b73-43c3-a854-c6f78c681349";
+export const stitchClientId: string = "";
 const stitchScopes: string[] = ["accountholders", "balances", "transactions", "accounts", "offline_access", "openid"];
 export const redirectUri: string = "http://localhost:3000/return";
 
