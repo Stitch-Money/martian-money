@@ -1,12 +1,12 @@
 import React from "react"
-import { siteName } from "../../components/layout"
+import { siteName } from "../layout"
 
 export default function Home() {
   return (
     <section className="hero">
       <div className="hero-body">
         <div className="container">
-          <h1 className="title">
+          <h1 className="title is-2">
             { siteName }
           </h1>
           <h2 className="subtitle">
