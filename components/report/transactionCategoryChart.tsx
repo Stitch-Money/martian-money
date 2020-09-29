@@ -22,15 +22,20 @@ export function TransactionCategoryChart(): JSX.Element {
         }
     ];
 
-    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+    const COLORS = ['#691a1a','#870d0d','#cc7810','#a74808'];
 
     const renderLabel = (entry: PieLabelRenderProps) => entry.name;
 
     return (
-        <ResponsiveContainer className="tile">
+        <ResponsiveContainer className="tile" minHeight="300px">
             <PieChart>
-                <Tooltip/>
-                <Pie data={data} dataKey="value" nameKey="name" label={renderLabel}>
+                <Tooltip formatter={value => `R ${value}`}/>
+                <Pie
+                    data={data}
+                    dataKey="value"
+                    nameKey="name"
+                    innerRadius="50%"
+                    label={renderLabel}>
                     <LabelList dataKey="name"/>
                     {
                         data.map((_entry: transactionCategory, index) =>
