@@ -1,0 +1,42 @@
+---
+env:
+  browser: true
+  es2021: true
+  jest: true
+  node: true
+extends:
+  - 'standard-with-typescript'
+  - 'plugin:react/recommended'
+  - 'plugin:react-hooks/recommended'
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 12
+  project:
+    - './tsconfig.json'
+  sourceType: module
+plugins:
+  - '@typescript-eslint'
+  - react
+reportUnusedDisableDirectives: true
+root: true
+rules:
+  '@typescript-eslint/semi':
+    - 2
+    - always
+  '@typescript-eslint/indent':
+    - error
+    - 4
+  '@typescript-eslint/space-before-function-paren':
+    - error
+    - never
+  '@typescript-eslint/explicit-function-return-type': 0
+  '@typescript-eslint/restrict-template-expressions':
+    - 0
+  '@typescript-eslint/consistent-type-definitions':
+    - error
+    - type
+settings:
+  react:
+    version: "16"
