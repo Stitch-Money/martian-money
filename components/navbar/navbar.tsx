@@ -9,7 +9,7 @@ export default function Navbar() {
           <img className="navbar-item" src={'/favicon.svg'} width={"60px"}/>
           <h2 className="navbar-item">{ siteName }</h2>
         </div>
-        <a className="navbar-item navbar-end button is-primary">Apply!</a>
+        <a className="navbar-item navbar-end button is-primary is-hidden-mobile">Apply!</a>
       </div>
     </nav>
   );

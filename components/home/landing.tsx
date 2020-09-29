@@ -1,7 +1,7 @@
 import React from "react"
 import { siteName } from "../layout"
 
-export default function Home() {
+export default function Landing() {
   return (
     <section className="hero">
       <div className="hero-body">
