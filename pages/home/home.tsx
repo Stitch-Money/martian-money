@@ -12,6 +12,8 @@ export default function Home() {
           <h2 className="subtitle">
             Providing the financial services you'll need for your new Martian life!
           </h2>
+
+          <a className="button is-large is-primary">Apply now</a>
         </div>
       </div>
     </section>
