@@ -1,11 +1,34 @@
 import Layout from "../../components/layout";
 import React from "react";
 import { useRouter } from 'next/router'
+import useSWR from "swr";
+import { getStitchAccessToken } from "../../integrations/stitch-steps";
 
 
 export default function Index() {
   const router = useRouter()
-  const { code, scope, state, session_state } = router.query  
+  const { code, scope, state, session_state } = router.query
+  let verifier;
+  if (typeof window !== 'undefined') {
+    verifier = localStorage.getItem('stitchVerifier');
+  }
+  if (verifier) {
+    const { data, error } = useSWR([code, verifier], getStitchAccessToken);
+
+    if(data) {
+      return(
+          <Layout>
+            <p>{ JSON.stringify(data) }</p>
+          </Layout>
+      )
+    } else if (error) {
+      return(
+          <Layout>
+            { JSON.stringify(error) }
+          </Layout>
+      )
+    }
+  }
   return (
     <Layout>
       <p> { code } </p>

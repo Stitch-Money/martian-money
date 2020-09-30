@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 export default function StitchSSOLink() {
-    const {data} = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
+    const { data } = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
 
     if (data) {
         return (
