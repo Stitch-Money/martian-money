@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router'
-import Layout, { siteName } from '../../components/layout';
+import Layout, { siteName } from 'components/layout';
 import React from 'react';
-import { IncomeExpenseChart } from '../../components/report/incomeExpenseChart';
-import { TransactionCategoryChart } from '../../components/report/transactionCategoryChart';
+import { IncomeExpenseChart } from 'components/report/incomeExpenseChart';
+import { TransactionCategoryChart } from 'components/report/transactionCategoryChart';
 import useSWR from "swr";
 import { getStitchAccessToken } from "../../integrations/stitch-steps";
 

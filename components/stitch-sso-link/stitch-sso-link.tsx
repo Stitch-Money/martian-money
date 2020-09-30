@@ -1,12 +1,12 @@
-import { getStitchAuthorizationCodeUrl } from "./../../integrations/stitch-steps";
+import { getStitchAuthorizationCodeUrl } from 'integrations/stitch-steps';
 import useSWR from 'swr';
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
 export default function StitchSSOLink() {
     const { data } = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
 
-    if (data) {
+    if (data != null) {
         return (
             <Link href={ data }>
                 <a className="button is-large is-primary">Apply now</a>

@@ -9,7 +9,7 @@ export default function Testimonials() {
                 <article className="media">
                     <figure className="media-left">
                         <p className="image is-64x64">
-                            <img src="/images/aria.svg"/>
+                            <img src="/images/aria.svg" alt=""/>
                         </p>
                     </figure>
                     <div className="media-content">
@@ -17,7 +17,9 @@ export default function Testimonials() {
                             <p>
                                 <strong>Aria Mcfarland</strong> <small>@aria_on_mars</small> <small> - 3 days</small>
                                 <br/>
-              Applying for a dome loan painless and easy! I was really worried that my immigration was going to be a long process, but with MM all I had to do was link my account and boom! I was pre-approved for a loan on the spot!
+                                Applying for a dome loan painless and easy! I was really worried that my immigration was
+                                going to be a long process, but with MM all I had to do was link my account and boom! I
+                                was pre-approved for a loan on the spot!
                             </p>
                         </div>
                         <nav className="level is-mobile">

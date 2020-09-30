@@ -17,7 +17,7 @@ export default function About() {
                             home on Mars, <strong>the mightiest of the planets!</strong>
                         </p>
                     </div>
-                    <img className="column box has-shadow" src="/images/dome.jpg"/>
+                    <img className="column box has-shadow" src="/images/dome.jpg" alt=""/>
                 </div>
             </div>
         </section>
