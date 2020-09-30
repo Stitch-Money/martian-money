@@ -1,13 +1,14 @@
 import { getUrlEncodedFormData } from './utils';
-import { StitchAccessToken, StitchAccessTokenRequest, StitchRefreshTokenRequest } from './types';
+import { StitchAccessTokenResponse, StitchAccessTokenRequest, StitchRefreshTokenRequest } from './types';
 import { redirectUri, stitchClientId } from './client';
+import { setStitchAccessToken } from '../storage/session-storage';
 
 const tokenEndpoint = 'https://secure.stitch.money/connect/token';
 
 export async function retrieveTokenUsingAuthorizationCode(
     authorizationCode: string,
     codeVerifier: string
-): Promise<StitchAccessToken> {
+): Promise<StitchAccessTokenResponse> {
     const body: StitchAccessTokenRequest = {
         grant_type: 'authorization_code',
         client_id: stitchClientId,
@@ -23,13 +24,15 @@ export async function retrieveTokenUsingAuthorizationCode(
         body: bodyString
     });
 
-    const stitchAccessToken = await response.json() as StitchAccessToken;
-    console.log('Tokens: ', stitchAccessToken);
+    const tokenResponse = await response.json() as StitchAccessTokenResponse;
+    console.log('Tokens: ', tokenResponse);
 
-    return stitchAccessToken;
+    setStitchAccessToken(tokenResponse.access_token);
+
+    return tokenResponse;
 }
 
-async function refreshAuthorizationCode(refreshToken: string) {
+export async function refreshAuthorizationCode(refreshToken: string) {
     const body: StitchRefreshTokenRequest = {
         grant_type: 'refresh_token',
         client_id: stitchClientId,
@@ -46,12 +49,8 @@ async function refreshAuthorizationCode(refreshToken: string) {
     const responseBody = await response.json();
     console.log('Tokens: ', responseBody);
 
-    const stitchAccessToken = responseBody as StitchAccessToken;
+    const stitchAccessToken = responseBody as StitchAccessTokenResponse;
     console.log('Tokens: ', stitchAccessToken);
 
     return stitchAccessToken;
-}
-
-export async function refreshStitchAccessToken(refreshToken: string) {
-    return await refreshAuthorizationCode(refreshToken);
 }
