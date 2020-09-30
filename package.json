@@ -10,6 +10,7 @@
   "dependencies": {
     "bulma": "^0.9.0",
     "date-fns": "^2.11.1",
+    "decimal.js": "^10.2.1",
     "gray-matter": "^4.0.2",
     "next": "9.5.3",
     "react": "16.13.1",
