@@ -5,3 +5,9 @@ $primary: #cc7810;
 $link: #870d0d;
 
 @import "../node_modules/bulma/bulma.sass";
+
+.round {
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+}
