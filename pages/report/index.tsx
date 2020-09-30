@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import Layout, { siteName } from '../../components/layout';
+import Layout, { siteName } from 'components/layout';
 import React from 'react';
-import { IncomeExpenseChart } from '../../components/report/incomeExpenseChart';
-import { TransactionCategoryChart } from '../../components/report/transactionCategoryChart';
+import { IncomeExpenseChart } from 'components/report/incomeExpenseChart';
+import { TransactionCategoryChart } from 'components/report/transactionCategoryChart';
 
 export default function Report(): JSX.Element {
     return (

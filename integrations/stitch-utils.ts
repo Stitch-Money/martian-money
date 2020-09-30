@@ -1,9 +1,9 @@
-export const stitchClientId: string = "c05f0a6c-4d56-4306-830b-1a0a35fd5075";
-const stitchScopes: string[] = ["accountholders", "balances", "transactions", "accounts", "offline_access", "openid"];
-export const redirectUri: string = "http://localhost:3000/return";
+export const stitchClientId: string = 'c05f0a6c-4d56-4306-830b-1a0a35fd5075';
+const stitchScopes: string[] = ['accountholders', 'balances', 'transactions', 'accounts', 'offline_access', 'openid'];
+export const redirectUri: string = 'http://localhost:3000/return';
 
 function base64UrlEncode(byteArray: Uint8Array): string {
-    const charCodes =  String.fromCharCode(...byteArray);
+    const charCodes = String.fromCharCode(...byteArray);
     return window.btoa(charCodes)
         .replace(/\+/g, '-')
         .replace(/\//g, '_')
@@ -14,7 +14,7 @@ async function sha256(verifier: string): Promise<Uint8Array> {
     const msgBuffer = new TextEncoder().encode(verifier);
     // hash the message
     const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    
+
     return new Uint8Array(hashBuffer);
 }
 
@@ -22,7 +22,7 @@ async function generateVerifierChallengePair() {
     const randomBytes = crypto.getRandomValues(new Uint8Array(32));
     const verifier = base64UrlEncode(randomBytes);
     const challenge = await sha256(verifier).then(base64UrlEncode);
-    
+
     return [verifier, challenge];
 }
 
