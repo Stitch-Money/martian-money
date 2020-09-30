@@ -32,7 +32,13 @@ async function retrieveTokenUsingAuthorizationCode(
 }
 
 export async function getStitchAuthorizationCodeUrl() {
-    const [stitchUrl] = await buildAuthorizationUrl();
+    const [stitchUrl, verifier, nonce] = await buildAuthorizationUrl();
+
+    if (typeof window !== 'undefined') {
+        localStorage.setItem('stitchVerifier', verifier);
+        localStorage.setItem('stitchNonce', nonce);
+    }
+
     return stitchUrl;
 }
 
