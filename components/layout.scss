@@ -5,9 +5,12 @@ $primary: #cc7810;
 $link: #870d0d;
 
 @import "../node_modules/bulma/bulma.sass";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
 
 .round {
-    height: 200px;
-    width: 200px;
-    border-radius: 100px;
+    height: 300px;
+    width: 300px;
+    border-radius: 150px;
 }
+
+$family-primary: 'Montserrat', sans-serif;

@@ -1,13 +1,14 @@
 import React from 'react';
-import { siteName } from '../layout';
 
 export default function Footer() {
     return (
         <footer className={'footer'}>
             <div className="content has-text-centered">
                 <p>
-                    <strong>{siteName} Demo</strong> by <a href="https://stitch.money/">Stitch</a>.
-                    The source code is <a href="http://opensource.org/licenses/mit-license.php">MIT</a> licensed.
+                    A <strong>demo experience</strong> by <a href="https://stitch.money/">Stitch</a>.
+                    <a href="">Learn more</a>
+                    |
+                    <a href="">Github</a>
                 </p>
             </div>
         </footer>

@@ -9,7 +9,7 @@ export default function StitchSSOLink() {
     if (data != null) {
         return (
             <Link href={ data }>
-                <a className='button is-large is-primary round'>Apply now</a>
+                <a className='button is-large is-primary round is-family-primary is-size-1 has-text-weight-semibold'>APPLY</a>
             </Link>
         );
     }
