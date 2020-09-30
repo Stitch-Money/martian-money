@@ -1,3 +1,5 @@
+import { StitchAuthorizationUrlParameters } from './types';
+
 export const stitchClientId: string = 'c05f0a6c-4d56-4306-830b-1a0a35fd5075';
 const stitchScopes: string[] = ['accountholders', 'balances', 'transactions', 'accounts', 'offline_access', 'openid'];
 export const redirectUri: string = 'http://localhost:3000/return';
@@ -36,7 +38,7 @@ export async function buildAuthorizationUrl(): Promise<string[]> {
     const nonce = generateRandomStateOrNonce();
     const [verifier, challenge] = await generateVerifierChallengePair();
 
-    const search = {
+    const search: StitchAuthorizationUrlParameters = {
         client_id: stitchClientId,
         code_challenge: challenge,
         code_challenge_method: 'S256',
@@ -47,6 +49,10 @@ export async function buildAuthorizationUrl(): Promise<string[]> {
         state: state
     };
 
-    const searchString = Object.entries(search).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+    const searchString = getUrlEncodedFormData(search);
     return [`https://secure.stitch.money/connect/authorize?${searchString}`, verifier, nonce];
+}
+
+export function getUrlEncodedFormData(body: { [key: string]: any }) {
+    return Object.entries(body).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
 }
