@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Layout from 'components/layout';
-import { getStitchAccessToken } from 'integrations/stitch-steps';
+import { getStitchAccessToken } from 'integration/stitch-steps';
 
 export default function Index() {
     const router = useRouter();

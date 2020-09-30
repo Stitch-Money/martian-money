@@ -1,4 +1,4 @@
-import { getStitchAuthorizationCodeUrl } from 'integrations/stitch-steps';
+import { getStitchAuthorizationCodeUrl } from 'integration/stitch-steps';
 import useSWR from 'swr';
 import React from 'react';
 import Link from 'next/link';

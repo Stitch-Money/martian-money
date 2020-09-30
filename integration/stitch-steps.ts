@@ -1,10 +1,29 @@
+import { buildAuthorizationUrl, getUrlEncodedFormData, redirectUri, stitchClientId } from './stitch-utils';
+import { StitchAccessToken, StitchAccessTokenRequest } from './types';
+
+export async function getStitchAuthorizationCodeUrl(): Promise<string> {
+    const [stitchUrl, verifier, nonce] = await buildAuthorizationUrl();
+
+    if (typeof window !== 'undefined') {
+        localStorage.setItem('stitchVerifier', verifier);
+        localStorage.setItem('stitchNonce', nonce);
+    }
+
+    return stitchUrl;
+}
+
+export async function getStitchAccessToken(authorizationCode: string, codeVerifier: string) {
+    return await retrieveTokenUsingAuthorizationCode(authorizationCode, codeVerifier);
+}
 import { buildAuthorizationUrl, redirectUri, stitchClientId } from './stitch-utils';
 import { StitchAccessToken } from './types';
 const tokenEndpoint = 'https://secure.stitch.money/connect/token';
 
 async function retrieveTokenUsingAuthorizationCode(
-    authorizationCode: string, codeVerifier: string): Promise<StitchAccessToken> {
-    const body = {
+    authorizationCode: string,
+    codeVerifier: string
+): Promise<StitchAccessToken> {
+    const body: StitchAccessTokenRequest = {
         grant_type: 'authorization_code',
         client_id: stitchClientId,
         code: authorizationCode,
@@ -12,24 +31,17 @@ async function retrieveTokenUsingAuthorizationCode(
         code_verifier: codeVerifier
     };
 
-    const bodyString = Object.entries(body).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+    const bodyString = getUrlEncodedFormData(body);
     const response = await fetch(tokenEndpoint, {
         method: 'post',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: bodyString
     });
 
-    const responseBody = await response.json();
-    console.log('Tokens: ', responseBody);
+    const stitchAccessToken = await response.json() as StitchAccessToken;
+    console.log('Tokens: ', stitchAccessToken);
 
-    return {
-        id_token: responseBody.id_token,
-        access_token: responseBody.access_token,
-        expires_in: responseBody.expires_in,
-        token_type: responseBody.token_type,
-        refresh_token: responseBody.refresh_token,
-        scope: responseBody.scope
-    };
+    return stitchAccessToken;
 }
 
 async function refreshAuthorizationCode(refreshToken: string) {
@@ -60,12 +72,6 @@ export async function getStitchAuthorizationCodeUrl() {
         localStorage.setItem('stitchNonce', nonce);
     }
 
-    return stitchUrl;
-}
-
-export async function getStitchAccessToken(authorizationCode: string, codeVerifier: string) {
-    return await retrieveTokenUsingAuthorizationCode(authorizationCode, codeVerifier);
-}
 
 export async function refreshStitchAccessToken(refreshToken: string) {
     return await refreshAuthorizationCode(refreshToken);
