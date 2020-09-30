@@ -1,16 +1,6 @@
-import { buildAuthorizationUrl, getUrlEncodedFormData, redirectUri, stitchClientId } from './stitch-utils';
+import { getUrlEncodedFormData } from './utils';
 import { StitchAccessToken, StitchAccessTokenRequest } from './types';
-
-export async function getStitchAuthorizationCodeUrl(): Promise<string> {
-    const [stitchUrl, verifier, nonce] = await buildAuthorizationUrl();
-
-    if (typeof window !== 'undefined') {
-        localStorage.setItem('stitchVerifier', verifier);
-        localStorage.setItem('stitchNonce', nonce);
-    }
-
-    return stitchUrl;
-}
+import { redirectUri, stitchClientId } from './client';
 
 export async function getStitchAccessToken(authorizationCode: string, codeVerifier: string) {
     return await retrieveTokenUsingAuthorizationCode(authorizationCode, codeVerifier);
@@ -40,5 +30,3 @@ async function retrieveTokenUsingAuthorizationCode(
 
     return stitchAccessToken;
 }
-
-
