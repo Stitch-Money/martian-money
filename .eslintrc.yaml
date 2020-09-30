@@ -39,6 +39,8 @@ rules:
     - type
   '@typescript-eslint/naming-convention':
     - off
+  '@typescript-eslint/strict-boolean-expressions':
+    - off
 settings:
   react:
     version: "16"
