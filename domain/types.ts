@@ -1,8 +1,8 @@
 import { Decimal } from 'decimal.js';
 
-export type BankAccountId = string & { __bankId__: void };
-export type TransactionId = string & { __transactionId__: void };
-export type DebitOrderId = string & { __debitOrderId__: void };
+export type BankAccountId = string & { __bankId__: null };
+export type TransactionId = string & { __transactionId__: null };
+export type DebitOrderId = string & { __debitOrderId__: null };
 
 export type Money = {
     quantity: Decimal
