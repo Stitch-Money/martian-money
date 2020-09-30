@@ -4,11 +4,7 @@ import { redirectUri, stitchClientId } from './client';
 
 const tokenEndpoint = 'https://secure.stitch.money/connect/token';
 
-export async function getStitchAccessToken(authorizationCode: string, codeVerifier: string) {
-    return await retrieveTokenUsingAuthorizationCode(authorizationCode, codeVerifier);
-}
-
-async function retrieveTokenUsingAuthorizationCode(
+export async function retrieveTokenUsingAuthorizationCode(
     authorizationCode: string,
     codeVerifier: string
 ): Promise<StitchAccessToken> {

@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Layout from 'components/layout';
-import { getStitchAccessToken } from 'integrations/stitch/fetch-token';
+import { retrieveTokenUsingAuthorizationCode } from 'integrations/stitch/fetch-token';
 
 export default function Index() {
     const router = useRouter();
@@ -12,7 +12,7 @@ export default function Index() {
         verifier = localStorage.getItem('stitchVerifier');
     }
     if (verifier) {
-        const { data, error } = useSWR([code, verifier], getStitchAccessToken);
+        const { data, error } = useSWR([code, verifier], retrieveTokenUsingAuthorizationCode);
 
         if (data) {
             return (

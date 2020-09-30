@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Layout, { siteName } from 'components/layout';
 import { IncomeExpenseChart } from 'components/report/incomeExpenseChart';
 import { TransactionCategoryChart } from 'components/report/transactionCategoryChart';
-import { getStitchAccessToken } from 'integrations/stitch/fetch-token';
+import { retrieveTokenUsingAuthorizationCode } from 'integrations/stitch/fetch-token';
 import { getSessionVerifier } from "integrations/storage/session-storage";
 
 function getAccessToken() {
@@ -13,7 +13,7 @@ function getAccessToken() {
     const { code } = router.query;
     const verifier = getSessionVerifier();
 
-    return useSWR([code, verifier], getStitchAccessToken);
+    return useSWR([code, verifier], retrieveTokenUsingAuthorizationCode);
 }
 
 export default function Report(): JSX.Element {

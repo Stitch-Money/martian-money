@@ -7,7 +7,7 @@ export function getSessionNonce(): string | null{
     if (typeof window !== 'undefined') {
         return sessionStorage.getItem('stitchNonce');
     }
-    return null; 
+    return null;
 }
 
 export function setSessionVerifier(verifier: string) {
@@ -19,6 +19,19 @@ export function setSessionVerifier(verifier: string) {
 export function getSessionVerifier(): string | null{
     if (typeof window !== 'undefined') {
         return sessionStorage.getItem('stitchVerifier');
+    }
+    return null;
+}
+
+export function setStitchAccessToken(token: string) {
+    if (typeof window !== 'undefined') {
+        sessionStorage.setItem('stitchToken', token);
+    }
+}
+
+export function getStitchAccessToken(): string | null{
+    if (typeof window !== 'undefined') {
+        return sessionStorage.getItem('stitchToken');
     }
     return null;
 }
