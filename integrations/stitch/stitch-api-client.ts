@@ -1,6 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { BankAccounts } from './queries';
+import { BankAccounts } from './query/queries';
 import { getStitchAccessToken } from '../storage/session-storage';
 
 // Apollo Client chains together ApolloLinks to add our token to every request
