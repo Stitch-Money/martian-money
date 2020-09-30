@@ -1,6 +1,8 @@
 import { getUrlEncodedFormData } from './utils';
-import { StitchAccessToken, StitchAccessTokenRequest } from './types';
+import { StitchAccessToken, StitchAccessTokenRequest, StitchRefreshTokenRequest } from './types';
 import { redirectUri, stitchClientId } from './client';
+
+const tokenEndpoint = 'https://secure.stitch.money/connect/token';
 
 export async function getStitchAccessToken(authorizationCode: string, codeVerifier: string) {
     return await retrieveTokenUsingAuthorizationCode(authorizationCode, codeVerifier);
@@ -19,7 +21,7 @@ async function retrieveTokenUsingAuthorizationCode(
     };
 
     const bodyString = getUrlEncodedFormData(body);
-    const response = await fetch('https://secure.stitch.money/connect/token', {
+    const response = await fetch(tokenEndpoint, {
         method: 'post',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: bodyString
@@ -29,4 +31,31 @@ async function retrieveTokenUsingAuthorizationCode(
     console.log('Tokens: ', stitchAccessToken);
 
     return stitchAccessToken;
+}
+
+async function refreshAuthorizationCode(refreshToken: string) {
+    const body: StitchRefreshTokenRequest = {
+        grant_type: 'refresh_token',
+        client_id: stitchClientId,
+        refresh_token: refreshToken
+    };
+    const bodyString = Object.entries(body).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+
+    const response = await fetch(tokenEndpoint, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: bodyString
+    });
+
+    const responseBody = await response.json();
+    console.log('Tokens: ', responseBody);
+
+    const stitchAccessToken = responseBody as StitchAccessToken;
+    console.log('Tokens: ', stitchAccessToken);
+
+    return stitchAccessToken;
+}
+
+export async function refreshStitchAccessToken(refreshToken: string) {
+    return await refreshAuthorizationCode(refreshToken);
 }
