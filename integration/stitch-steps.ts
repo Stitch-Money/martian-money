@@ -1,5 +1,6 @@
 import { buildAuthorizationUrl, getUrlEncodedFormData, redirectUri, stitchClientId } from './stitch-utils';
 import { StitchAccessToken, StitchAccessTokenRequest } from './types';
+const tokenEndpoint = 'https://secure.stitch.money/connect/token';
 
 export async function getStitchAuthorizationCodeUrl(): Promise<string> {
     const [stitchUrl, verifier, nonce] = await buildAuthorizationUrl();
@@ -15,9 +16,6 @@ export async function getStitchAuthorizationCodeUrl(): Promise<string> {
 export async function getStitchAccessToken(authorizationCode: string, codeVerifier: string) {
     return await retrieveTokenUsingAuthorizationCode(authorizationCode, codeVerifier);
 }
-import { buildAuthorizationUrl, redirectUri, stitchClientId } from './stitch-utils';
-import { StitchAccessToken } from './types';
-const tokenEndpoint = 'https://secure.stitch.money/connect/token';
 
 async function retrieveTokenUsingAuthorizationCode(
     authorizationCode: string,
@@ -63,15 +61,6 @@ async function refreshAuthorizationCode(refreshToken: string) {
 
     return responseBody;
 }
-
-export async function getStitchAuthorizationCodeUrl() {
-    const [stitchUrl, verifier, nonce] = await buildAuthorizationUrl();
-
-    if (typeof window !== 'undefined') {
-        localStorage.setItem('stitchVerifier', verifier);
-        localStorage.setItem('stitchNonce', nonce);
-    }
-
 
 export async function refreshStitchAccessToken(refreshToken: string) {
     return await refreshAuthorizationCode(refreshToken);
