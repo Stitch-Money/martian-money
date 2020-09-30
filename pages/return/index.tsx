@@ -1,39 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
-import Layout from 'components/layout';
 import { retrieveTokenUsingAuthorizationCode } from 'integrations/stitch/fetch-token';
+import {
+    getSessionVerifier,
+    getStitchAccessToken,
+    setStitchAccessToken
+} from '../../integrations/storage/session-storage';
+import Layout from '../../components/layout';
 
 export default function Index() {
     const router = useRouter();
-    const { code, scope, state, session_state } = router.query;
-    let verifier;
+    const { code } = router.query;
+    let verifier: string | null = null;
     if (typeof window !== 'undefined') {
-        verifier = localStorage.getItem('stitchVerifier');
+        verifier = getSessionVerifier();
     }
-    if (verifier) {
-        const { data, error } = useSWR([code, verifier], retrieveTokenUsingAuthorizationCode);
 
-        if (data) {
-            return (
-                <Layout>
-                    <p>{JSON.stringify(data)}</p>
-                </Layout>
-            );
-        } else if (error) {
-            return (
-                <Layout>
-                    {JSON.stringify(error)}
-                </Layout>
-            );
+    useEffect(() => {
+        async function retrieveToken(): Promise<void> {
+            if (code && verifier) {
+                const response = await retrieveTokenUsingAuthorizationCode(`${code}`, verifier);
+                setStitchAccessToken(response.access_token);
+            }
         }
-    }
-    return (
-        <Layout>
-            <p> {code} </p>
-            <p> {scope} </p>
-            <p> {state} </p>
-            <p> {session_state} </p>
-        </Layout>
-    );
+
+        retrieveToken().then(_ => {
+            const token = getStitchAccessToken();
+            if (token) {
+                router.push('/report').then(_ => {}, _ => {});
+            }
+        }, () => {});
+    }, [router, code, verifier]);
+
+    return <Layout>
+        Loading...
+    </Layout>;
 }

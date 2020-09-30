@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { BankAccountResponse } from '../../integrations/stitch/query/query-response-types';
-import { BankAccounts } from '../../integrations/stitch/query/queries';
+import { BankAccounts, TransactionsByBankAccount } from '../../integrations/stitch/query/queries';
 import Layout, { siteName } from '../layout';
 import Head from 'next/head';
 import { IncomeExpenseChart } from './incomeExpenseChart';
@@ -8,10 +8,13 @@ import { TransactionCategoryChart } from './transactionCategoryChart';
 import React from 'react';
 
 export function ReportContents(): JSX.Element {
-    const { loading, data, error } = useQuery<BankAccountResponse>(BankAccounts);
-    console.log('Loading', loading);
-    console.log('Errors', error);
-    console.log('Data', data);
+    const bankAccountResponse = useQuery<BankAccountResponse>(BankAccounts);
+    console.log('Errors', bankAccountResponse.error);
+    console.log('bankAccountResponse', bankAccountResponse.data);
+
+    let transactionsResponse = useQuery<BankAccountResponse>(TransactionsByBankAccount, );
+    console.log('Errors', transactionsResponse.error);
+    console.log('transactionsResponse', transactionsResponse.data);
 
     return (
         <Layout>
