@@ -28,3 +28,9 @@ export type StitchAccessTokenRequest = {
     redirect_uri: string
     code_verifier: string
 };
+
+export type StitchRefreshTokenRequest = {
+    grant_type: 'refresh_token',
+    client_id: string,
+    refresh_token: string
+}

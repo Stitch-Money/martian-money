@@ -1,5 +1,5 @@
 import { buildAuthorizationUrl, getUrlEncodedFormData, redirectUri, stitchClientId } from './stitch-utils';
-import { StitchAccessToken, StitchAccessTokenRequest } from './types';
+import {StitchAccessToken, StitchAccessTokenRequest, StitchRefreshTokenRequest} from './types';
 const tokenEndpoint = 'https://secure.stitch.money/connect/token';
 
 export async function getStitchAuthorizationCodeUrl(): Promise<string> {
@@ -43,7 +43,7 @@ async function retrieveTokenUsingAuthorizationCode(
 }
 
 async function refreshAuthorizationCode(refreshToken: string) {
-    const body = {
+    const body: StitchRefreshTokenRequest = {
         grant_type: 'refresh_token',
         client_id: stitchClientId,
         refresh_token: refreshToken
@@ -59,7 +59,10 @@ async function refreshAuthorizationCode(refreshToken: string) {
     const responseBody = await response.json();
     console.log('Tokens: ',  responseBody);
 
-    return responseBody;
+    const stitchAccessToken = responseBody as StitchAccessToken;
+    console.log('Tokens: ', stitchAccessToken);
+    
+    return stitchAccessToken;
 }
 
 export async function refreshStitchAccessToken(refreshToken: string) {
