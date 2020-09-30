@@ -5,16 +5,15 @@ import {
 } from './utils';
 import { StitchAuthorizationUrlParameters } from './types';
 import { redirectUri, stitchClientId } from './client';
+import { setSessionNonce, setSessionVerifier } from "integrations/storage/session-storage";
 
 const stitchScopes: string[] = ['accountholders', 'balances', 'transactions', 'accounts', 'offline_access', 'openid'];
 
 export async function getStitchAuthorizationCodeUrl(): Promise<string> {
     const [stitchUrl, verifier, nonce] = await buildAuthorizationUrl();
 
-    if (typeof window !== 'undefined') {
-        localStorage.setItem('stitchVerifier', verifier);
-        localStorage.setItem('stitchNonce', nonce);
-    }
+    setSessionNonce(nonce);
+    setSessionVerifier(verifier);
 
     return stitchUrl;
 }

@@ -6,14 +6,12 @@ import Layout, { siteName } from 'components/layout';
 import { IncomeExpenseChart } from 'components/report/incomeExpenseChart';
 import { TransactionCategoryChart } from 'components/report/transactionCategoryChart';
 import { getStitchAccessToken } from 'integrations/stitch/fetch-token';
+import { getSessionVerifier } from "integrations/storage/session-storage";
 
 function getAccessToken() {
     const router = useRouter();
     const { code } = router.query;
-    let verifier;
-    if (typeof window !== 'undefined') {
-        verifier = localStorage.getItem('stitchVerifier');
-    }
+    const verifier = getSessionVerifier();
 
     return useSWR([code, verifier], getStitchAccessToken);
 }
