@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Footer(props: { onReadMoreClick: () => void }) {
+export default function Footer(props: { onReadMoreClick: () => void }): JSX.Element {
     return (
         <footer className={'footer stitch-footer'}>
             <div className="content has-text-centered">
