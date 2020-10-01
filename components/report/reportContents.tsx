@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { Decimal } from 'decimal.js';
 import { BankAccountResponse, TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
 import { BankAccountsQuery, TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
 import { IncomeExpenseChart } from './incomeExpenseChart';
@@ -15,7 +16,8 @@ export function ReportContents(): JSX.Element {
         variables: { accountId: bankAccountResponse.data?.user.bankAccounts[0].id }
     });
     console.log('Errors', transactionsResponse.error);
-    console.log('transaction total', transactionsResponse.data?.node.transactions.edges.reduce((acc, t) => acc + t.node.amount, 0));
+    const total = transactionsResponse.data?.node.transactions.edges.reduce((acc, t) => acc.add(new Decimal(t.node.amount.quantity)), new Decimal(0));
+    console.log('transaction total', total?.toString());
 
     return (
         <>

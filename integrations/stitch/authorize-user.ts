@@ -4,8 +4,9 @@ import {
     getUrlEncodedFormData
 } from './utils';
 import { StitchAuthorizationUrlParameters } from './types';
-import { redirectUri, stitchClientId } from './client';
-import { setSessionNonce, setSessionVerifier } from "integrations/storage/session-storage";
+
+import { setSessionNonce, setSessionVerifier } from 'integrations/storage/session-storage';
+import { StitchTestClient } from './client.test';
 
 const stitchScopes: string[] = ['accountholders', 'balances', 'transactions', 'accounts', 'offline_access', 'openid'];
 
@@ -23,8 +24,10 @@ async function buildAuthorizationUrl(): Promise<string[]> {
     const nonce = generateRandomStateOrNonce();
     const [verifier, challenge] = await generateVerifierChallengePair();
 
+    const { clientId, redirectUri, identityServerUri } = StitchTestClient;
+
     const search: StitchAuthorizationUrlParameters = {
-        client_id: stitchClientId,
+        client_id: clientId,
         code_challenge: challenge,
         code_challenge_method: 'S256',
         redirect_uri: redirectUri,
@@ -35,5 +38,5 @@ async function buildAuthorizationUrl(): Promise<string[]> {
     };
 
     const searchString = getUrlEncodedFormData(search);
-    return [`https://secure.stitch.money/connect/authorize?${searchString}`, verifier, nonce];
+    return [`${identityServerUri}/connect/authorize?${searchString}`, verifier, nonce];
 }
