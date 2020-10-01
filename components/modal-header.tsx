@@ -6,7 +6,7 @@ export function ModalHeader(props: { onClose: MouseEventHandler }) {
     return <nav id="navbar" className='navbar is-spaced is-transparent'>
         <div className="navbar-menu">
             <div className="navbar-end">
-                <button className="button is-text has-text-primary" onClick={props.onClose}>
+                <button className="button is-text has-text-primary is-small" onClick={props.onClose}>
                     <span className="icon is-small">
                         <FontAwesomeIcon icon={faTimes}/>
                     </span></button>

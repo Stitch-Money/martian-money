@@ -10,13 +10,15 @@ import { setClientIdForSession } from '../../integrations/storage/session-storag
 import { StitchConfiguration } from '../../integrations/stitch/client';
 import { ModalHeader } from '../../components/modal-header';
 import { useRouter } from 'next/router';
+import Dome from '../../components/dome';
 
 export default function SelectExperiencePage(): JSX.Element {
     const authorizeUrl = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
     const testAuthorizeUrl = useSWR('stitchTestClientUrl', getStitchTestClientAuthorizationCodeUrl);
     const router = useRouter();
 
-    return (
+    return <>
+        <Dome/>
         <section className="section">
             <div className="container">
                 <ModalHeader onClose={() => router.push('/')}/>
@@ -50,5 +52,5 @@ export default function SelectExperiencePage(): JSX.Element {
                 </div>
             </div>
         </section>
-    );
+    </>;
 }
