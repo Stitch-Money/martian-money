@@ -1,7 +1,7 @@
 import { getUrlEncodedFormData } from './utils';
 import { StitchAccessTokenResponse, StitchAccessTokenRequest, StitchRefreshTokenRequest } from './types';
-import { redirectUri, stitchClientId } from './client';
 import { setStitchAccessToken } from '../storage/session-storage';
+import { StitchTestEnvironmentConfiguration } from './client.test'
 
 const tokenEndpoint = 'https://secure.stitch.money/connect/token';
 
@@ -9,9 +9,11 @@ export async function retrieveTokenUsingAuthorizationCode(
     authorizationCode: string,
     codeVerifier: string
 ): Promise<StitchAccessTokenResponse> {
+    const { clientId, redirectUri } = StitchTestEnvironmentConfiguration;
+
     const body: StitchAccessTokenRequest = {
         grant_type: 'authorization_code',
-        client_id: stitchClientId,
+        client_id: clientId,
         code: authorizationCode,
         redirect_uri: redirectUri,
         code_verifier: codeVerifier
@@ -33,9 +35,11 @@ export async function retrieveTokenUsingAuthorizationCode(
 }
 
 export async function refreshAuthorizationCode(refreshToken: string) {
+    const { clientId } = StitchTestEnvironmentConfiguration;
+
     const body: StitchRefreshTokenRequest = {
         grant_type: 'refresh_token',
-        client_id: stitchClientId,
+        client_id: clientId,
         refresh_token: refreshToken
     };
     const bodyString = Object.entries(body).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
