@@ -1,20 +1,27 @@
 @charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-//$body-background-color: #f0e7e7;
+$family-sans-serif: 'Inter', sans-serif;
+
 $primary: #E95122;
 $link: #E95122;
 $info: #FBE6DA;
 $info-invert: $primary;
+$grey: #857D7A;
+$grey-light: #ADA39F;
+
 $footer-background-color: #ffffff;
 $footer-padding: 1.5rem 1.5rem 0;
 
 @import "../node_modules/bulma/bulma.sass";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-//font-family: 'Inter', sans-serif;
 
-.button {
+a.button {
     border-radius: 1000px;
+}
+
+a.button:hover {
+    text-decoration: none !important;
 }
 
 .round {
@@ -65,13 +72,9 @@ $footer-padding: 1.5rem 1.5rem 0;
     width: 100%;
 }
 
-.stitch-footer-text-subtle {
-    color: #857D7A;
-}
-
 .stitch-footer-text-orange {
     text-decoration: none;
-    color: #E95122;
+    color: $primary;
     font-weight: bold;
     line-height: 150%;
 }
