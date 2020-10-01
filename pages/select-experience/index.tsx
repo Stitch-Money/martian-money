@@ -4,6 +4,8 @@ import {
     getStitchTestClientAuthorizationCodeUrl
 } from '../../integrations/stitch/authorize/authorize-user';
 import useSWR from 'swr';
+import { PrimaryButton } from '../../components/buttons/primary-button';
+import { SecondaryButton } from '../../components/buttons/secondary-button';
 
 export default function SelectExperiencePage(): JSX.Element {
     const authorizeUrl = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
@@ -18,8 +20,8 @@ export default function SelectExperiencePage(): JSX.Element {
                 </div>
 
                 <div className="buttons is-centered">
-                    <a href={ testAuthorizeUrl.data } className="button is-primary is-half">Apply with demo info</a>
-                    <a href={ authorizeUrl.data } className="button is-info is-half">Apply with my info</a>
+                    <PrimaryButton href={ testAuthorizeUrl.data}>Apply with demo info</PrimaryButton>
+                    <SecondaryButton href={ authorizeUrl.data}>Apply with my info</SecondaryButton>
                 </div>
             </div>
             <div className="container">

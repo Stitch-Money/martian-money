@@ -2,6 +2,7 @@ import React from 'react';
 import { SiteHead } from '../siteHead';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import { PrimaryButton } from '../buttons/primary-button';
 
 function AboutHeader(props: { onClose: () => void }) {
     return <nav id="navbar" className={'navbar is-spaced'}>
@@ -34,8 +35,8 @@ export function About(props: { onClose: () => void }) {
                     <div className="content has-text-weight-bold is-medium is-light">
                         <p>Try the demo now</p>
                     </div>
-                    <a href="/select-experience" className="button is-primary">Apply for a dome-loan</a>
-                    <a href="https://stitch.money">Learn more about Stitch</a>
+                    <PrimaryButton href="/select-experience">Apply for a dome-loan</PrimaryButton>
+                    <p><a href="https://stitch.money">Learn more about Stitch</a></p>
                 </div>
             </div>
         </>
