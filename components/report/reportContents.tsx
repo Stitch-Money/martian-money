@@ -24,7 +24,6 @@ export function ReportContents(): JSX.Element {
         <>
             <div className='columns is-centered'>
                 <div className='column is-half-desktop is-center'>
-                    
                     <ChartCard title = 'Earth ID'>
                         <Identity />
                     </ChartCard>
