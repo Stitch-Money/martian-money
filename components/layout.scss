@@ -5,6 +5,7 @@
 $family-sans-serif: 'Inter', sans-serif;
 
 $primary: #E95122;
+$primary-dark: #D63908;
 $link: #E95122;
 $info: #FBE6DA;
 $info-invert: $primary;
@@ -33,7 +34,7 @@ a.button:hover {
 }
 
 .round:hover {
-    background: #D63908;
+    background: $primary-dark;
     text-decoration: none;
 }
 
