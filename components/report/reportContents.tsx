@@ -22,17 +22,19 @@ export function ReportContents(): JSX.Element {
 
     return (
         <>
-            <h1 className="title">Congrats! You&apos;re on your way!</h1>
-            <div className='column is-half-desktop'>
-                <ChartCard title = 'Earth ID'>
-                    <Identity />
-                </ChartCard>
-                <ChartCard title = 'Income Vs Expenses'>
-                    <IncomeExpenseChart/>
-                </ChartCard>
-                <ChartCard title = 'Spend Breakdown'>
-                    <TransactionCategoryChart/>
-                </ChartCard>
+            <div className='columns is-centered'>
+                <div className='column is-half-desktop is-center'>
+                    
+                    <ChartCard title = 'Earth ID'>
+                        <Identity />
+                    </ChartCard>
+                    <ChartCard title = 'Income Vs Expenses'>
+                        <IncomeExpenseChart/>
+                    </ChartCard>
+                    <ChartCard title = 'Spend Breakdown'>
+                        <TransactionCategoryChart/>
+                    </ChartCard>
+                </div>
             </div>
         </>
     );
