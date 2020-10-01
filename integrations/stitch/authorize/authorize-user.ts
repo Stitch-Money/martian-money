@@ -3,15 +3,24 @@ import {
     generateVerifierChallengePair,
     getUrlEncodedFormData
 } from './utils';
-import { StitchAuthorizationUrlParameters } from './types';
-
+import { StitchAuthorizationUrlParameters } from '../types';
 import { setSessionNonce, setSessionVerifier } from 'integrations/storage/session-storage';
-import { StitchTestClient } from './client.test';
+import { StitchConfiguration } from '../client.test';
 
 const stitchScopes: string[] = ['accountholders', 'balances', 'transactions', 'accounts', 'offline_access', 'openid'];
 
-export async function getStitchAuthorizationCodeUrl(): Promise<string> {
-    const [stitchUrl, verifier, nonce] = await buildAuthorizationUrl();
+export async function getStitchAuthorizationCodeUrl() {
+    const clientId = StitchConfiguration.clientId;
+    return await buildStitchAuthorizationCodeUrl(clientId);
+}
+
+export async function getStitchTestClientAuthorizationCodeUrl() {
+    const clientId = StitchConfiguration.testClientId;
+    return await buildStitchAuthorizationCodeUrl(clientId);
+}
+
+export async function buildStitchAuthorizationCodeUrl(clientId: string): Promise<string> {
+    const [stitchUrl, verifier, nonce] = await buildAuthorizationUrl(clientId);
 
     setSessionNonce(nonce);
     setSessionVerifier(verifier);
@@ -19,12 +28,12 @@ export async function getStitchAuthorizationCodeUrl(): Promise<string> {
     return stitchUrl;
 }
 
-async function buildAuthorizationUrl(): Promise<string[]> {
+async function buildAuthorizationUrl(clientId: string): Promise<string[]> {
     const state = generateRandomStateOrNonce();
     const nonce = generateRandomStateOrNonce();
     const [verifier, challenge] = await generateVerifierChallengePair();
 
-    const { clientId, redirectUri, identityServerUri } = StitchTestClient;
+    const { redirectUri, identityServerUri } = StitchConfiguration;
 
     const search: StitchAuthorizationUrlParameters = {
         client_id: clientId,

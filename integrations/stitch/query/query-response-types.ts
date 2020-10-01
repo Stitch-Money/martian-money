@@ -1,4 +1,4 @@
-import { BankAccount, Identity, Transaction } from 'domain/types';
+import { BankAccount, Identity, Transaction } from '../types';
 
 export type IdentityResponse = {
     user: {

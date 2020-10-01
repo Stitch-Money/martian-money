@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { retrieveTokenUsingAuthorizationCode } from 'integrations/stitch/fetch-token';
+import { retrieveTokenUsingAuthorizationCode } from 'integrations/stitch/authorize/fetch-token';
 import {
     getSessionVerifier,
     getStitchAccessToken,

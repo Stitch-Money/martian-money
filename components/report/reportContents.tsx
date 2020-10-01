@@ -6,6 +6,7 @@ import { IncomeExpenseChart } from './incomeExpenseChart';
 import { TransactionCategoryChart } from './transactionCategoryChart';
 import React from 'react';
 import { Identity } from './identity';
+import ChartCard from "components/report/chart-card";
 
 export function ReportContents(): JSX.Element {
     const bankAccountResponse = useQuery<BankAccountResponse>(BankAccountsQuery);
@@ -21,11 +22,19 @@ export function ReportContents(): JSX.Element {
 
     return (
         <>
-            <h1 className="title">Congrats! You&apos;re on your way!</h1>
-            <Identity />
-            <div className="tile is-ancestor">
-                <IncomeExpenseChart/>
-                <TransactionCategoryChart/>
+            <div className='columns is-centered'>
+                <div className='column is-half-desktop is-center'>
+                    
+                    <ChartCard title = 'Earth ID'>
+                        <Identity />
+                    </ChartCard>
+                    <ChartCard title = 'Income Vs Expenses'>
+                        <IncomeExpenseChart/>
+                    </ChartCard>
+                    <ChartCard title = 'Spend Breakdown'>
+                        <TransactionCategoryChart/>
+                    </ChartCard>
+                </div>
             </div>
         </>
     );

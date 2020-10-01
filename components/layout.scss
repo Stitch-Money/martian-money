@@ -1,19 +1,42 @@
 @charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-//$body-background-color: #f0e7e7;
-$primary: #cc7810;
-$link: #870d0d;
+$family-sans-serif: 'Inter', sans-serif;
+
+$primary: #E95122;
+$primary-dark: #D63908;
+$link: #E95122;
+$info: #FBE6DA;
+$info-invert: $primary;
+$grey: #857D7A;
+$grey-light: #ADA39F;
+
 $footer-background-color: #ffffff;
 $footer-padding: 1.5rem 1.5rem 0;
+$card-radius: 1.5rem;
 
 @import "../node_modules/bulma/bulma.sass";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
+
+a.button {
+    border-radius: 1000px;
+}
+
+a.button:hover {
+    text-decoration: none !important;
+}
 
 .round {
     height: 300px;
     width: 300px;
     border-radius: 150px;
     background: linear-gradient(224.98deg, #F4D0C9 2.82%, #EB6D46 39.79%, #E95122 56.97%, #D63908 101.23%);
+    box-shadow: 0 8px 5px #FBE6DA;
+}
+
+.round:hover {
+    background: $primary-dark;
+    text-decoration: none;
 }
 
 .apply {
@@ -34,6 +57,14 @@ $footer-padding: 1.5rem 1.5rem 0;
     max-width: 100%;
 }
 
+.big-dome {
+    position: absolute;
+    top: -30%;
+    height: 90%;
+    width: 150%;
+    max-width: 100%;
+}
+
 .stitch-footer {
     position: absolute;
     bottom: 0;
@@ -43,13 +74,18 @@ $footer-padding: 1.5rem 1.5rem 0;
     width: 100%;
 }
 
-.stitch-footer-text-subtle {
-    color: #857D7A;
-}
-
 .stitch-footer-text-orange {
     text-decoration: none;
-    color: #E95122;
+    color: $primary;
     font-weight: bold;
     line-height: 150%;
+}
+
+.transparent {
+    background: none;
+}
+
+.report-card-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
 }

@@ -1,25 +1,49 @@
 import React from 'react';
-import { siteName } from '../layout';
+import { SiteHead } from '../siteHead';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import { PrimaryButton } from '../buttons/primary-button';
 
-export default function About() {
+function AboutHeader(props: { onClose: () => void }) {
+    return <nav id="navbar" className={'navbar is-spaced'}>
+        <div className="navbar-menu">
+            <div className="navbar-end">
+                <button className="button is-link is-inverted" onClick={props.onClose}>
+                    <span className="icon is-small">
+                        <FontAwesomeIcon icon={faTimes}/>
+                    </span></button>
+            </div>
+        </div>
+    </nav>;
+}
+
+export function About(props: { onClose: () => void }) {
     return (
-        <section className="section">
-            <div className="container">
-                <div className="columns is-vcentered">
+        <>
+            <SiteHead/>
+            <AboutHeader onClose={props.onClose}/>
+            <div className="section">
+                <div className="container">
+                    <div className="column is-offset-one-quarter-tablet is-half-tablet">
+                        <div className="content has-text-weight-bold is-medium">Mars.Financial is a fictitious <a
+                            href="#">demo website</a> showing how a
+                            fintech company can use Stitch to link a user&apos;s African bank account to their service
+                        </div>
+                        <div className="content has-text-weight-light is-medium">
+                            <p>It is 100% safe and you will not be debited any real money when you apply for a fake
+                                dome-loan on Mars :)</p>
+                            <p>You can either use the demo with example credentials we provide or with you own
+                                information.</p>
+                        </div>
 
-                    <div className="column">
-                        <h2 className="title is-3">Apply for your dome loan now!</h2>
-                        <p className="content is-medium">Olympus Mons is calling, and the great migration has begun.
-                            It&apos;s time to leave behind our earthly possessions and launch ourselves at new horizons.
-                        <br/>
-                        <br/>
-                            The team at <a href={'#'}>{siteName}</a> will help you transfer all your wealth to your new
-                            home on Mars, <strong>the mightiest of the planets!</strong>
-                        </p>
+                        <div className="content has-text-weight-bold has-text-grey is-medium is-light">
+                            <p>Try the demo now</p>
+                        </div>
+                        <PrimaryButton href="/select-experience">Apply for a dome-loan</PrimaryButton>
+                        <p><a href="https://stitch.money">Learn more about Stitch</a></p>
                     </div>
-                    <img className="column box has-shadow" src="/images/dome.jpg" alt=""/>
                 </div>
             </div>
-        </section>
+        </>
     );
 }

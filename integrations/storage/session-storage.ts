@@ -24,14 +24,32 @@ export function getSessionVerifier(): string | null{
 }
 
 export function setStitchAccessToken(token: string) {
+    setItem('stitchToken', token);
+}
+
+export function getStitchAccessToken(): string | null {
+    return getItem('stitchToken');
+}
+
+export function setClientIdForSession(clientId: string) {
+    console.log('setting client Id to', clientId);
+    setItem('clientId', clientId);
+}
+
+export function getClientIdForSession() {
+    return getItem('clientId');
+}
+
+function setItem(key: string, value: any) {
     if (typeof window !== 'undefined') {
-        sessionStorage.setItem('stitchToken', token);
+        sessionStorage.setItem(key, value);
     }
 }
 
-export function getStitchAccessToken(): string | null{
+function getItem(key: string): string | null {
     if (typeof window !== 'undefined') {
-        return sessionStorage.getItem('stitchToken');
+        return sessionStorage.getItem(key);
     }
+
     return null;
 }
