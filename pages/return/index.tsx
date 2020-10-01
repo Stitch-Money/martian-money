@@ -20,6 +20,11 @@ export default function Index() {
         async function retrieveToken(): Promise<void> {
             if (code && verifier) {
                 const response = await retrieveTokenUsingAuthorizationCode(`${code}`, verifier);
+
+                if ('error' in response) {
+                    throw new Error('Failed to fetch token.' + response.error);
+                }
+
                 setStitchAccessToken(response.access_token);
             }
         }
