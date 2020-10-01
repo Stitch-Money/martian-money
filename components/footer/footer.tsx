@@ -9,7 +9,11 @@ export default function Footer() {
                         A <strong className='stitch-footer-text-subtle'>demo</strong> by Stitch
                     </div>
                     <div className='column is-2 has-text-left stitch-footer-text-subtle'>
-                        <a className='stitch-footer-text-orange' href="">Learn more</a> | <a className='stitch-footer-text-orange' href="https://github.com/Stitch-Money/Mars-Capital">Github</a>
+                        <a className='stitch-footer-text-orange' href="">
+                            Learn more
+                        </a> | <a className='stitch-footer-text-orange' href="https://github.com/Stitch-Money/Mars-Capital">
+                            Github
+                        </a>
                     </div>
                 </div>
             </div>
