@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Navbar() {
     return (
-        <nav id="navbar" className={'navbar is-spaced is-center'}>
+        <nav id="navbar" className={'navbar transparent is-spaced is-center'}>
             <div className="column">
                 <div className="level-item is-center">
                     <div className="col">

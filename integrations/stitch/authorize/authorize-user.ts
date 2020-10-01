@@ -5,7 +5,7 @@ import {
 } from './utils';
 import { StitchAuthorizationUrlParameters } from '../types';
 import { setSessionNonce, setSessionVerifier } from 'integrations/storage/session-storage';
-import { StitchConfiguration } from '../client.test';
+import { StitchConfiguration } from '../client';
 
 const stitchScopes: string[] = ['accountholders', 'balances', 'transactions', 'accounts', 'offline_access', 'openid'];
 

@@ -14,6 +14,7 @@ $grey-light: #ADA39F;
 
 $footer-background-color: #ffffff;
 $footer-padding: 1.5rem 1.5rem 0;
+$card-radius: 1.5rem;
 
 @import "../node_modules/bulma/bulma.sass";
 
@@ -59,9 +60,9 @@ a.button:hover {
 
 .big-dome {
     position: absolute;
-    top: -30%;
-    height: 90%;
-    width: 150%;
+    top: 0;
+    height: 60%;
+    width: 100%;
     max-width: 100%;
 }
 
@@ -79,4 +80,13 @@ a.button:hover {
     color: $primary;
     font-weight: bold;
     line-height: 150%;
+}
+
+.transparent {
+    background: none;
+}
+
+.report-card-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
 }

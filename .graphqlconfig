@@ -1,0 +1,15 @@
+{
+  "name": "Stitch GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Stitch GraphQL Endpoint": {
+        "url": "https://api.stitch.money/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL Plugin for Webstorm"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

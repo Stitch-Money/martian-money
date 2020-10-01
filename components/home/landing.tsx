@@ -1,5 +1,5 @@
 import React from 'react';
-import ApplyButton from '../stitch-sso-link/apply-button';
+import ApplyButton from 'components/apply-button/apply-button';
 
 export default function Landing() {
     return (
