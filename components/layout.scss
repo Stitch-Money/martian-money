@@ -53,13 +53,16 @@ a.button:hover {
 }
 
 .dome {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    max-width: 100%;
+    margin-top: 1.5rem;
+    height: 70%;
 
-    @media screen and (min-width: $tablet) {
-        height: 70%;
+    @media screen and (max-width: $desktop) {
+        min-width: $desktop;
+        margin-left: calc((100vw - #{$desktop}) / 2);
     }
+
 }
 
 .big-dome {
