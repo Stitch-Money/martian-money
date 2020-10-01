@@ -7,7 +7,7 @@ import useSWR from 'swr';
 import { PrimaryButton } from '../../components/buttons/primary-button';
 import { SecondaryButton } from '../../components/buttons/secondary-button';
 import { setClientIdForSession } from '../../integrations/storage/session-storage'
-import { StitchConfiguration } from '../../integrations/stitch/client.test'
+import { StitchConfiguration } from '../../integrations/stitch/client'
 
 export default function SelectExperiencePage(): JSX.Element {
     const authorizeUrl = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
