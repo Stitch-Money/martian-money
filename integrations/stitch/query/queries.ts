@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const BankAccounts = gql`
+export const BankAccountsQuery = gql`
     query BankAccounts {
         user {
             bankAccounts {
@@ -16,7 +16,7 @@ export const BankAccounts = gql`
         }
     }`;
 
-export const TransactionsByBankAccount = gql`
+export const TransactionsByBankAccountQuery = gql`
     query TransactionsByBankAccount($accountId: ID!) {
         node(id: $accountId) {
             ... on BankAccount {
@@ -37,7 +37,7 @@ export const TransactionsByBankAccount = gql`
     }
 `;
 
-export const TransactionCategoriesByBankAccount = gql`
+export const TransactionCategoriesByBankAccountQuery = gql`
     query TransactionCategoriesByBankAccount($accountId: ID!) {
         node(id: $accountId) {
             ... on BankAccount {
@@ -56,7 +56,7 @@ export const TransactionCategoriesByBankAccount = gql`
     }
 `;
 
-export const DebitOrdersByBankAccount = gql`
+export const DebitOrdersByBankAccountQuery = gql`
     query DebitOrdersByBankAccount($accountId: ID!) {
         node(id: $accountId) {
             ... on BankAccount {
@@ -68,6 +68,33 @@ export const DebitOrdersByBankAccount = gql`
                             amount
                             reference
                         }
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const IdentityQuery = gql`
+    query GetAccounts {
+        user {
+            identity {
+                nickname
+                middleName
+                dateOfBirth
+                email
+                familyName
+                fullName
+                gender
+                givenName
+                contact {
+                    name
+                    phoneNumber
+                }
+                identifyingDocument {
+                    ... on IdentityDocument {
+                        country
+                        number
                     }
                 }
             }
