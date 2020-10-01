@@ -12,6 +12,7 @@ $info-invert: $primary;
 $grey: #857D7A;
 $grey-light: #ADA39F;
 
+$navbar-background-color: transparent;
 $footer-background-color: #ffffff;
 $footer-padding: 1.5rem 1.5rem 0;
 $card-radius: 1.5rem;
@@ -53,9 +54,12 @@ a.button:hover {
 
 .dome {
     position: absolute;
-    height: 70%;
     width: 100%;
     max-width: 100%;
+
+    @media screen and (min-width: $tablet) {
+        height: 70%;
+    }
 }
 
 .big-dome {

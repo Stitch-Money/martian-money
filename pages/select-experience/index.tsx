@@ -19,8 +19,8 @@ export default function SelectExperiencePage(): JSX.Element {
     return (
         <section className="section">
             <div className="container">
+                <ModalHeader onClose={() => router.push('/')}/>
                 <div className="column is-offset-one-quarter-tablet is-half-tablet">
-                    <ModalHeader onClose={() => router.push('/')}/>
                     <div className="content has-text-weight-bold is-medium">
                         <p>Select your preferred method to apply for your fake dome-loan.</p>
                     </div>
