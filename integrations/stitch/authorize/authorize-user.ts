@@ -3,10 +3,10 @@ import {
     generateVerifierChallengePair,
     getUrlEncodedFormData
 } from './utils';
-import { StitchAuthorizationUrlParameters } from './types';
+import { StitchAuthorizationUrlParameters } from '../types';
 
 import { setSessionNonce, setSessionVerifier } from 'integrations/storage/session-storage';
-import { StitchTestEnvironmentConfiguration } from './client.test';
+import { StitchTestEnvironmentConfiguration } from '../client.test';
 
 const stitchScopes: string[] = ['accountholders', 'balances', 'transactions', 'accounts', 'offline_access', 'openid'];
 
