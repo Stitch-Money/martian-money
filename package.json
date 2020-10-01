@@ -9,7 +9,12 @@
   },
   "dependencies": {
     "@apollo/client": "^3.2.1",
-    "bulma": "^0.9.0",
+    "@fortawesome/fontawesome-free": "^5.15.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.31",
+    "@fortawesome/free-regular-svg-icons": "^5.15.0",
+    "@fortawesome/free-solid-svg-icons": "^5.15.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
+    "bulma": "^0.9.1",
     "date-fns": "^2.11.1",
     "decimal.js": "^10.2.1",
     "graphql": "^15.3.0",
