@@ -53,6 +53,11 @@ export type TransactionCategories = {
     category: string
 };
 
+export type AccountStatement = {
+    payload: string,
+    statementType: string
+}
+
 export type BankAccount = {
     id: BankAccountId
     name: string
@@ -62,4 +67,5 @@ export type BankAccount = {
     bankId: string
     branchCode: string
     currentBalance: Money
+    accountStatements : AccountStatement[]
 };

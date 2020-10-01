@@ -101,3 +101,16 @@ export const IdentityQuery = gql`
         }
     }
 `;
+
+export const StatementsByBankAccountQuery = gql`
+    query TransactionsByBankAccount($accountId: ID!) {
+        node(id: $accountId) {
+            ... on BankAccount {
+                accountStatements {
+                    payload
+                    statementType
+                }
+            }
+        }
+    }
+`;
