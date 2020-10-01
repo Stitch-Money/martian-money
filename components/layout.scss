@@ -13,4 +13,20 @@ $link: #870d0d;
     border-radius: 150px;
 }
 
-$family-primary: 'Montserrat', sans-serif;
+.apply {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+
+.domeLoan {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+.dome {
+    position: absolute;
+    height: 70%;
+    width: 100%;
+    max-width: 100%;
+}
