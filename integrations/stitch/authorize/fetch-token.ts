@@ -1,7 +1,7 @@
 import { getUrlEncodedFormData } from './utils';
 import { StitchAccessTokenResponse, StitchAccessTokenRequest, StitchRefreshTokenRequest } from '../types';
 import { getClientIdForSession, setStitchAccessToken } from '../../storage/session-storage'
-import { StitchConfiguration } from '../client.test';
+import { StitchConfiguration } from '../client';
 
 export async function retrieveTokenUsingAuthorizationCode(
     authorizationCode: string,
@@ -33,7 +33,11 @@ export async function retrieveTokenUsingAuthorizationCode(
     });
 
     const tokenResponse = await response.json() as StitchAccessTokenResponse;
-    console.log('Tokens: ', tokenResponse);
+    console.log('Token: ', tokenResponse);
+
+    if ('error' in tokenResponse) {
+        throw new Error('Oh no! Failed to fetch token!' + tokenResponse.error);
+    }
 
     setStitchAccessToken(tokenResponse.access_token);
 
