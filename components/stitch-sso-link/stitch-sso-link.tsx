@@ -9,7 +9,14 @@ export default function StitchSSOLink() {
     if (data != null) {
         return (
             <Link href={ data }>
-                <a className='button is-large is-primary round is-family-primary is-size-1 has-text-weight-semibold'>APPLY</a>
+                <div className='col'>
+                    <a className='button is-large is-primary round'>
+                        <div className='col'>
+                            <p className='apply is-size-1'>APPLY</p>
+                            <p className='domeLoan is-size-7'>FOR A DOME LOAN</p>
+                        </div>
+                    </a>
+                </div>
             </Link>
         );
     }
