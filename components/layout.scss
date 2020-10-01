@@ -13,6 +13,10 @@ $footer-padding: 1.5rem 1.5rem 0;
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 //font-family: 'Inter', sans-serif;
 
+.button {
+    border-radius: 1000px;
+}
+
 .round {
     height: 300px;
     width: 300px;
