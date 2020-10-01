@@ -14,7 +14,7 @@ export function StatementContents(): JSX.Element {
         variables: { accountId: currentAccountId }
     });
 
-    const statementPayload = statementsResponse.data?.user.bankAccounts[0].accountStatements[0].payload;
+    const statementPayload = statementsResponse.data?.user.bankAccounts[0].accountStatements![0].payload;
     console.log('Statement', statementPayload);
     console.log('Errors', statementsResponse.error);
 
