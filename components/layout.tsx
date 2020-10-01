@@ -16,13 +16,14 @@ export default function Layout({ children }: { children: any }) {
                     content="Providing the financial services you'll need for your new Martian life!"/>
                 <meta name="og:title" content={siteName}/>
             </Head>
-
+            
+                
             <Navbar/>
-
+    
             {children}
-
+    
             <Footer/>
-
+            
         </>
     );
 }
