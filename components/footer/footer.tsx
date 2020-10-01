@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Footer() {
+export default function Footer(props: { onReadMoreClick: () => void }) {
     return (
         <footer className={'footer stitch-footer'}>
             <div className="content has-text-centered">
@@ -9,7 +9,7 @@ export default function Footer() {
                         A <strong className='stitch-footer-text-subtle'>demo</strong> by Stitch
                     </div>
                     <div className='column is-2 has-text-left stitch-footer-text-subtle'>
-                        <a className='stitch-footer-text-orange' href="">
+                        <a className='stitch-footer-text-orange' href="#" onClick={props.onReadMoreClick}>
                             Learn more
                         </a> | <a className='stitch-footer-text-orange' href="https://github.com/Stitch-Money/Mars-Capital">
                             Github

@@ -3,11 +3,11 @@ import { SiteHead } from '../siteHead';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 
-function AboutHeader() {
+function AboutHeader(props: { onClose: () => void }) {
     return <nav id="navbar" className={'navbar is-spaced'}>
         <div className="navbar-menu">
             <div className="navbar-end">
-                <button className="button is-link is-inverted">
+                <button className="button is-link is-inverted" onClick={props.onClose}>
                     <span className="icon is-small">
                         <FontAwesomeIcon icon={faTimes}/>
                     </span></button>
@@ -16,11 +16,11 @@ function AboutHeader() {
     </nav>;
 }
 
-export function About() {
+export function About(props: { onClose: () => void }) {
     return (
         <>
             <SiteHead/>
-            <AboutHeader/>
+            <AboutHeader onClose={props.onClose}/>
             <div className="section">
                 <div className="container is-max-desktop">
                     <div className="content has-text-weight-bold is-large">Mars.Financial is a fictitious <a href="#">demo website</a> showing how a
