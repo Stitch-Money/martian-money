@@ -8,12 +8,20 @@ $footer-padding: 1.5rem 1.5rem 0;
 
 @import "../node_modules/bulma/bulma.sass";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+//font-family: 'Inter', sans-serif;
 
 .round {
     height: 300px;
     width: 300px;
     border-radius: 150px;
     background: linear-gradient(224.98deg, #F4D0C9 2.82%, #EB6D46 39.79%, #E95122 56.97%, #D63908 101.23%);
+    box-shadow: 0 5px 5px #F4D0C9;
+}
+
+.round:hover {
+    background: #D63908;
+    text-decoration: none;
 }
 
 .apply {

@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import Navbar from './navbar/navbar';
-import Footer from './footer/footer';
 
 export const siteName = 'Mars Financial';
 
@@ -21,9 +20,6 @@ export default function Layout({ children }: { children: any }) {
             <Navbar/>
     
             {children}
-    
-            <Footer/>
-            
         </>
     );
 }
