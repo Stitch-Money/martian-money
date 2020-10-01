@@ -6,7 +6,7 @@ import {
 import { StitchAuthorizationUrlParameters } from './types';
 
 import { setSessionNonce, setSessionVerifier } from 'integrations/storage/session-storage';
-import { StitchTestClient } from './client.test';
+import { StitchTestEnvironmentConfiguration } from './client.test';
 
 const stitchScopes: string[] = ['accountholders', 'balances', 'transactions', 'accounts', 'offline_access', 'openid'];
 
@@ -24,7 +24,7 @@ async function buildAuthorizationUrl(): Promise<string[]> {
     const nonce = generateRandomStateOrNonce();
     const [verifier, challenge] = await generateVerifierChallengePair();
 
-    const { clientId, redirectUri, identityServerUri } = StitchTestClient;
+    const { clientId, redirectUri, identityServerUri } = StitchTestEnvironmentConfiguration;
 
     const search: StitchAuthorizationUrlParameters = {
         client_id: clientId,
