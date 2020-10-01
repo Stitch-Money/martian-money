@@ -11,9 +11,10 @@ export default function Statement(): JSX.Element {
         </Head>
         <section className="section">
             <div className="container">
-                <StitchProvider>
+            <StatementContents/>
+                {/* <StitchProvider>
                     <StatementContents/>
-                </StitchProvider>
+                </StitchProvider> */}
             </div>
         </section>
     </Layout>;

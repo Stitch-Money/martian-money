@@ -1,9 +1,11 @@
 import { useQuery } from '@apollo/client';
-import { BankAccountResponse } from '../../integrations/stitch/query/query-response-types';
-import { BankAccountsQuery, StatementsByBankAccountQuery } from '../../integrations/stitch/query/queries';
+import { sendStatementEmail } from 'integrations/sib-email/email-client';
+import { BankAccountsQuery, StatementsByBankAccountQuery } from 'integrations/stitch/query/queries';
+import { BankAccountResponse } from 'integrations/stitch/query/query-response-types';
 import React from 'react';
 
 export function StatementContents(): JSX.Element {
+
     const bankAccountResponse = useQuery<BankAccountResponse>(BankAccountsQuery);
     console.log('Errors', bankAccountResponse.error);
     console.log('bankAccountResponse', bankAccountResponse);
@@ -14,9 +16,12 @@ export function StatementContents(): JSX.Element {
         variables: { accountId: currentAccountId }
     });
 
-    const statementPayload = statementsResponse.data?.user.bankAccounts[0].accountStatements![0].payload;
+    const accountStatements = statementsResponse.data?.user.bankAccounts[0].accountStatements;
+    const statementPayload = accountStatements![0].payload;
     console.log('Statement', statementPayload);
     console.log('Errors', statementsResponse.error);
+
+    sendStatementEmail("priyenwork@gmail.com", "Priyen Pillay", accountStatements);
 
     return (
         <>
