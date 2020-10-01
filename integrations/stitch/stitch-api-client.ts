@@ -1,11 +1,12 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { StitchTestClient } from './client.test';
 
 // Apollo Client chains together ApolloLinks to add our token to every request
 
 export const stitchClient = (token: string) => {
     const httpLink = createHttpLink({
-        uri: 'https://api.stitch.money/graphql'
+        uri: StitchTestClient.apiUri
     });
     const authLink = setContext((_, { headers }) => {
         if (token === null) {
