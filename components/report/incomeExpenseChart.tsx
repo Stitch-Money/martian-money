@@ -20,7 +20,7 @@ export function IncomeExpenseChart(): JSX.Element {
     const valueFormatter = (value: any) => `R ${value}`;
 
     return (
-        <ResponsiveContainer className="tile" minHeight="300px">
+        <ResponsiveContainer className="tile" minHeight="300px" minWidth="300px">
             <BarChart data={data} >
                 <Tooltip cursor={false} formatter={valueFormatter} labelFormatter={getLabelFormatter}/>
                 <XAxis dataKey="month"/>

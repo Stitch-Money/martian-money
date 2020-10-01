@@ -23,8 +23,18 @@ export function ReportContents(): JSX.Element {
         <>
             <h1 className="title">Congrats! You&apos;re on your way!</h1>
             <Identity />
+            <div className='card'>
+                <div className='card-content'>
+                    <div>
+                        <h3 className='report-card-title'>Income Vs Expenses</h3>
+                    </div>
+                    <div className='content'>
+                        <IncomeExpenseChart/>
+                    </div>
+                </div>
+            </div>
             <div className="tile is-ancestor">
-                <IncomeExpenseChart/>
+                
                 <TransactionCategoryChart/>
             </div>
         </>

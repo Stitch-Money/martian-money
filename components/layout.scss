@@ -5,6 +5,7 @@ $primary: #E95122;
 $link: #E95122;
 $footer-background-color: #ffffff;
 $footer-padding: 1.5rem 1.5rem 0;
+$card-radius: 1.5rem;
 
 @import "../node_modules/bulma/bulma.sass";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
@@ -68,4 +69,13 @@ $footer-padding: 1.5rem 1.5rem 0;
     color: #E95122;
     font-weight: bold;
     line-height: 150%;
+}
+
+.transparent {
+    background: none;
+}
+
+.report-card-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
 }
