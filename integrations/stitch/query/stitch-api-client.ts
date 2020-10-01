@@ -1,6 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { StitchTestEnvironmentConfiguration } from './client.test';
+import { StitchTestEnvironmentConfiguration } from '../client.test';
 
 // Apollo Client chains together ApolloLinks to add our token to every request
 

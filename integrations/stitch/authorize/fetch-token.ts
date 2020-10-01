@@ -1,26 +1,24 @@
 import { getUrlEncodedFormData } from './utils';
-import { StitchAccessTokenResponse, StitchAccessTokenRequest, StitchRefreshTokenRequest } from './types';
-import { setStitchAccessToken } from '../storage/session-storage';
-import { StitchTestEnvironmentConfiguration } from './client.test'
-
-const tokenEndpoint = 'https://secure.stitch.money/connect/token';
+import { StitchAccessTokenResponse, StitchAccessTokenRequest, StitchRefreshTokenRequest } from '../types';
+import { setStitchAccessToken } from '../../storage/session-storage';
+import { StitchTestEnvironmentConfiguration } from '../client.test';
 
 export async function retrieveTokenUsingAuthorizationCode(
     authorizationCode: string,
     codeVerifier: string
 ): Promise<StitchAccessTokenResponse> {
-    const { clientId, redirectUri } = StitchTestEnvironmentConfiguration;
+    const { testClientId, redirectUri, identityServerUri } = StitchTestEnvironmentConfiguration;
 
     const body: StitchAccessTokenRequest = {
         grant_type: 'authorization_code',
-        client_id: clientId,
+        client_id: testClientId,
         code: authorizationCode,
         redirect_uri: redirectUri,
         code_verifier: codeVerifier
     };
 
     const bodyString = getUrlEncodedFormData(body);
-    const response = await fetch(tokenEndpoint, {
+    const response = await fetch(`${identityServerUri}/connect/token`, {
         method: 'post',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: bodyString
@@ -35,7 +33,7 @@ export async function retrieveTokenUsingAuthorizationCode(
 }
 
 export async function refreshAuthorizationCode(refreshToken: string) {
-    const { clientId } = StitchTestEnvironmentConfiguration;
+    const { clientId, identityServerUri } = StitchTestEnvironmentConfiguration;
 
     const body: StitchRefreshTokenRequest = {
         grant_type: 'refresh_token',
@@ -44,7 +42,7 @@ export async function refreshAuthorizationCode(refreshToken: string) {
     };
     const bodyString = Object.entries(body).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
 
-    const response = await fetch(tokenEndpoint, {
+    const response = await fetch(`${identityServerUri}/connect/token`, {
         method: 'post',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: bodyString

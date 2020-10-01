@@ -2,7 +2,7 @@ import React from 'react';
 import {
     getStitchAuthorizationCodeUrl,
     getStitchTestClientAuthorizationCodeUrl
-} from '../../integrations/stitch/authorize-user';
+} from '../../integrations/stitch/authorize/authorize-user';
 import useSWR from 'swr';
 import { PrimaryButton } from '../../components/buttons/primary-button';
 import { SecondaryButton } from '../../components/buttons/secondary-button';

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ApolloProvider } from '@apollo/client';
-import { stitchClient } from 'integrations/stitch/stitch-api-client';
+import { stitchClient } from 'integrations/stitch/query/stitch-api-client';
 import { ApolloClient } from '@apollo/client/core';
 import { getStitchAccessToken } from '../../integrations/storage/session-storage';
 
