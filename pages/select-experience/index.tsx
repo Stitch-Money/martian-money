@@ -1,23 +1,25 @@
 import React from 'react';
-// import { getStitchAuthorizationCodeUrl } from '../../integrations/stitch/authorize-user';
-// import useSWR from 'swr/esm/use-swr';
+import {
+    getStitchAuthorizationCodeUrl,
+    getStitchTestClientAuthorizationCodeUrl
+} from '../../integrations/stitch/authorize-user';
+import useSWR from 'swr/esm/use-swr';
+
 export default function SelectExperiencePage(): JSX.Element {
-    // const clientData = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
-    // const testClientData = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
+    const authorizeUrl = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
+    const testAuthorizeUrl = useSWR('stitchTestClientUrl', getStitchTestClientAuthorizationCodeUrl);
 
     return (
         <section className="section">
             <div className="container">
                 <div className="content">
                     <a href="/" className="delete is-pulled-right" /><br/>
-
                     <h3 className="title is-4 has-text-centered">Select your preferred method to apply for you fake dome-loan.</h3>
-
                 </div>
 
                 <div className="buttons is-centered">
-                    <button className="button is-primary is-half">Apply with demo info</button>
-                    <button className="button is-info is-half">Apply with my info</button>
+                    <a href={ testAuthorizeUrl.data } className="button is-primary is-half">Apply with demo info</a>
+                    <a href={ authorizeUrl.data } className="button is-info is-half">Apply with my info</a>
                 </div>
             </div>
             <div className="container">
