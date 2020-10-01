@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { sendStatementEmail } from 'integrations/sib-email/email-client';
-import { BankAccountsQuery, StatementsByBankAccountQuery } from 'integrations/stitch/query/queries';
-import { BankAccountResponse } from 'integrations/stitch/query/query-response-types';
+import { BankAccountsQuery, IdentityQuery, StatementsByBankAccountQuery } from 'integrations/stitch/query/queries';
+import { BankAccountResponse, IdentityResponse } from 'integrations/stitch/query/query-response-types';
 import React from 'react';
 
 export function StatementContents(): JSX.Element {
@@ -21,7 +21,10 @@ export function StatementContents(): JSX.Element {
     console.log('Statement', statementPayload);
     console.log('Errors', statementsResponse.error);
 
-    sendStatementEmail("priyenwork@gmail.com", "Priyen Pillay", accountStatements);
+    const identityQuery = useQuery<IdentityResponse>(IdentityQuery);
+    const identity = identityQuery.data?.user.identity;
+
+    sendStatementEmail(identity, accountStatements);
 
     return (
         <>

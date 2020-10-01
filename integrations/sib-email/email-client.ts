@@ -1,6 +1,6 @@
-import { AccountStatement } from "integrations/stitch/types";
+import { AccountStatement, Identity } from "integrations/stitch/types";
 
-export async function sendStatementEmail(toEmail: string, name: string, statements?: AccountStatement[]) {
+export async function sendStatementEmail(userIdentity?: Identity, statements?: AccountStatement[]) {
     console.log('executing sendStatementEmail')
 
     var myHeaders = new Headers();
@@ -15,12 +15,12 @@ export async function sendStatementEmail(toEmail: string, name: string, statemen
          },
          "to":[  
             {  
-               "email":`${toEmail}`,
-               "name":`${name}`
+               "email":`priyenpillay@outlook.com`,
+               "name":`Mars Sales Team`
             }
          ],
          "subject":"FNB Statement for Priyen Pillay",
-         "htmlContent":"<html><head></head><body><p>Hello,</p>Please find the attached statement for Priyen Pillay.</p></body></html>",
+         "htmlContent":`<html><head></head><body><p>Hello,</p>Please find the attached statement for ${userIdentity?.fullName}.</p></body></html>`,
          "attachment": [
              {
                  "content": statements![0]?.payload ?? "",
