@@ -3,7 +3,7 @@ import {
     getStitchAuthorizationCodeUrl,
     getStitchTestClientAuthorizationCodeUrl
 } from '../../integrations/stitch/authorize-user';
-import useSWR from 'swr/esm/use-swr';
+import useSWR from 'swr';
 
 export default function SelectExperiencePage(): JSX.Element {
     const authorizeUrl = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
