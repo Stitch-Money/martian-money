@@ -33,6 +33,6 @@ export default function Index() {
     }, [router, code, verifier]);
 
     return <Layout>
-        Loading...
+        <progress className="progress is-large is-info" max="100">60%</progress>
     </Layout>;
 }
