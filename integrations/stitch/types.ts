@@ -37,6 +37,7 @@ export type StitchRefreshTokenRequest = {
 
 export type BankAccountId = string & { __bankId__: null };
 export type TransactionId = string & { __transactionId__: null };
+export type DebitOrderId = string & { __transactionId__: null };
 
 export type Money = {
     quantity: string
@@ -69,10 +70,20 @@ export type IdentifyingDocument = {
 export type Transaction = {
     id: TransactionId
     amount: Money
-    date: Date
+    date: string
     description: string
     reference?: string
     runningBalance: Money
+};
+
+export type TransactionCategory = {
+    id: TransactionId
+    amount: Money
+    date: Date
+    category?: {
+        description: string
+        probability: string
+    }
 };
 
 export type AccountStatement = {
@@ -91,3 +102,10 @@ export type BankAccount = {
     currentBalance: Money
     accountStatements?: AccountStatement[]
 };
+
+export type DebitOrder = {
+    id: DebitOrderId
+    date: Date
+    amount: Money
+    reference: string
+}

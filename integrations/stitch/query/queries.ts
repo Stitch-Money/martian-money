@@ -45,8 +45,11 @@ export const TransactionCategoriesByBankAccountQuery = gql`
                     edges {
                         node {
                             id
-                            categories {
+                            amount
+                            date
+                            category {
                                 description
+                                probability
                             }
                         }
                     }

@@ -1,12 +1,14 @@
 import { useQuery } from '@apollo/client';
-import { TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
-import { TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
+import { DebitOrderResponse, TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
+import { DebitOrdersByBankAccountQuery, TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
 import { IncomeExpenseChart } from './incomeExpenseChart';
 import { TransactionCategoryChart } from './transactionCategoryChart';
 import React from 'react';
 import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
-import { BankAccount } from '../../integrations/stitch/types';
+import { BankAccount } from 'integrations/stitch/types';
+import TopExpensesCard from './top-expenses-card';
+import TopDebitOrderCard from "components/report/top-debit-order-card";
 import { PrimaryButton } from 'components/buttons/primary-button';
 
 export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
@@ -14,8 +16,14 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
         variables: { accountId: props.bankAccount.id }
     });
 
-    const transactions = transactionsResponse.data?.node.transactions.edges.map(x => x.node);
+    const transactions = transactionsResponse.data?.node.transactions.edges.map(x => x.node) ?? [];
 
+    const debitOrderResponse = useQuery<DebitOrderResponse>(DebitOrdersByBankAccountQuery, {
+        variables: { accountId: props.bankAccount.id }
+    });
+
+    const debitOrders = debitOrderResponse.data?.node.debitOrderPayments.edges.map(x => x.node) ?? [];
+    
     return (
         <>
             <div className="columns is-12 mb-6">
@@ -50,14 +58,20 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
                 </div>
                 <div className='column is-one-third-desktop'>
                     <ChartCard title='SPEND BREAKDOWN'>
-                        <TransactionCategoryChart/>
+                        <TransactionCategoryChart accountId={props.bankAccount.id}/>
                     </ChartCard>
+                </div>
+                <div className="column is-one-third-desktop">
+                    <TopExpensesCard transactions={transactions} />
+                </div>
+                <div className="column is-one-third-desktop">
+                    <TopDebitOrderCard debitOrders={debitOrders} />
                 </div>
             </div>
 
             <div className="buttons is-centered">
-            <PrimaryButton href={'/statement'}>Send statement</PrimaryButton>
-        </div>
+                <PrimaryButton href={'/statement'}>Send statement</PrimaryButton>
+            </div>
         </>
     );
 }
