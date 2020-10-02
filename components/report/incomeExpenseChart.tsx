@@ -3,11 +3,6 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend } fro
 import { number } from 'prop-types';
 import { Transaction } from '../../integrations/stitch/types';
 
-// [
-//     { month: 'January 2020', income: 50000, expenses: 30000 },
-//     { month: 'February 2020', income: 52000, expenses: 58000 },
-//     { month: 'March 2020', income: 51000, expenses: 26000 }
-// ]
 type MonthSummary = {
     month: string
     income: number
@@ -75,11 +70,11 @@ export function IncomeExpenseChart(props: { transactions: Transaction[] | undefi
         <ResponsiveContainer className="tile" minHeight="300px">
             <BarChart data={data}>
                 <Tooltip cursor={false} formatter={valueFormatter} labelFormatter={getLabelFormatter}/>
-                <XAxis dataKey="month"/>
-                <YAxis tickFormatter={value => `R ${value}`}/>
-                <Bar dataKey="income" fill="#cc7810"/>
-                <Bar dataKey="expenses" fill="#870D0D"/>
-                <Legend formatter={getLabelFormatter}/>
+                <XAxis dataKey="month" tick={{ fontSize: 10 }} axisLine={false} tickLine={false}/>
+                <YAxis tickFormatter={value => `R ${value}`} tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
+                <Bar dataKey="income" fill="#D63908" barSize={12} />
+                <Bar dataKey="expenses" fill="#F87C55" barSize={12}/>
+                <Legend formatter={getLabelFormatter} height={15}/>
             </BarChart>
         </ResponsiveContainer>
     );
