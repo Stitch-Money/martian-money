@@ -86,6 +86,11 @@ export type TransactionCategory = {
     }
 };
 
+export type AccountStatement = {
+    payload: string
+    name: string
+}
+
 export type BankAccount = {
     id: BankAccountId
     name: string
@@ -95,6 +100,7 @@ export type BankAccount = {
     bankId: string
     branchCode: string
     currentBalance: Money
+    accountStatements?: AccountStatement[]
 };
 
 export type DebitOrder = {

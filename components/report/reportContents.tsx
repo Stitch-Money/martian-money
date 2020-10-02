@@ -9,6 +9,7 @@ import ChartCard from 'components/report/chart-card';
 import { BankAccount } from 'integrations/stitch/types';
 import TopExpensesCard from './top-expenses-card';
 import TopDebitOrderCard from "components/report/top-debit-order-card";
+import { PrimaryButton } from 'components/buttons/primary-button';
 
 export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
@@ -66,6 +67,10 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
                 <div className="column is-one-third-desktop">
                     <TopDebitOrderCard debitOrders={debitOrders} />
                 </div>
+            </div>
+
+            <div className="buttons is-centered">
+                <PrimaryButton href={'/statement'}>Send statement</PrimaryButton>
             </div>
         </>
     );
