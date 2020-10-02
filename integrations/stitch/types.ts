@@ -70,7 +70,7 @@ export type IdentifyingDocument = {
 export type Transaction = {
     id: TransactionId
     amount: Money
-    date: Date
+    date: string
     description: string
     reference?: string
     runningBalance: Money
@@ -98,8 +98,8 @@ export type BankAccount = {
 };
 
 export type DebitOrder = {
-    id: DebitOrderId,
-    date: Date,
-    amount: Money,
+    id: DebitOrderId
+    date: Date
+    amount: Money
     reference: string
 }

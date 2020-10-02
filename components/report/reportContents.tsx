@@ -6,7 +6,7 @@ import { TransactionCategoryChart } from './transactionCategoryChart';
 import React from 'react';
 import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
-import { BankAccount } from "integrations/stitch/types";
+import { BankAccount } from 'integrations/stitch/types';
 import TopExpensesCard from './top-expenses-card';
 
 export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
@@ -22,7 +22,7 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
 
     const debitOrders = debitOrderResponse.data?.node.debitOrderPayments.edges.map(x => x.node);
     console.log(debitOrders);
-    
+
     return (
         <>
             <div className="columns is-12 mb-6">

@@ -32,4 +32,4 @@ export type DebitOrderResponse = Edge<{
     debitOrderPayments: {
         edges: Array<Edge<DebitOrder>>
     }
-}>
+}>;
