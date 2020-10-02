@@ -22,7 +22,7 @@ export function TransactionCategoryChart(): JSX.Element {
         }
     ];
 
-    const COLORS = ['#691a1a', '#870d0d', '#cc7810', '#a74808'];
+    const COLORS = ['#D63908', '#FF9559', '#FFC58F', '#a74808'];
 
     const renderLabel = (entry: PieLabelRenderProps) => entry.name;
 
@@ -35,6 +35,7 @@ export function TransactionCategoryChart(): JSX.Element {
                     dataKey="value"
                     nameKey="name"
                     innerRadius="50%"
+                    outerRadius="60%"
                     label={renderLabel}>
                     <LabelList dataKey="name"/>
                     {
