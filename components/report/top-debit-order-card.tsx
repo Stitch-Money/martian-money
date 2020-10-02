@@ -24,7 +24,7 @@ export default function TopDebitOrderCard({ debitOrders }: { debitOrders: DebitO
                 <div>
                     <h3 className='report-card-title is-size-6'>TOP 5 DEBIT ORDERS</h3>
                 </div>
-                <div className='content my-6 mx-2'>
+                <div className='content mt-6 mb-4 mx-2'>
                     {
                         topExpenses.length > 0
                             ? topExpenses.map(TransactionLine)
