@@ -12,8 +12,8 @@ export function Identity(): JSX.Element {
                 <div className="columns">
                     <div className="column">
                         <div className="level-item is-center mb-6">
-                                <img src={` https://api.adorable.io/avatars/160/${encodeURIComponent(identity.fullName)}`}
-                                     alt="Placeholder image"/>
+                            <img src={` https://api.adorable.io/avatars/160/${encodeURIComponent(identity.fullName)}`}
+                                alt="Placeholder image"/>
                         </div>
                         <div className="media-content">
                             <div className="content">
@@ -25,7 +25,7 @@ export function Identity(): JSX.Element {
                                     </tbody>
                                 </table>
                             </div>
-                        </div>        
+                        </div>
                     </div>
                 </div>
             </article>

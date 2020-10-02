@@ -46,25 +46,21 @@ export function ReportContents(): JSX.Element {
                 </div>
             </div>
 
-            <div className='columns is-centered'>
-                <div className='column is-four-fifths-desktop'>
-                    <div className='columns is-centered is-desktop'>
-                        <div className='column'>
-                            <ChartCard title='EARTH ID'>
-                                <Identity />
-                            </ChartCard>
-                        </div>
-                        <div className='column'>
-                            <ChartCard title='INCOME VS EXPENSES'>
-                                <IncomeExpenseChart transactions={transactions}/>
-                            </ChartCard>
-                        </div>
-                        <div className='column'>
-                            <ChartCard title='SPEND BREAKDOWN'>
-                                <TransactionCategoryChart/>
-                            </ChartCard>
-                        </div>
-                    </div>
+            <div className='columns is-centered is-multiline'>
+                <div className='column is-one-third-desktop'>
+                    <ChartCard title='EARTH ID'>
+                        <Identity />
+                    </ChartCard>
+                </div>
+                <div className='column is-one-third-desktop'>
+                    <ChartCard title='INCOME VS EXPENSES'>
+                        <IncomeExpenseChart transactions={transactions}/>
+                    </ChartCard>
+                </div>
+                <div className='column is-one-third-desktop'>
+                    <ChartCard title='SPEND BREAKDOWN'>
+                        <TransactionCategoryChart/>
+                    </ChartCard>
                 </div>
             </div>
         </>
