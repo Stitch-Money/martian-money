@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import React, { MouseEventHandler } from 'react';
 
-export function ModalHeader(props: { onClose: MouseEventHandler }) {
+export function ExplainerHeader(props: { onClose: MouseEventHandler }) {
     return <nav id="navbar" className='navbar is-spaced is-transparent'>
         <div className="navbar-menu">
             <div className="navbar-end">
