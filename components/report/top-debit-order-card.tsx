@@ -1,22 +1,22 @@
 import React from 'react';
 import { DebitOrder, Transaction } from '../../integrations/stitch/types';
-import { topFiveExpenses } from '../../util/transactions';
+import { topFiveExpensesThisMonth } from '../../util/transactions';
 import { getDateWithShortMonthLabel } from '../../util/income-expense-summary';
 
 export function TransactionLine(transaction: Transaction | DebitOrder) {
-    return <div className="columns">
-        <div className="column">
+    return <div className="columns is-mobile">
+        <div className="column is-9">
             <div className="content">
-                <strong>{ transaction.reference }</strong><br/>
+                { transaction.reference }<br/>
                 <div className="is-small">{ getDateWithShortMonthLabel(new Date(transaction.date)) }</div>
             </div>
         </div>
-        <div className="column is-one-fifth">{ transaction.amount.quantity }</div>
+        <div className="column"><strong>{ transaction.amount.quantity }</strong></div>
     </div>;
 }
 
 export default function TopDebitOrderCard({ debitOrders }: { debitOrders: DebitOrder[] }) {
-    const topExpenses: DebitOrder[] = topFiveExpenses<DebitOrder>(debitOrders);
+    const topExpenses: DebitOrder[] = topFiveExpensesThisMonth<DebitOrder>(debitOrders);
 
     return (
         <div className='card mb-4'>
