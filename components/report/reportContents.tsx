@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
-import { TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
-import { TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
+import { DebitOrderResponse, TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
+import { DebitOrdersByBankAccountQuery, TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
 import { IncomeExpenseChart } from './incomeExpenseChart';
 import { TransactionCategoryChart } from './transactionCategoryChart';
 import React from 'react';
 import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
-import {BankAccount, DebitOrder} from "integrations/stitch/types";
+import { BankAccount } from "integrations/stitch/types";
 
 export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
@@ -15,6 +15,13 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
 
     const transactions = transactionsResponse.data?.node.transactions.edges.map(x => x.node);
 
+    const debitOrderResponse = useQuery<DebitOrderResponse>(DebitOrdersByBankAccountQuery, {
+        variables: { accountId: props.bankAccount.id }
+    });
+
+    const debitOrders = debitOrderResponse.data?.node.debitOrderPayments.edges.map(x => x.node);
+    console.log(debitOrders);
+    
     return (
         <>
             <div className="columns is-12 mb-6">
