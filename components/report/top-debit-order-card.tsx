@@ -1,13 +1,13 @@
 import React from 'react';
-import { Transaction } from '../../integrations/stitch/types';
+import { DebitOrder, Transaction } from '../../integrations/stitch/types';
 import { topFiveExpensesThisMonth } from '../../util/transactions';
 import { getDateWithShortMonthLabel } from '../../util/income-expense-summary';
 
-export function TransactionLine(transaction: Transaction) {
+export function TransactionLine(transaction: Transaction | DebitOrder) {
     return <div className="columns is-mobile">
         <div className="column is-9">
             <div className="content">
-                { transaction.description }<br/>
+                { transaction.reference }<br/>
                 <div className="is-small">{ getDateWithShortMonthLabel(new Date(transaction.date)) }</div>
             </div>
         </div>
@@ -15,14 +15,14 @@ export function TransactionLine(transaction: Transaction) {
     </div>;
 }
 
-export default function TopExpensesCard({ transactions }: { transactions: Transaction[] }) {
-    const topExpenses = topFiveExpensesThisMonth(transactions);
+export default function TopDebitOrderCard({ debitOrders }: { debitOrders: DebitOrder[] }) {
+    const topExpenses: DebitOrder[] = topFiveExpensesThisMonth<DebitOrder>(debitOrders).reverse();
 
     return (
         <div className='card mb-4'>
             <div className='card-content'>
                 <div>
-                    <h3 className='report-card-title is-size-6 is-uppercase'>TOP 5 EXPENSES</h3>
+                    <h3 className='report-card-title is-size-6'>TOP 5 DEBIT ORDERS</h3>
                 </div>
                 <div className='content my-6 mx-2'>
                     {
