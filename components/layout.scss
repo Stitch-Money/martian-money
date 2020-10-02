@@ -11,6 +11,7 @@ $info: #FBE6DA;
 $info-invert: $primary;
 $grey: #857D7A;
 $grey-light: #ADA39F;
+$grey-dark: #66666A;
 
 $navbar-background-color: transparent;
 $footer-background-color: #ffffff;
@@ -51,6 +52,12 @@ a.button:hover {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     letter-spacing: 3px;
+}
+
+.approved {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color: $grey-dark;
 }
 
 .dome {
