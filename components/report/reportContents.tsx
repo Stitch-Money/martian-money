@@ -50,17 +50,17 @@ export function ReportContents(): JSX.Element {
                 <div className='column is-four-fifths-desktop'>
                     <div className='columns is-centered is-desktop'>
                         <div className='column'>
-                            <ChartCard title='Earth ID'>
+                            <ChartCard title='EARTH ID'>
                                 <Identity />
                             </ChartCard>
                         </div>
                         <div className='column'>
-                            <ChartCard title='Income Vs Expenses'>
+                            <ChartCard title='INCOME VS EXPENSES'>
                                 <IncomeExpenseChart transactions={transactions}/>
                             </ChartCard>
                         </div>
                         <div className='column'>
-                            <ChartCard title='Spend Breakdown'>
+                            <ChartCard title='SPEND BREAKDOWN'>
                                 <TransactionCategoryChart/>
                             </ChartCard>
                         </div>

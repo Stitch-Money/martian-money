@@ -26,7 +26,7 @@ export function IncomeExpenseChart(props: { transactions: Transaction[] | undefi
                 <XAxis dataKey="month" tick={{ fontSize: 10 }} axisLine={false} tickLine={false}/>
                 <YAxis tickFormatter={value => `R ${value}`} tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
                 <Bar dataKey="income" fill="#D63908" barSize={12} />
-                <Bar dataKey="expenses" fill="#F87C55" barSize={12}/>
+                <Bar dataKey="expenses" fill="#FF9559" barSize={12}/>
                 <Legend formatter={getLabelFormatter} height={15}/>
             </BarChart>
         </ResponsiveContainer>
