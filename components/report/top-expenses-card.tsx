@@ -5,7 +5,7 @@ import { topFiveExpenses } from '../../util/income-expense-summary';
 export function TransactionLine(transaction: Transaction) {
     return <div className="container">
         { transaction.reference }
-        { transaction.date.getDate() }
+        { transaction.date }
     </div>;
 }
 
