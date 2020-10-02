@@ -1,26 +1,41 @@
 import { useQuery } from '@apollo/client';
-import { BankAccountResponse, TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
-import { BankAccountsQuery, TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
+import {
+    BankAccountResponse,
+    DebitOrderResponse, Edge,
+    TransactionsResponse
+} from '../../integrations/stitch/query/query-response-types';
+import {
+    BankAccountsQuery,
+    DebitOrdersByBankAccountQuery,
+    TransactionsByBankAccountQuery
+} from '../../integrations/stitch/query/queries';
 import { IncomeExpenseChart } from './incomeExpenseChart';
 import { TransactionCategoryChart } from './transactionCategoryChart';
 import React from 'react';
 import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
+import {BankAccount, DebitOrder} from "integrations/stitch/types";
 
 export function ReportContents(): JSX.Element {
     const bankAccountResponse = useQuery<BankAccountResponse>(BankAccountsQuery);
+    const chequeAccount: BankAccount | undefined = bankAccountResponse.data?.user.bankAccounts.find( (ba: BankAccount) => ba.accountType === "current");
     console.log('Errors', bankAccountResponse.error);
     console.log('bankAccountResponse', bankAccountResponse);
 
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
         variables: { accountId: bankAccountResponse.data?.user.bankAccounts[0].id }
     });
-
-    console.log('Errors', transactionsResponse.error);
+    const debitOrderResponse = useQuery<DebitOrderResponse>(DebitOrdersByBankAccountQuery, {
+        variables: { accountId: chequeAccount?.id }
+    });
+    
+    console.log('Errors', transactionsResponse.error, debitOrderResponse.error);
     const transactions = transactionsResponse.data?.node.transactions.edges.map(x => x.node);
     const total = transactionsResponse.data?.node.transactions.edges.reduce((acc, t) => acc + Number.parseFloat(t.node.amount.quantity), 0);
     console.log('transaction total', total?.toString());
-
+    
+    const debitOrders: DebitOrder[] | undefined = debitOrderResponse.data?.node.debitOrderPayments.edges.map( (dop: Edge<DebitOrder>) => dop.node);
+    
     if (bankAccountResponse.loading) {
         return <progress className="progress is-large is-info" max="100">60%</progress>;
     }

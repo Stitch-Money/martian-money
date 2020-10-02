@@ -37,6 +37,7 @@ export type StitchRefreshTokenRequest = {
 
 export type BankAccountId = string & { __bankId__: null };
 export type TransactionId = string & { __transactionId__: null };
+export type DebitOrderId = string & { __transactionId__: null };
 
 export type Money = {
     quantity: string
@@ -85,3 +86,10 @@ export type BankAccount = {
     branchCode: string
     currentBalance: Money
 };
+
+export type DebitOrder = {
+    id: DebitOrderId,
+    date: Date,
+    amount: Money,
+    reference: string
+}
