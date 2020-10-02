@@ -7,13 +7,14 @@ import React from 'react';
 import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
 import { BankAccount } from '../../integrations/stitch/types';
+import TopExpensesCard from './top-expenses-card';
 
 export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
         variables: { accountId: props.bankAccount.id }
     });
 
-    const transactions = transactionsResponse.data?.node.transactions.edges.map(x => x.node);
+    const transactions = transactionsResponse.data?.node.transactions.edges.map(x => x.node) ?? [];
 
     return (
         <>
@@ -51,6 +52,11 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
                     <ChartCard title='SPEND BREAKDOWN'>
                         <TransactionCategoryChart/>
                     </ChartCard>
+                </div>
+            </div>
+            <div className="columns is-centered is-multiline">
+                <div className="column is-one-third-desktop">
+                    <TopExpensesCard transactions={transactions} />
                 </div>
             </div>
         </>
