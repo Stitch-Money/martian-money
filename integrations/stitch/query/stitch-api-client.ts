@@ -1,6 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { StitchConfiguration } from '../client.test';
+import { StitchConfiguration } from '../client';
 
 // Apollo Client chains together ApolloLinks to add our token to every request
 export const stitchClient = (token: string) => {
@@ -9,7 +9,7 @@ export const stitchClient = (token: string) => {
     });
     const authLink = setContext((_, { headers }) => {
         if (token === null) {
-            throw new Error('Token was undefined. Failed to create ApolloClient auth link.');
+            throw new Error('[stitch-api-client] Token was undefined. Failed to create ApolloClient auth link.');
         }
 
         return {

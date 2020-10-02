@@ -12,6 +12,7 @@ $info-invert: $primary;
 $grey: #857D7A;
 $grey-light: #ADA39F;
 
+$navbar-background-color: transparent;
 $footer-background-color: #ffffff;
 $footer-padding: 1.5rem 1.5rem 0;
 $card-radius: 1.5rem;
@@ -20,6 +21,7 @@ $card-radius: 1.5rem;
 
 a.button {
     border-radius: 1000px;
+    padding: 1.6em 1.8em;
 }
 
 a.button:hover {
@@ -30,6 +32,7 @@ a.button:hover {
     height: 300px;
     width: 300px;
     border-radius: 150px;
+    border: none;
     background: linear-gradient(224.98deg, #F4D0C9 2.82%, #EB6D46 39.79%, #E95122 56.97%, #D63908 101.23%);
     box-shadow: 0 8px 5px #FBE6DA;
 }
@@ -52,17 +55,27 @@ a.button:hover {
 
 .dome {
     position: absolute;
-    height: 70%;
     width: 100%;
-    max-width: 100%;
+    margin-top: 1.5rem;
+    height: 70%;
+
+    @media screen and (max-width: $desktop) {
+        min-width: $desktop;
+        margin-left: calc((100vw - #{$desktop}) / 2);
+    }
+
 }
 
 .big-dome {
     position: absolute;
-    top: -30%;
-    height: 90%;
-    width: 150%;
+    top: 0;
+    width: 100%;
     max-width: 100%;
+
+    @media screen and (max-width: $desktop) {
+        min-width: $desktop;
+        margin-left: calc((100vw - #{$desktop}) / 2);
+    }
 }
 
 .stitch-footer {

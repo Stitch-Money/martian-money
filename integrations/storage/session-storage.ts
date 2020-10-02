@@ -32,7 +32,6 @@ export function getStitchAccessToken(): string | null {
 }
 
 export function setClientIdForSession(clientId: string) {
-    console.log('setting client Id to', clientId);
     setItem('clientId', clientId);
 }
 

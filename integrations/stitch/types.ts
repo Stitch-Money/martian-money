@@ -19,7 +19,7 @@ export type StitchAccessTokenResponse = {
     token_type: StitchTokenType
     refresh_token: string
     scope: StitchScope[]
-};
+} | { error: string };
 
 export type StitchAccessTokenRequest = {
     grant_type: 'authorization_code'
