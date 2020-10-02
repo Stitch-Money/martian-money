@@ -6,7 +6,7 @@ import { TransactionCategoryChart } from './transactionCategoryChart';
 import React from 'react';
 import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
-import { BankAccount } from "integrations/stitch/types";
+import { BankAccount } from 'integrations/stitch/types';
 import TopExpensesCard from './top-expenses-card';
 import TopDebitOrderCard from "components/report/top-debit-order-card";
 
@@ -57,7 +57,7 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
                 </div>
                 <div className='column is-one-third-desktop'>
                     <ChartCard title='SPEND BREAKDOWN'>
-                        <TransactionCategoryChart/>
+                        <TransactionCategoryChart accountId={props.bankAccount.id}/>
                     </ChartCard>
                 </div>
                 <div className="column is-one-third-desktop">
