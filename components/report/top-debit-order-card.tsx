@@ -15,14 +15,14 @@ export function TransactionLine(transaction: Transaction | DebitOrder) {
     </div>;
 }
 
-export default function TopExpensesCard({ transactions }: { transactions: Transaction[] }) {
-    const topExpenses = topFiveExpenses(transactions);
+export default function TopDebitOrderCard({ debitOrders }: { debitOrders: DebitOrder[] }) {
+    const topExpenses: DebitOrder[] = topFiveExpenses<DebitOrder>(debitOrders);
 
     return (
         <div className='card mb-4'>
             <div className='card-content'>
                 <div>
-                    <h3 className='report-card-title is-size-6'>TOP 5 EXPENSES</h3>
+                    <h3 className='report-card-title is-size-6'>TOP 5 DEBIT ORDERS</h3>
                 </div>
                 <div className='content my-6 mx-2'>
                     {

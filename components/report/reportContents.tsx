@@ -8,6 +8,7 @@ import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
 import { BankAccount } from "integrations/stitch/types";
 import TopExpensesCard from './top-expenses-card';
+import TopDebitOrderCard from "components/report/top-debit-order-card";
 
 export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
@@ -20,8 +21,7 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
         variables: { accountId: props.bankAccount.id }
     });
 
-    const debitOrders = debitOrderResponse.data?.node.debitOrderPayments.edges.map(x => x.node);
-    console.log(debitOrders);
+    const debitOrders = debitOrderResponse.data?.node.debitOrderPayments.edges.map(x => x.node) ?? [];
     
     return (
         <>
@@ -60,10 +60,11 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
                         <TransactionCategoryChart/>
                     </ChartCard>
                 </div>
-            </div>
-            <div className="columns is-centered is-multiline">
                 <div className="column is-one-third-desktop">
                     <TopExpensesCard transactions={transactions} />
+                </div>
+                <div className="column is-one-third-desktop">
+                    <TopDebitOrderCard debitOrders={debitOrders} />
                 </div>
             </div>
         </>
