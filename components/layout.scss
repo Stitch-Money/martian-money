@@ -12,6 +12,7 @@ $info-invert: $primary;
 $grey: #857D7A;
 $grey-light: #ADA39F;
 $grey-dark: #66666A;
+$green: #39AF4C;
 
 $navbar-background-color: transparent;
 $footer-background-color: #ffffff;
@@ -69,7 +70,7 @@ a.button:hover {
 .approved {
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
-    color: $grey-dark;
+    color: $green;
 }
 
 .dome {
@@ -123,6 +124,7 @@ a.button:hover {
     @extend .is-size-6;
     @extend .has-text-black;
     @extend .has-text-weight-bold;
+    @extend .is-uppercase;
 }
 
 .card {

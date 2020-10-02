@@ -33,12 +33,9 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
                     <div className="level-item is-center">
                         <p className="approved is-size-2">APPROVED</p>
                     </div>
-                    <div className="level-item is-center mb-4">
-                        <p className="domeLoan has-text-grey-dark">DOME LOAN</p>
-                    </div>
                     <div className="level-item is-center">
                         <div className="column is-6">
-                            <p className="is-size-5 has-text-black has-text-centered">James, your application for a dome-loan on Mars has been successful, congrats!</p>
+                            <p className="is-size-5 has-text-black has-text-centered">Your application for a dome-loan on Mars has been successful, congrats!</p>
                         </div>
                     </div>
                 </div>
