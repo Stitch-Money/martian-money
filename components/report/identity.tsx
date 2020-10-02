@@ -32,7 +32,7 @@ export function Identity(): JSX.Element {
             </>
         );
     }
-    return <p>Error</p>;
+    return <progress className="progress is-small is-info" max="100">60%</progress>;
 }
 
 function IdentityTableRow(props: { heading: string, value: string | undefined }): JSX.Element {
