@@ -1,4 +1,4 @@
-import { BankAccount, Identity, Transaction } from '../types';
+import { BankAccount, Identity, Transaction, TransactionCategory } from '../types';
 
 export type IdentityResponse = {
     user: {
@@ -19,5 +19,11 @@ export type Edge<T> = {
 export type TransactionsResponse = Edge<{
     transactions: {
         edges: Array<Edge<Transaction>>
+    }
+}>;
+
+export type TransactionCategoriesResponse = Edge<{
+    transactions: {
+        edges: Array<Edge<TransactionCategory>>
     }
 }>;

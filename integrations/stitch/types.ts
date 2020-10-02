@@ -75,6 +75,16 @@ export type Transaction = {
     runningBalance: Money
 };
 
+export type TransactionCategory = {
+    id: TransactionId
+    amount: Money
+    date: Date
+    category?: {
+        description: string
+        probability: string
+    }
+};
+
 export type BankAccount = {
     id: BankAccountId
     name: string

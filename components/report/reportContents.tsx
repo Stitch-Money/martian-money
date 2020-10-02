@@ -49,7 +49,7 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
                 </div>
                 <div className='column is-one-third-desktop'>
                     <ChartCard title='SPEND BREAKDOWN'>
-                        <TransactionCategoryChart/>
+                        <TransactionCategoryChart accountId={props.bankAccount.id}/>
                     </ChartCard>
                 </div>
             </div>
