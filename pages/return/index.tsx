@@ -7,14 +7,12 @@ import {
     setStitchAccessToken
 } from '../../integrations/storage/session-storage';
 import Layout from '../../components/layout';
+import Dome from '../../components/dome';
 
 export default function Index() {
     const router = useRouter();
     const { code } = router.query;
-    let verifier: string | null = null;
-    if (typeof window !== 'undefined') {
-        verifier = getSessionVerifier();
-    }
+    const verifier = getSessionVerifier();
 
     useEffect(() => {
         async function retrieveToken(): Promise<void> {
@@ -38,6 +36,11 @@ export default function Index() {
     }, [router, code, verifier]);
 
     return <Layout>
-        <progress className="progress is-large is-info" max="100">60%</progress>
+        <Dome />
+        <div className="section">
+            <div className="container">
+                <progress className="progress is-large is-info" max="100">60%</progress>
+            </div>
+        </div>
     </Layout>;
 }
