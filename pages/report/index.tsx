@@ -1,9 +1,9 @@
 import React from 'react';
 import { StitchProvider } from 'components/stitch/stitch-provider';
-import { ReportContents } from '../../components/report/reportContents';
 import Layout, { siteName } from '../../components/layout';
 import Head from 'next/head';
 import Dome from 'components/dome';
+import Reports from '../../components/report/reports';
 
 export default function Report(): JSX.Element {
     return (
@@ -15,16 +15,10 @@ export default function Report(): JSX.Element {
             <section className="section">
                 <div className="container">
                     <StitchProvider>
-                        <ReportContents/>
+                        <Reports />
                     </StitchProvider>
                 </div>
             </section>
         </Layout>
     );
-}
-
-export async function getStaticProps() {
-    return {
-        props: {} // will be passed to the page component as props
-    };
 }

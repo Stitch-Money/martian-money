@@ -11,6 +11,7 @@ $info: #FBE6DA;
 $info-invert: $primary;
 $grey: #857D7A;
 $grey-light: #ADA39F;
+$grey-dark: #66666A;
 
 $navbar-background-color: transparent;
 $footer-background-color: #ffffff;
@@ -18,6 +19,14 @@ $footer-padding: 1.5rem 1.5rem 0;
 $card-radius: 1.5rem;
 
 @import "../node_modules/bulma/bulma.sass";
+
+.full-viewport-height {
+    height: 100vh;
+
+    > .container {
+      height: 100%;
+    }
+}
 
 a.button {
     border-radius: 1000px;
@@ -51,6 +60,12 @@ a.button:hover {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     letter-spacing: 3px;
+}
+
+.approved {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color: $grey-dark;
 }
 
 .dome {
@@ -101,4 +116,16 @@ a.button:hover {
 .report-card-title {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
+}
+
+.recharts-legend-item { 
+    font-size: 12px; 
+}
+
+.recharts-pie-label-text {
+    font-size: 12px;
+}
+
+th {
+    min-width: 100px;
 }
