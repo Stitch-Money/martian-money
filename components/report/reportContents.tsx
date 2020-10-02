@@ -7,6 +7,7 @@ import React from 'react';
 import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
 import { BankAccount } from '../../integrations/stitch/types';
+import { PrimaryButton } from 'components/buttons/primary-button';
 
 export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
@@ -53,6 +54,10 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
                     </ChartCard>
                 </div>
             </div>
+
+            <div className="buttons is-centered">
+            <PrimaryButton href={'/statement'}>Send statement</PrimaryButton>
+        </div>
         </>
     );
 }

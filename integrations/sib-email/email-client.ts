@@ -13,7 +13,7 @@ type EmailAttachment = {
 type EmailBody = {
     emailTo: string[]
     attributes: EmailAttributes
-    attachment: EmailAttachment[]
+    attachment?: EmailAttachment[]
 };
 
 export async function sendStatementEmail(userIdentity?: Identity, statements?: AccountStatement[]) {
@@ -29,17 +29,19 @@ export async function sendStatementEmail(userIdentity?: Identity, statements?: A
         attributes: {
             FULLNAME: userIdentity?.fullName!,
             IDNUMBER: userIdentity?.identifyingDocument?.number!
-        },
-        attachment: []
+        }
     };
 
-    statements!.forEach(statement => {
-        const attachment: EmailAttachment = {
-            content: statement.payload,
-            name: statement.name
-        }
-        body.attachment.push(attachment);
-    });
+    if (statements) {
+        body.attachment = [];
+        statements.forEach(statement => {
+            const attachment: EmailAttachment = {
+                content: statement.payload,
+                name: statement.name
+            }
+            body.attachment!.push(attachment);
+        });
+    }
 
     const bodyString = JSON.stringify(body);
 

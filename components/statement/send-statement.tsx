@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import ChartCard from 'components/report/chart-card';
 import { sendStatementEmail } from 'integrations/sib-email/email-client';
 import { BankAccountsQuery, IdentityQuery, StatementsByBankAccountQuery } from 'integrations/stitch/query/queries';
 import { BankAccountResponse, IdentityResponse } from 'integrations/stitch/query/query-response-types';
@@ -19,23 +20,32 @@ export function StatementContents(): JSX.Element {
             variables: { accountId: currentAccountId }
         });
     
-        const accountStatements = statementsResponse.data?.user.bankAccounts[0].accountStatements;
-        const statementPayload = accountStatements![0].payload;
-        console.log('Statement', statementPayload);
-        console.log('Errors', statementsResponse.error);
-    
-        const identityQuery = useQuery<IdentityResponse>(IdentityQuery);
-        const identity = identityQuery.data?.user.identity;
-    
-        console.log('identity', identity?.fullName);
-    
-        sendStatementEmail(identity, accountStatements);
+        const bankAccounts = statementsResponse.data?.user.bankAccounts;
+        if (bankAccounts) {
+            const accountStatements = bankAccounts[0].accountStatements;
+            const statementPayload = accountStatements![0].payload;
+            console.log('Statement', statementPayload);
+            console.log('Errors', statementsResponse.error);
+        
+            const identityQuery = useQuery<IdentityResponse>(IdentityQuery);
+            const identity = identityQuery.data?.user.identity;
+        
+            console.log('identity', identity?.fullName);
+        
+            sendStatementEmail(identity, accountStatements);
+        }
     
         return (
             <>
                 <h1 className="title">Your statement has been successfully sent!</h1>
-                <p>currentAccountId: {currentAccountId}</p>
-                <p>statementPayload {statementPayload}</p>
+                <div className='columns is-centered'>
+                <div className='column'>
+                    <ChartCard title='Account Details'>
+                        <p>Account Name: <b>{currentAccount?.name}</b></p>
+                        <p>Account Number: <b>{currentAccount?.accountNumber}</b></p>
+                    </ChartCard>
+                </div>
+            </div>
             </>
         );
       }
@@ -43,10 +53,8 @@ export function StatementContents(): JSX.Element {
         return (
             <>
                 <h1 className="title">Oops, something went wrong!</h1>
-                <p>Message {err.message}</p>
+                <p>Message: {err.message}</p>
             </>
         );
-      }
-
-    
+      } 
 }
