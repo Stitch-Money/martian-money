@@ -22,7 +22,7 @@ export default function TopExpensesCard({ transactions }: { transactions: Transa
         <div className='card mb-4'>
             <div className='card-content'>
                 <div>
-                    <h3 className='report-card-title is-size-6 is-uppercase'>TOP 5 EXPENSES</h3>
+                    <h3 className='report-card-title is-size-6 is-uppercase has-text-black'>TOP 5 EXPENSES</h3>
                 </div>
                 <div className='content my-6 mx-2'>
                     {

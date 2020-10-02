@@ -22,7 +22,7 @@ export default function TopDebitOrderCard({ debitOrders }: { debitOrders: DebitO
         <div className='card mb-4'>
             <div className='card-content'>
                 <div>
-                    <h3 className='report-card-title is-size-6'>TOP 5 DEBIT ORDERS</h3>
+                    <h3 className='report-card-title is-size-6 has-text-black'>TOP 5 DEBIT ORDERS</h3>
                 </div>
                 <div className='content my-6 mx-2'>
                     {
