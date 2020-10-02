@@ -8,7 +8,7 @@ export function topFiveExpensesThisMonth<Sortable extends SortableByAmount>(tran
 
     const sorted = transactions
         .filter(transaction => new Date(transaction.date).getTime() > oneMonthAgo)
-        .sort((a, b) => (Number.parseFloat(a.amount.quantity) - Number.parseFloat(b.amount.quantity)) || new Date(a.date).getMonth() - new Date(b.date).getMonth());
+        .sort((a, b) => (Number.parseFloat(a.amount.quantity) - Number.parseFloat(b.amount.quantity)));
 
     console.log('Sorted:', sorted.map(x => x.amount.quantity));
 
