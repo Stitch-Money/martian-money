@@ -12,7 +12,7 @@ const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-function getMonthLabel(date: Date): string {
+function getMonthWithYearLabel(date: Date): string {
     return `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 }
 
@@ -24,7 +24,7 @@ export function getIncomeAndExpenses(transactions: Transaction[] | undefined): I
     return transactions
         .sort((a, b) => (a.date > b.date) ? 1 : -1)
         .reduce((summary, transaction) => {
-            const transactionMonth = getMonthLabel(new Date(transaction.date));
+            const transactionMonth = getMonthWithYearLabel(new Date(transaction.date));
             let monthSummary = emptySummary.find(x => x.month === transactionMonth);
             if (!monthSummary) {
                 monthSummary = {
@@ -52,4 +52,13 @@ export function getIncomeAndExpenses(transactions: Transaction[] | undefined): I
             value.expenses = Math.round(value.expenses * 100) / 100;
             return value;
         });
+}
+
+export function topFiveExpenses(transactions: Transaction[]): Transaction[] {
+    const sorted = transactions
+        .sort((a, b) => Number.parseFloat(a.amount.quantity) - Number.parseFloat(b.amount.quantity));
+
+    console.log('Sorted:', sorted.map(x => x.amount.quantity));
+
+    return sorted.slice(0, 5);
 }
