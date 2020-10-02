@@ -1,29 +1,19 @@
 import { useQuery } from '@apollo/client';
-import { BankAccountResponse, TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
-import { BankAccountsQuery, TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
+import { TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
+import { TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
 import { IncomeExpenseChart } from './incomeExpenseChart';
 import { TransactionCategoryChart } from './transactionCategoryChart';
 import React from 'react';
 import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
+import { BankAccount } from '../../integrations/stitch/types';
 
-export function ReportContents(): JSX.Element {
-    const bankAccountResponse = useQuery<BankAccountResponse>(BankAccountsQuery);
-    console.log('Errors', bankAccountResponse.error);
-    console.log('bankAccountResponse', bankAccountResponse);
-
+export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
-        variables: { accountId: bankAccountResponse.data?.user.bankAccounts[0].id }
+        variables: { accountId: props.bankAccount.id }
     });
 
-    console.log('Errors', transactionsResponse.error);
     const transactions = transactionsResponse.data?.node.transactions.edges.map(x => x.node);
-    const total = transactionsResponse.data?.node.transactions.edges.reduce((acc, t) => acc + Number.parseFloat(t.node.amount.quantity), 0);
-    console.log('transaction total', total?.toString());
-
-    if (bankAccountResponse.loading) {
-        return <progress className="progress is-large is-info" max="100">60%</progress>;
-    }
 
     return (
         <>
