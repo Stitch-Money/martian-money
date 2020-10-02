@@ -35,13 +35,11 @@ export type StitchRefreshTokenRequest = {
     refresh_token: string
 };
 
-import { Decimal } from 'decimal.js';
-
 export type BankAccountId = string & { __bankId__: null };
 export type TransactionId = string & { __transactionId__: null };
 
 export type Money = {
-    quantity: Decimal
+    quantity: string
     currency: string
 };
 
