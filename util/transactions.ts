@@ -20,7 +20,3 @@ export function topFiveExpensesThisMonth<Sortable extends SortableByAmount>(sort
 
     return topFiveExpenses.slice(0, 5);
 }
-
-export function getMostRecentTopFiveExpenses() {
-
-}
