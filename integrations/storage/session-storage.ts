@@ -35,6 +35,12 @@ export function setClientIdForSession(clientId: string) {
     setItem('clientId', clientId);
 }
 
+export function setAuthSessionVariables(clientId: string, nonce?: string, verifier?: string) {
+    setSessionNonce(nonce ?? '');
+    setSessionVerifier(verifier ?? '');
+    setClientIdForSession(clientId);
+}
+
 export function getClientIdForSession() {
     return getItem('clientId');
 }

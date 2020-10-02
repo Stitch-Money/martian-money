@@ -6,14 +6,14 @@ import {
 import useSWR from 'swr';
 import { PrimaryButton } from '../../components/buttons/primary-button';
 import { SecondaryButton } from '../../components/buttons/secondary-button';
-import { setClientIdForSession } from '../../integrations/storage/session-storage';
+import { setAuthSessionVariables } from '../../integrations/storage/session-storage';
 import { StitchConfiguration } from '../../integrations/stitch/client';
 import { useRouter } from 'next/router';
 import { ExplainerLayout } from '../../components/explainer/explainer-layout';
 
 export default function SelectExperiencePage(): JSX.Element {
-    const authorizeUrl = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
-    const testAuthorizeUrl = useSWR('stitchTestClientUrl', getStitchTestClientAuthorizationCodeUrl);
+    const authorizeData = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
+    const testAuthorizeData = useSWR('stitchTestClientUrl', getStitchTestClientAuthorizationCodeUrl);
     const router = useRouter();
 
     return <ExplainerLayout onCloseClick={() => router.push('/')}>
@@ -22,12 +22,12 @@ export default function SelectExperiencePage(): JSX.Element {
         </div>
 
         <div className="buttons is-centered">
-            <PrimaryButton href={testAuthorizeUrl.data}
-                onClick={() => setClientIdForSession(StitchConfiguration.testClientId)}>Apply
+            <PrimaryButton href={testAuthorizeData.data?.url}
+                onClick={() => setAuthSessionVariables(StitchConfiguration.testClientId, testAuthorizeData.data?.nonce, testAuthorizeData.data?.verifier)}>Apply
                 with
                 demo info</PrimaryButton>
-            <SecondaryButton href={authorizeUrl.data}
-                onClick={() => setClientIdForSession(StitchConfiguration.clientId)}>Apply with
+            <SecondaryButton href={authorizeData.data?.url}
+                onClick={() => setAuthSessionVariables(StitchConfiguration.clientId, authorizeData.data?.nonce, authorizeData.data?.verifier)}>Apply with
                 my
                 info</SecondaryButton>
         </div>
