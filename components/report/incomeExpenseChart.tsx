@@ -64,14 +64,14 @@ export function IncomeExpenseChart(props: { transactions: Transaction[] | undefi
         return label.charAt(0).toUpperCase() + label.slice(1);
     }
 
-    const valueFormatter = (value: any) => `R ${value}`;
+    const valueFormatter = (value: any) => `R${value}`;
 
     return (
         <ResponsiveContainer className="tile" minHeight="300px">
             <BarChart data={data}>
                 <Tooltip cursor={false} formatter={valueFormatter} labelFormatter={getLabelFormatter}/>
                 <XAxis dataKey="month" tick={{ fontSize: 10 }} axisLine={false} tickLine={false}/>
-                <YAxis tickFormatter={value => `R ${value}`} tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
+                <YAxis tickFormatter={value => `R ${value}`} tick={{ fontSize: 10 }} axisLine={false} tickLine={false} width={75} />
                 <Bar dataKey="income" fill="#D63908" barSize={12} />
                 <Bar dataKey="expenses" fill="#FF9559" barSize={12}/>
                 <Legend formatter={getLabelFormatter} height={15}/>
