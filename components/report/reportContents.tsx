@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { Decimal } from 'decimal.js';
 import { BankAccountResponse, TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
 import { BankAccountsQuery, TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
 import { IncomeExpenseChart } from './incomeExpenseChart';
@@ -18,7 +17,8 @@ export function ReportContents(): JSX.Element {
     });
 
     console.log('Errors', transactionsResponse.error);
-    const total = transactionsResponse.data?.node.transactions.edges.reduce((acc, t) => acc.add(new Decimal(t.node.amount.quantity)), new Decimal(0));
+    const transactions = transactionsResponse.data?.node.transactions.edges.map(x => x.node);
+    const total = transactionsResponse.data?.node.transactions.edges.reduce((acc, t) => acc + Number.parseFloat(t.node.amount.quantity), 0);
     console.log('transaction total', total?.toString());
 
     if (bankAccountResponse.loading) {
@@ -45,7 +45,7 @@ export function ReportContents(): JSX.Element {
                     </div>
                 </div>
             </div>
-            
+
             <div className='columns is-centered'>
                 <div className='column is-four-fifths-desktop'>
                     <div className='columns is-centered is-desktop'>
@@ -56,7 +56,7 @@ export function ReportContents(): JSX.Element {
                         </div>
                         <div className='column'>
                             <ChartCard title='Income Vs Expenses'>
-                                <IncomeExpenseChart/>
+                                <IncomeExpenseChart transactions={transactions}/>
                             </ChartCard>
                         </div>
                         <div className='column'>
