@@ -1,5 +1,21 @@
 import { AccountStatement, Identity } from "integrations/stitch/types";
 
+type EmailAttributes = {
+    FULLNAME: string
+    IDNUMBER: string
+};
+
+type EmailAttachment = {
+    content: string
+    name: string
+};
+
+type EmailBody = {
+    emailTo: string[]
+    attributes: EmailAttributes
+    attachment: EmailAttachment[]
+};
+
 export async function sendStatementEmail(userIdentity?: Identity, statements?: AccountStatement[]) {
     console.log('executing sendStatementEmail')
 
@@ -8,30 +24,26 @@ export async function sendStatementEmail(userIdentity?: Identity, statements?: A
     myHeaders.append("api-key", "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");
     myHeaders.append("content-type", "application/json");
 
-    let body = {
-        "sender":{  
-            "name":"Stitch Money",
-            "email":"priyen@stitch.money"
-         },
-         "to":[  
-            {  
-               "email":`priyenpillay@outlook.com`,
-               "name":`Mars Sales Team`
-            }
-         ],
-         "subject":"FNB Statement for Priyen Pillay",
-         "htmlContent":`<html><head></head><body><p>Hello,</p>Please find the attached statement for ${userIdentity?.fullName}.</p></body></html>`,
-         "attachment": [
-             {
-                 "content": statements![0]?.payload ?? "",
-                 "name": `${name}-statement.pdf`
-             }
-         ]
+    let body: EmailBody = {
+        emailTo: ["priyenwork@gmail.com"],
+        attributes: {
+            FULLNAME: userIdentity?.fullName!,
+            IDNUMBER: userIdentity?.identifyingDocument?.number!
+        },
+        attachment: []
     };
+
+    statements!.forEach(statement => {
+        const attachment: EmailAttachment = {
+            content: statement.payload,
+            name: statement.name
+        }
+        body.attachment.push(attachment);
+    });
 
     const bodyString = JSON.stringify(body);
 
-    const response = await fetch(`https://api.sendinblue.com/v3/smtp/email`, {
+    const response = await fetch(`https://api.sendinblue.com/v3/smtp/templates/1/send`, {
         method: 'post',
         headers: myHeaders,
         body: bodyString

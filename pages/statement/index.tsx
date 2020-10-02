@@ -11,17 +11,10 @@ export default function Statement(): JSX.Element {
         </Head>
         <section className="section">
             <div className="container">
-            <StatementContents/>
-                {/* <StitchProvider>
+                <StitchProvider>
                     <StatementContents/>
-                </StitchProvider> */}
+                </StitchProvider>
             </div>
         </section>
     </Layout>;
-}
-
-export async function getStaticProps() {
-    return {
-        props: {} // will be passed to the page component as props
-    };
 }

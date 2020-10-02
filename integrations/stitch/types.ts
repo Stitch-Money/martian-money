@@ -79,7 +79,7 @@ export type Transaction = {
 
 export type AccountStatement = {
     payload: string
-    statementType: string
+    name: string
 }
 
 export type BankAccount = {

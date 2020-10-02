@@ -108,7 +108,7 @@ export const StatementsByBankAccountQuery = gql`
             ... on BankAccount {
                 accountStatements {
                     payload
-                    statementType
+                    name
                 }
             }
         }
