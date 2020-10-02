@@ -25,8 +25,8 @@ export function IncomeExpenseChart(props: { transactions: Transaction[] | undefi
                 <Tooltip cursor={false} formatter={valueFormatter} labelFormatter={getLabelFormatter}/>
                 <XAxis dataKey="month" tick={{ fontSize: 10 }} axisLine={false} tickLine={false}/>
                 <YAxis tickFormatter={value => `R ${value}`} tick={{ fontSize: 10 }} axisLine={false} tickLine={false} width={75} />
-                <Bar dataKey="income" fill="#D63908" barSize={12} />
-                <Bar dataKey="expenses" fill="#FF9559" barSize={12}/>
+                <Bar dataKey="income" fill="#D63908" barSize={25} />
+                <Bar dataKey="expenses" fill="#FF9559" barSize={25}/>
                 <Legend formatter={getLabelFormatter} height={15}/>
             </BarChart>
         </ResponsiveContainer>

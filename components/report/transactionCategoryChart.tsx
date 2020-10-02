@@ -41,7 +41,7 @@ export function TransactionCategoryChart(props: { accountId: BankAccountId }): J
                     dataKey="value"
                     nameKey="name"
                     innerRadius="50%"
-                    outerRadius="60%"
+                    outerRadius="70%"
                     label={renderLabel}>
                     <LabelList dataKey="name"/>
                     {

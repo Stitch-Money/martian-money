@@ -8,7 +8,7 @@ export function TransactionLine(transaction: Transaction | DebitOrder) {
         <div className="column is-9">
             <div className="content">
                 { transaction.reference }<br/>
-                <div className="is-small">{ getDateWithShortMonthLabel(new Date(transaction.date)) }</div>
+                <span className="has-text-grey has-text-weight-light is-size-7">{ getDateWithShortMonthLabel(new Date(transaction.date)) }</span>
             </div>
         </div>
         <div className="column"><strong>{ transaction.amount.quantity }</strong></div>
@@ -22,7 +22,7 @@ export default function TopDebitOrderCard({ debitOrders }: { debitOrders: DebitO
         <div className='card mb-4'>
             <div className='card-content'>
                 <div>
-                    <h3 className='report-card-title is-size-6'>TOP 5 DEBIT ORDERS</h3>
+                    <h3 className='report-card-title is-size-6 has-text-black'>TOP 5 DEBIT ORDERS</h3>
                 </div>
                 <div className='content mt-6 mb-4 mx-2'>
                     {

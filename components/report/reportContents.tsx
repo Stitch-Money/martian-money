@@ -8,7 +8,7 @@ import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
 import { BankAccount } from 'integrations/stitch/types';
 import TopExpensesCard from './top-expenses-card';
-import TopDebitOrderCard from "components/report/top-debit-order-card";
+import TopDebitOrderCard from 'components/report/top-debit-order-card';
 
 export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
@@ -22,7 +22,7 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
     });
 
     const debitOrders = debitOrderResponse.data?.node.debitOrderPayments.edges.map(x => x.node) ?? [];
-    
+
     return (
         <>
             <div className="columns is-12 mb-6">
@@ -61,7 +61,7 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
                     </ChartCard>
                 </div>
                 <div className="column is-one-third-desktop">
-                    <TopExpensesCard transactions={transactions} />
+                    <TopExpensesCard transactions={transactions} loading={transactionsResponse.loading} />
                 </div>
                 <div className="column is-one-third-desktop">
                     <TopDebitOrderCard debitOrders={debitOrders} />
