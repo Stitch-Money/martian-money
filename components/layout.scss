@@ -28,6 +28,10 @@ $card-radius: 1.5rem;
     }
 }
 
+a {
+    color: $link;
+}
+
 a.button {
     border-radius: 1000px;
     padding: 1.6em 1.8em;
@@ -118,8 +122,12 @@ a.button:hover {
     font-weight: bold;
 }
 
-.recharts-legend-item { 
-    font-size: 12px; 
+.recharts-legend-item {
+    font-size: 12px;
+}
+
+.recharts-wrapper svg{
+    overflow: inherit !important;
 }
 
 .recharts-pie-label-text {
