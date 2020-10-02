@@ -8,14 +8,14 @@ export function TransactionLine(transaction: Transaction) {
         <div className="column is-9">
             <div className="content">
                 { transaction.description }<br/>
-                <div className="is-small">{ getDateWithShortMonthLabel(new Date(transaction.date)) }</div>
+                <span className="has-text-grey has-text-weight-light is-size-7">{ getDateWithShortMonthLabel(new Date(transaction.date)) }</span>
             </div>
         </div>
         <div className="column"><strong>{ transaction.amount.quantity }</strong></div>
     </div>;
 }
 
-export default function TopExpensesCard({ transactions }: { transactions: Transaction[] }) {
+export default function TopExpensesCard({ transactions, loading }: { transactions: Transaction[], loading: boolean }) {
     const topExpenses = topFiveExpensesThisMonth(transactions);
 
     return (
@@ -26,9 +26,11 @@ export default function TopExpensesCard({ transactions }: { transactions: Transa
                 </div>
                 <div className='content my-6 mx-2'>
                     {
-                        topExpenses.length > 0
-                            ? topExpenses.map(TransactionLine)
-                            : 'No transactions.'
+                        loading
+                            ? <progress className="progress is-small is-info" max="100">60%</progress>
+                            : topExpenses.length > 0
+                                ? topExpenses.map(TransactionLine)
+                                : 'No transactions.'
                     }
                 </div>
             </div>

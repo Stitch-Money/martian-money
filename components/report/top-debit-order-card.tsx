@@ -8,7 +8,7 @@ export function TransactionLine(transaction: Transaction | DebitOrder) {
         <div className="column is-9">
             <div className="content">
                 { transaction.reference }<br/>
-                <div className="is-small">{ getDateWithShortMonthLabel(new Date(transaction.date)) }</div>
+                <span className="has-text-grey has-text-weight-light is-size-7">{ getDateWithShortMonthLabel(new Date(transaction.date)) }</span>
             </div>
         </div>
         <div className="column"><strong>{ transaction.amount.quantity }</strong></div>
