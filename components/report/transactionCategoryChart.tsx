@@ -26,7 +26,7 @@ export function TransactionCategoryChart(props: { accountId: BankAccountId }): J
     const data: TransactionCategoriesSummary =
         getTransactionCategorySummary(transactions)
             .sort((a, b) => (a.value > b.value) ? 1 : -1)
-            .slice(-4);
+            .slice(-3);
 
     const COLORS = ['#D63908', '#FF9559', '#FFC58F', '#a74808'];
 
