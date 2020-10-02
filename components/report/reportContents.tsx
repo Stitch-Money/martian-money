@@ -1,14 +1,6 @@
 import { useQuery } from '@apollo/client';
-import {
-    BankAccountResponse,
-    DebitOrderResponse, Edge,
-    TransactionsResponse
-} from '../../integrations/stitch/query/query-response-types';
-import {
-    BankAccountsQuery,
-    DebitOrdersByBankAccountQuery,
-    TransactionsByBankAccountQuery
-} from '../../integrations/stitch/query/queries';
+import { TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
+import { TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
 import { IncomeExpenseChart } from './incomeExpenseChart';
 import { TransactionCategoryChart } from './transactionCategoryChart';
 import React from 'react';
@@ -16,29 +8,12 @@ import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
 import {BankAccount, DebitOrder} from "integrations/stitch/types";
 
-export function ReportContents(): JSX.Element {
-    const bankAccountResponse = useQuery<BankAccountResponse>(BankAccountsQuery);
-    const chequeAccount: BankAccount | undefined = bankAccountResponse.data?.user.bankAccounts.find( (ba: BankAccount) => ba.accountType === "current");
-    console.log('Errors', bankAccountResponse.error);
-    console.log('bankAccountResponse', bankAccountResponse);
-
+export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
-        variables: { accountId: bankAccountResponse.data?.user.bankAccounts[0].id }
+        variables: { accountId: props.bankAccount.id }
     });
-    const debitOrderResponse = useQuery<DebitOrderResponse>(DebitOrdersByBankAccountQuery, {
-        variables: { accountId: chequeAccount?.id }
-    });
-    
-    console.log('Errors', transactionsResponse.error, debitOrderResponse.error);
+
     const transactions = transactionsResponse.data?.node.transactions.edges.map(x => x.node);
-    const total = transactionsResponse.data?.node.transactions.edges.reduce((acc, t) => acc + Number.parseFloat(t.node.amount.quantity), 0);
-    console.log('transaction total', total?.toString());
-    
-    const debitOrders: DebitOrder[] | undefined = debitOrderResponse.data?.node.debitOrderPayments.edges.map( (dop: Edge<DebitOrder>) => dop.node);
-    
-    if (bankAccountResponse.loading) {
-        return <progress className="progress is-large is-info" max="100">60%</progress>;
-    }
 
     return (
         <>
@@ -61,25 +36,21 @@ export function ReportContents(): JSX.Element {
                 </div>
             </div>
 
-            <div className='columns is-centered'>
-                <div className='column is-four-fifths-desktop'>
-                    <div className='columns is-centered is-desktop'>
-                        <div className='column'>
-                            <ChartCard title='EARTH ID'>
-                                <Identity />
-                            </ChartCard>
-                        </div>
-                        <div className='column'>
-                            <ChartCard title='INCOME VS EXPENSES'>
-                                <IncomeExpenseChart transactions={transactions}/>
-                            </ChartCard>
-                        </div>
-                        <div className='column'>
-                            <ChartCard title='SPEND BREAKDOWN'>
-                                <TransactionCategoryChart/>
-                            </ChartCard>
-                        </div>
-                    </div>
+            <div className='columns is-centered is-multiline'>
+                <div className='column is-one-third-desktop'>
+                    <ChartCard title='EARTH ID'>
+                        <Identity />
+                    </ChartCard>
+                </div>
+                <div className='column is-one-third-desktop'>
+                    <ChartCard title='INCOME VS EXPENSES'>
+                        <IncomeExpenseChart transactions={transactions}/>
+                    </ChartCard>
+                </div>
+                <div className='column is-one-third-desktop'>
+                    <ChartCard title='SPEND BREAKDOWN'>
+                        <TransactionCategoryChart/>
+                    </ChartCard>
                 </div>
             </div>
         </>

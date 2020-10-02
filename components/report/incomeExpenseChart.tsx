@@ -2,58 +2,11 @@ import React, { useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { number } from 'prop-types';
 import { Transaction } from '../../integrations/stitch/types';
-
-type MonthSummary = {
-    month: string
-    income: number
-    expenses: number
-};
-
-type IncomeExpenseSummary = MonthSummary[];
-
-const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-];
-
-function getMonthLabel(date: Date): string {
-    return `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
-}
-
-function getIncomeAndExpenses(transactions: Transaction[] | undefined): IncomeExpenseSummary {
-    const emptySummary: IncomeExpenseSummary = [];
-    if (!transactions || transactions.length === 0) {
-        return emptySummary;
-    }
-    return transactions
-        .sort((a, b) => (a.date > b.date) ? 1 : -1)
-        .reduce((summary, transaction) => {
-            const transactionMonth = getMonthLabel(new Date(transaction.date));
-            let monthSummary = emptySummary.find(x => x.month === transactionMonth);
-            if (!monthSummary) {
-                monthSummary = {
-                    month: transactionMonth,
-                    expenses: 0,
-                    income: 0
-                };
-                summary.push(monthSummary);
-            }
-
-            const quantity = Number.parseFloat(transaction.amount.quantity);
-            console.log('Quantity', typeof quantity);
-            console.log('Expenses', typeof monthSummary.expenses);
-            console.log('Income', typeof monthSummary.income);
-            if (quantity < 0) {
-                monthSummary.expenses -= quantity;
-            } else {
-                monthSummary.income += quantity;
-            }
-            return summary;
-        }, emptySummary);
-}
+import { getIncomeAndExpenses } from '../../util/income-expense-summary';
 
 export function IncomeExpenseChart(props: { transactions: Transaction[] | undefined }): JSX.Element {
     const data = useMemo(
-        () => getIncomeAndExpenses(props.transactions),
+        () => getIncomeAndExpenses(props.transactions).slice(-3),
         [props.transactions]
     );
 
