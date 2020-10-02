@@ -16,7 +16,7 @@ export function TransactionLine(transaction: Transaction | DebitOrder) {
 }
 
 export default function TopDebitOrderCard({ debitOrders }: { debitOrders: DebitOrder[] }) {
-    const topExpenses: DebitOrder[] = topFiveExpensesThisMonth<DebitOrder>(debitOrders);
+    const topExpenses: DebitOrder[] = topFiveExpensesThisMonth<DebitOrder>(debitOrders).reverse();
 
     return (
         <div className='card mb-4'>
