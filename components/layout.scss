@@ -21,6 +21,16 @@ $card-radius: 1.5rem;
 
 @import "../node_modules/bulma/bulma.sass";
 
+.dome {
+    position: absolute;
+    width: 100%;
+    margin-top: 1.5rem;
+    height: 70%;
+    background-image: url('/images/dome.svg');
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
 .full-viewport-height {
     height: 100vh;
 
@@ -73,19 +83,6 @@ a.button:hover {
     color: $green;
 }
 
-.dome {
-    position: absolute;
-    width: 100%;
-    margin-top: 1.5rem;
-    height: 70%;
-
-    @media screen and (max-width: $desktop) {
-        min-width: $desktop;
-        margin-left: calc((100vw - #{$desktop}) / 2);
-    }
-
-}
-
 .big-dome {
     position: absolute;
     top: 0;
@@ -105,6 +102,7 @@ a.button:hover {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+    background-color: transparent;
 }
 
 .stitch-footer-text-orange {
