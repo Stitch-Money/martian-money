@@ -14,7 +14,7 @@ Note:
 Only the demo login will work on your machine. If you would like to use real bank logins, you need to first create a client by contacting us.
 
 ### Get your own Stitch client
-Reach out to use at ✉️ info@stitch.money. We'd love to hear from you!
+Reach out to us at ✉️ info@stitch.money. We'd love to hear from you!
 
 ### Read the Stitch docs
 Our API and integration documentation can be found at https://stitch.money/docs
