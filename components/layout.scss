@@ -21,17 +21,6 @@ $card-radius: 1.5rem;
 
 @import "../node_modules/bulma/bulma.sass";
 
-.dome {
-    position: absolute;
-    width: 100%;
-    margin-top: 1.5rem;
-    height: 70%;
-    background-image: url('/images/dome.svg');
-    background-repeat: no-repeat;
-    background-position: top;
-    z-index: -1;
-}
-
 .full-viewport-height {
     height: 100vh;
 
@@ -83,16 +72,28 @@ a.button:hover {
     color: $green;
 }
 
-.big-dome {
+.dome {
     position: absolute;
+    width: 100%;
+    margin-top: 1.5rem;
+    height: 70vh;
+    background-image: url('/images/dome.svg');
+    background-repeat: no-repeat;
+    background-position: top;
+    z-index: -1;
+}
+
+
+.big-dome {
+    background-image: url('/images/big-dome.svg');
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: top center;
     top: 0;
     width: 100%;
     max-width: 100%;
-
-    @media screen and (max-width: $desktop) {
-        min-width: $desktop;
-        margin-left: calc((100vw - #{$desktop}) / 2);
-    }
+    z-index: -1;
+    height: 70vh;
 }
 
 .stitch-footer {
