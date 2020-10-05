@@ -7,7 +7,7 @@ export function ExplainerLayout(props: { onCloseClick: () => void, children?: JS
     return <>
         <SiteHead/>
         <Dome/>
-        <div className="section full-viewport-height">
+        <div className="full-viewport-height">
             <div className="container is-flex is-flex-direction-column is-justify-content-center">
                 <ExplainerHeader onClose={props.onCloseClick}/>
                 <div className="column is-offset-one-quarter-tablet is-half-tablet">
