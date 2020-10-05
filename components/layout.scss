@@ -22,7 +22,7 @@ $card-radius: 1.5rem;
 @import "../node_modules/bulma/bulma.sass";
 
 .full-viewport-height {
-    height: 100vh;
+    min-height: 100vh;
 
     > .container {
       height: 100%;
