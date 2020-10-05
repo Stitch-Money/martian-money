@@ -14,7 +14,7 @@ export default function Footer(props: { onReadMoreClick: () => void }): JSX.Elem
                         <div className="content">
                             <a className='stitch-footer-text-orange' href="#" onClick={props.onReadMoreClick}>
                             Learn more
-                            </a><span> | </span><a className='stitch-footer-text-orange' href="https://github.com/Stitch-Money/Mars-Capital">
+                            </a><span> | </span><a className='stitch-footer-text-orange' href="https://github.com/Stitch-Money/Mars-Financial">
                             Github
                             </a>
                         </div>
