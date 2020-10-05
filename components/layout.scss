@@ -29,6 +29,17 @@ $card-radius: 1.5rem;
     }
 }
 
+.cta-button {
+    @extend .button;
+    @extend .is-rounded;
+    @extend .has-text-weight-bold;
+    @extend .is-medium;
+
+    @media only screen and (max-width: $tablet) {
+        width: 100%;
+    }
+}
+
 a {
     color: $link;
 }
