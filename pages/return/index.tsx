@@ -32,8 +32,6 @@ export default function Index() {
 
             if (token) {
                 router.push('/report').then(_ => {}, _ => {});
-            } else {
-                router.push('/').then(_ => {}, _ => {});
             }
         }, () => {});
     }, [router, code, verifier]);
