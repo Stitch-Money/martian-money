@@ -29,8 +29,11 @@ export default function Index() {
 
         retrieveToken().then(_ => {
             const token = getStitchAccessToken();
+
             if (token) {
                 router.push('/report').then(_ => {}, _ => {});
+            } else {
+                router.push('/').then(_ => {}, _ => {});
             }
         }, () => {});
     }, [router, code, verifier]);
