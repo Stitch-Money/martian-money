@@ -18,7 +18,7 @@ export default function SelectExperiencePage(): JSX.Element {
 
     return <ExplainerLayout onCloseClick={() => router.push('/')}>
         <div className="content has-text-weight-bold is-medium">
-            <p>Select your preferred method to apply for your fake dome-loan.</p>
+            <p>Select your preferred method to apply for your dome-loan.</p>
         </div>
 
         <div className="buttons is-centered">
@@ -32,16 +32,10 @@ export default function SelectExperiencePage(): JSX.Element {
                 info</SecondaryButton>
         </div>
         <div className="content has-text-weight-light is-medium">
-            <p>100% safe and you will not debit any real money when you apply for your fake dome-loan on
-                Mars.</p>
+            <p>Get approved for your dome loan today; your future starts now!</p>
         </div>
         <div className="content is-small">
-            <p>Once you select your preferred experience you will go through a demo experience to apply for
-                a
-                FAKE “Dome-Loan” for a Dome Home on Mars.
-                Once complete you will see a results page of whether you were FAKE successful/unsuccessful
-                and
-                how Stitch was able to determine this.</p>
+            <p>Ever since High Commander Musk settled the first group of people on Mars, relocating planets has been at the top of everyone’s mind. To lessen the financial burden, Mars Financial decided to offer tailored dome loans that take into consideration your personal finances to empower you to buy the dome of your dreams.</p>
         </div>
     </ExplainerLayout>;
 }
