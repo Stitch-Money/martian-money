@@ -13,7 +13,7 @@ export function LearnMore(props: { onClose: () => void }) {
             </div>
 
             <div className="content has-text-weight-bold has-text-grey is-medium">
-                <p>Get approved using your information: </p>
+                <p>Get approved now:</p>
                 <PrimaryButton href="/select-experience">Apply for a dome-loan</PrimaryButton>
             </div>
             <div className="content has-text-weight-bold">

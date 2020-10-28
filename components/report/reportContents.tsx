@@ -2,7 +2,6 @@ import { useQuery } from '@apollo/client';
 import { DebitOrderResponse, TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
 import { DebitOrdersByBankAccountQuery, TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
 import { IncomeExpenseChart } from './incomeExpenseChart';
-import { TransactionCategoryChart } from './transactionCategoryChart';
 import React from 'react';
 import { Identity } from './identity';
 import ChartCard from 'components/report/chart-card';
@@ -42,19 +41,14 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
             </div>
 
             <div className='columns is-centered is-multiline'>
-                <div className='column is-one-third-desktop'>
+                <div className='column is-one-half-desktop'>
                     <ChartCard title='EARTH ID'>
                         <Identity />
                     </ChartCard>
                 </div>
-                <div className='column is-one-third-desktop'>
+                <div className='column is-one-half-desktop'>
                     <ChartCard title='INCOME VS EXPENSES'>
                         <IncomeExpenseChart transactions={transactions}/>
-                    </ChartCard>
-                </div>
-                <div className='column is-one-third-desktop'>
-                    <ChartCard title='SPEND BREAKDOWN'>
-                        <TransactionCategoryChart accountId={props.bankAccount.id}/>
                     </ChartCard>
                 </div>
                 <div className="column is-one-third-desktop">

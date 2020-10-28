@@ -13,7 +13,7 @@ export function Identity(): JSX.Element {
                     <figure className="media-left ml-0">
                         <p className="image is-128x128">
                             <img className="is-rounded"
-                                src={`https://api.adorable.io/avatars/160/${encodeURIComponent(identity.fullName)}`}
+                                src={`https://robohash.org/${encodeURIComponent(identity.fullName)}`}
                                 alt="Placeholder image"/>
                         </p>
                     </figure>
