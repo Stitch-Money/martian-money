@@ -1,7 +1,7 @@
-import React, { Suspense, useLayoutEffect, useRef } from "react";
+import React, { Suspense, useRef } from "react";
 import { Canvas, ReactThreeFiber, useFrame } from "react-three-fiber";
 import dynamic from 'next/dynamic';
-import THREE, { Euler, InterpolateSmooth, Quaternion, Vector3 } from "three";
+import THREE, { Euler, Quaternion, Vector3 } from "three";
 
 type MarsKeyFrame = {
     time: number,
@@ -27,8 +27,12 @@ const marsKeyframes: MarsKeyFrame[] = [{
     transform: { position: new Vector3(0, -4, 4), rotation: new Euler(2 * Math.PI, 0, 0) }
 },
 {
+    time: 0.95,
+    transform: { position: new Vector3(0, 0, 0), rotation: new Euler(2 * Math.PI, 0, 0) }
+},
+{
     time: 1,
-    transform: { position: new Vector3(0, 4, 4), rotation: new Euler(2 * Math.PI, 0, 0) }
+    transform: { position: new Vector3(0, 4, 4), rotation: new Euler(2.1 * Math.PI, 0, 0) }
 }];
 
 if (!marsKeyframes.every((v, i) => i === 0 || marsKeyframes[i - 1].time <= marsKeyframes[i].time)) {
@@ -79,6 +83,9 @@ function getTime() {
     return scrollY / height;
 }
 
+
+
+
 const MarsScene = dynamic(
     () => import('../components/threeD/mars-scene'),
     { ssr: false }
@@ -107,7 +114,8 @@ function MarsCanvasContent() {
     });
 
     return <> <perspectiveCamera fov={100} />
-        <ambientLight />
+
+        <ambientLight color={'#efefef'} />
         <pointLight position={[10, 10, 10]} />
         <group position={[0, -4, 4]} ref={group}>
             <Suspense fallback={null}>
@@ -118,10 +126,14 @@ function MarsCanvasContent() {
 }
 
 export default function ThreeJsTest() {
-    return <div style={{ width: '100vw', height: '500vh', position: 'absolute', padding: 0, margin: 0 }}>
-        <div style={{ width: '100vw', height: '500vh', display: 'flex', position: 'absolute' }}>
+    return <div style={{
+        width: '100vw', height: '500vh', position: 'absolute', padding: 0, margin: 0,
+        background: 'linear-gradient(to bottom, #fff, #fff, #23074d,#23074d,#cc5333, #23074d)'
+    }}>
+        <div style={{ width: '100vw', height: '500vh', display: 'flex', position: 'absolute' }
+        } >
             <span style={{ width: '100%', height: '100%' }}>&nbsp;</span>
-        </div>
+        </ div>
         <Canvas style={{ width: '100vw', minHeight: '100vh', position: 'fixed' }} >
             <MarsCanvasContent />
         </Canvas>

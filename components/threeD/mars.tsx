@@ -5,13 +5,23 @@ import React, { Ref, useEffect, useRef, useState } from 'react'
 import { useGLTF } from '@react-three/drei/useGLTF'
 import { ReactThreeFiber } from 'react-three-fiber';
 import THREE, { Euler } from 'three';
+import { Stars } from '@react-three/drei';
 
 
 export function Mars(props: ReactThreeFiber.Object3DNode<THREE.Group, typeof THREE.Group>) {
   const gltf = useGLTF('/images/mars.glb');
 
-  return (
+  return (<group>
+    <Stars
+      radius={100} // Radius of the inner sphere (default=100)
+      depth={30} // Depth of area where stars should fit (default=50)
+      count={1000} // Amount of stars (default=5000)
+      factor={8} // Size factor (default=4)
+      saturation={0.6} // Saturation 0-1 (default=0)
+      fade
+    />
     <primitive object={gltf.scene}  {...props} />
+  </group>
   )
 }
 

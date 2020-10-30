@@ -7,9 +7,5 @@ import { Mars } from './mars';
 export default function MarsScene(props: ReactThreeFiber.Object3DNode<THREE.Group, typeof THREE.Group>) {
   // This reference will give us direct access to the mesh
 
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
-
-
   return <Mars />;
 }
