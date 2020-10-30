@@ -97,11 +97,11 @@ function MarsCanvasContent() {
             if (thisKeyframes.length > 1) {
                 const keyframeTime = (time - thisKeyframes[0].time) / (thisKeyframes[1]!.time - thisKeyframes[0].time);
                 const finalTransform = interpolateTransform(thisKeyframes[0].transform, thisKeyframes[1]!.transform, keyframeTime);
-                (maybeGroup.rotation as Euler).copy(finalTransform.rotation);
-                (maybeGroup.position as Vector3).copy(finalTransform.position);
+                (thisGroup.rotation as Euler).copy(finalTransform.rotation);
+                (thisGroup.position as Vector3).copy(finalTransform.position);
             } else {
-                (maybeGroup.rotation as Euler).copy(thisKeyframes[0].transform.rotation);
-                (maybeGroup.position as Vector3).copy(thisKeyframes[0].transform.position);
+                (thisGroup.rotation as Euler).copy(thisKeyframes[0].transform.rotation);
+                (thisGroup.position as Vector3).copy(thisKeyframes[0].transform.position);
             }
         }
     });
