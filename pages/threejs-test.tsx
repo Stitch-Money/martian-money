@@ -3,6 +3,7 @@ import { Canvas, ReactThreeFiber, useFrame } from "react-three-fiber";
 import dynamic from 'next/dynamic';
 import THREE, { Euler, Quaternion, Vector3 } from "three";
 import Footer from "components/footer/footer";
+import { Loader } from "@react-three/drei";
 
 type MarsKeyFrame = {
     time: number,
@@ -33,7 +34,7 @@ const marsKeyframes: MarsKeyFrame[] = [{
 },
 {
     time: 1,
-    transform: { position: new Vector3(0, 4, -10), rotation: new Euler(2.1 * Math.PI, 0, 0) }
+    transform: { position: new Vector3(0, 4, -10), rotation: new Euler(3 * Math.PI, 0, 0) }
 }];
 
 if (!marsKeyframes.every((v, i) => i === 0 || marsKeyframes[i - 1].time <= marsKeyframes[i].time)) {
@@ -218,6 +219,7 @@ export default function ThreeJsTest() {
         <Canvas style={{ width: '100vw', height: '100vh', position: 'fixed' }} >
             <MarsCanvasContent />
         </Canvas>
+
         <div style={{ height: '100%', width: '100%', position: 'absolute' }} className='three-landing-content'>
             <div className='marspage' style={{ height: '150vh' }} ref={page1Ref as any} id='page1'>
                 <a href="https://github.com/Stitch-Money/martian-money" className="github-corner" aria-label="View source on GitHub">
@@ -238,7 +240,7 @@ export default function ThreeJsTest() {
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                         <img width={'250px'} alt='Martian Money' src='/images/martianmoneylogo.svg' />
                     </div>
-                    <h2 style={{ position: 'absolute', color: '#ff5353', bottom: '20px' }}>“Finance for when this world is not enough”</h2>
+                    <h2 style={{ position: 'absolute', color: '#ff5353', bottom: '20px' }}>“Finance for when one world is not enough”</h2>
                 </div>
             </div>
             <div style={{ height: '100vh' }} className='marspage' id='page2' ref={page2Ref as any}>
