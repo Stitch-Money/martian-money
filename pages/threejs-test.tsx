@@ -1,15 +1,16 @@
-import React, { Suspense, useRef } from "react";
+import React, { DetailedHTMLProps, HTMLAttributes, MutableRefObject, Ref, Suspense, useEffect, useRef } from "react";
 import { Canvas, ReactThreeFiber, useFrame } from "react-three-fiber";
 import dynamic from 'next/dynamic';
 import THREE, { Euler, Quaternion, Vector3 } from "three";
+import Footer from "components/footer/footer";
 
 type MarsKeyFrame = {
     time: number,
     transform: Transform,
     apply?: (time: number, fracTillNextKeyframe: number, group: ReactThreeFiber.Object3DNode<THREE.Group, typeof THREE.Group>) => void
 };
-
 type Transform = { position: Vector3, rotation: Euler };
+
 
 const marsKeyframes: MarsKeyFrame[] = [{
     time: 0,
@@ -32,11 +33,31 @@ const marsKeyframes: MarsKeyFrame[] = [{
 },
 {
     time: 1,
-    transform: { position: new Vector3(0, 4, 4), rotation: new Euler(2.1 * Math.PI, 0, 0) }
+    transform: { position: new Vector3(0, 4, -10), rotation: new Euler(2.1 * Math.PI, 0, 0) }
 }];
 
 if (!marsKeyframes.every((v, i) => i === 0 || marsKeyframes[i - 1].time <= marsKeyframes[i].time)) {
-    throw new Error('Keyframes are not correctly ordered');
+    throw new Error('Mars Keyframes are not correctly ordered');
+}
+
+
+type ContentKeyFrame = {
+    time: number,
+    fullOpacity: number,
+    fullOpacityDuration?: number,
+    zeroOpacity: number
+};
+
+const contentKeyFrames: ContentKeyFrame[] = [
+    { time: 0, fullOpacity: 0.0, fullOpacityDuration: 0.2, zeroOpacity: 0.5 },
+    { time: 0.3, fullOpacity: 0.4, fullOpacityDuration: 0.4, zeroOpacity: 0.95 },
+    { time: 0.5, fullOpacity: 0.4, fullOpacityDuration: 0.4, zeroOpacity: 0.95 },
+    { time: 0.7, fullOpacity: 0.4, fullOpacityDuration: 0.4, zeroOpacity: 0.9 },
+    { time: 0.95, fullOpacity: 0.25, fullOpacityDuration: 0.75, zeroOpacity: 1.1 }
+];
+
+if (!contentKeyFrames.every((v, i) => i === 0 || contentKeyFrames[i - 1].time <= contentKeyFrames[i].time)) {
+    throw new Error('Content Keyframes are not correctly ordered');
 }
 
 
@@ -125,17 +146,131 @@ function MarsCanvasContent() {
     </>;
 }
 
+
+function calculateOpacity(keyframe: ContentKeyFrame, time: number) {
+    const start = keyframe.fullOpacity;
+    const end = keyframe.zeroOpacity;
+    const fullOpacityDuration = keyframe.fullOpacityDuration ?? 0;
+    const fadeStart = start + fullOpacityDuration;
+    if (time < start) {
+        return (time / start);
+    } else if (time >= start && time < fadeStart) {
+        return 1;
+    } else if (time < end) {
+        return (end - time) / (end - fadeStart);
+    } else {
+        return 0;
+    }
+}
+
+function applyContentKeyframes(refs: MutableRefObject<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> | undefined>[], time: number) {
+    const [current, maybeNext] = getCurrentAndNextKeyFrame(contentKeyFrames, time);
+    for (let i = 0; i < contentKeyFrames.length; ++i) {
+        let keyframe = contentKeyFrames[i];
+        let ref = refs[i];
+        if (keyframe && ref && ref.current) {
+            const refVal = ref.current;
+            if (!refVal.style) {
+                refVal.style = {};
+            }
+            if (current === keyframe) {
+                let internalTime = 0;
+                if (maybeNext) {
+                    let next = maybeNext;
+                    internalTime = (time - current.time) / (next.time - current.time);
+                } else {
+                    internalTime = (time - current.time) / (1 - current.time);
+                }
+                const opacity = `${calculateOpacity(keyframe, internalTime)}`;
+                refVal.style.opacity = opacity;
+            } else {
+                refVal.style.opacity = '0';
+            }
+        }
+    }
+}
+
 export default function ThreeJsTest() {
-    return <div style={{
-        width: '100vw', height: '500vh', position: 'absolute', padding: 0, margin: 0,
-        background: 'linear-gradient(to bottom, #fff, #fff, #23074d,#23074d,#cc5333, #23074d)'
-    }}>
-        <div style={{ width: '100vw', height: '500vh', display: 'flex', position: 'absolute' }
+    const page1Ref = useRef();
+    const page2Ref = useRef();
+    const page3Ref = useRef();
+    const page4Ref = useRef();
+    const page5Ref = useRef();
+
+    useEffect(() => {
+        if (window && window.addEventListener) {
+            const f = () => {
+                const time = getTime();
+                applyContentKeyframes([page1Ref, page2Ref, page3Ref, page4Ref, page5Ref], time);
+            };
+            f();
+            window.addEventListener('scroll', f, { passive: true });
+            return () => { window.removeEventListener('scroll', f) };
+        }
+    }, [page1Ref, page2Ref, page3Ref, page4Ref, page5Ref]);
+
+
+    return <div className='marsbackground' >
+        <div style={{ width: '100vw', height: '100%', display: 'flex', position: 'absolute' }
         } >
             <span style={{ width: '100%', height: '100%' }}>&nbsp;</span>
         </ div>
-        <Canvas style={{ width: '100vw', minHeight: '100vh', position: 'fixed' }} >
+        <Canvas style={{ width: '100vw', height: '100vh', position: 'fixed' }} >
             <MarsCanvasContent />
         </Canvas>
-    </div>;
+        <div style={{ height: '100%', width: '100%', position: 'absolute' }} className='three-landing-content'>
+            <div className='marspage' style={{ height: '150vh' }} ref={page1Ref as any} id='page1'>
+                <a href="https://github.com/Stitch-Money/martian-money" className="github-corner" aria-label="View source on GitHub">
+                    <svg width="80" height="80" viewBox="0 0 250 250" style={{
+                        fill: '#8733ff', color: '#fff', position: 'fixed', top: 0, border: 0, right: 0
+                    }} aria-hidden="true">
+                        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+                        <path
+                            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                            fill="currentColor"
+                            style={{ transformOrigin: '130px 106px' }} className="octo-arm">
+                        </path>
+                        <path
+                            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                            fill="currentColor" className="octo-body">
+                        </path></svg></a>
+                <div style={{ position: 'sticky', top: '5vh', height: '90vh' }}>
+                    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                        <img width={'250px'} alt='Martian Money' src='/images/martianmoneylogo.svg' />
+                    </div>
+                    <h2 style={{ position: 'absolute', color: '#ff5353', bottom: '20px' }}>“Finance for when this world is not enough”</h2>
+                </div>
+            </div>
+            <div style={{ height: '100vh' }} className='marspage' id='page2' ref={page2Ref as any}>
+                <div style={{ position: 'sticky', width: '100%', top: '5vh' }}>
+                    <h2 style={{ fontWeight: 600, fontSize: '2em', position: 'absolute', top: 0 }}>Rocket Advice</h2>
+                    <div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div style={{ height: '100vh' }} ref={page3Ref as any} className='marspage' id='page3'>
+                <div style={{ position: 'sticky', width: '100%', top: '5vh' }}>
+                    <h2 style={{ fontWeight: 600, fontSize: '2em', position: 'absolute', top: 0 }}>Dome Loans</h2>
+                    <div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div style={{ height: '100vh' }} className='marspage' id='page4' ref={page4Ref as any}>
+                <div style={{ position: 'sticky', width: '100%', top: '5vh' }}>
+                    <h2 style={{ fontWeight: 600, fontSize: '2em', position: 'absolute', top: 0 }}>Elevator Investments</h2>
+                    <div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div style={{ height: '100vh' }} className='marspage' id='page5' ref={page5Ref as any}>
+                <div className='footer'>
+                    A demo by&nbsp;<a target='#' href="https://stitch.money" ><img style={{ display: 'inline', height: '0.8em' }} alt='Stitch' src='/images/stitch-logo.svg' /></a>.
+                    The source code is <a href="https://opensource.org/licenses/mit-license.php">MIT</a> licensed, while the website content is licensed <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.<br /> Copyright © 2020 Stitch Money. All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </div >;
 }
