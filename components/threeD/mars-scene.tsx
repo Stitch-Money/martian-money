@@ -1,6 +1,6 @@
-import React, { Suspense, useRef, useState } from 'react'
-import { ReactThreeFiber, useFrame } from 'react-three-fiber'
-import THREE, { Euler } from 'three';
+import React from 'react';
+import { ReactThreeFiber } from 'react-three-fiber';
+import THREE from 'three';
 import { Mars } from './mars';
 
 
