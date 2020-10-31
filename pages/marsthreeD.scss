@@ -1,0 +1,64 @@
+.marspage {
+    text-align: center;
+    display: box;
+    box-sizing: border-box;
+    width: 100%;
+}
+.marsbackground {
+    width: 100%;
+    height: 550vh;
+    position: absolute;
+    box-sizing: content-box;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to bottom, #fff, #fff, #23074d,#23074d,#cc5333, #23074d);
+} 
+ 
+.marspage h2 {
+    font-weight: 600; 
+    font-size: 2em; 
+    color: white;
+    width: 100%;
+}
+
+.marspage .footer {
+    font-weight: 600; 
+    font-size: 1.1em; 
+    color: white;
+    width: 100%;
+    
+    background: none;
+    position: fixed; 
+    bottom: 10vh;
+}
+
+
+
+.github-corner:hover .octo-arm {
+	animation: octocat-wave 560ms ease-in-out
+}
+
+@keyframes octocat-wave {
+	0%,
+	100% {
+		transform: rotate(0)
+	}
+	20%,
+	60% {
+		transform: rotate(-25deg)
+	}
+	40%,
+	80% {
+		transform: rotate(10deg)
+	}
+}
+
+@media (max-width:500px) {
+	.github-corner:hover .octo-arm {
+		animation: none
+	}
+	.github-corner .octo-arm {
+		animation: octocat-wave 560ms ease-in-out
+	}
+}
+

@@ -8,12 +8,12 @@ export default function Index() {
     const [isReadMoreOpen, setReadMoreOpen] = useState(false);
 
     if (isReadMoreOpen) {
-        return <LearnMore onClose={() => setReadMoreOpen(false)}/>;
+        return <LearnMore onClose={() => setReadMoreOpen(false)} />;
     }
     return (
         <Layout>
-            <Landing/>
-            <Footer onReadMoreClick={() => setReadMoreOpen(true)}/>
+            <Landing />
+            <Footer onReadMoreClick={() => setReadMoreOpen(true)} />
         </Layout>
     );
 }
