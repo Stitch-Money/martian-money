@@ -182,7 +182,14 @@ function applyContentKeyframes(refs: MutableRefObject<DetailedHTMLProps<HTMLAttr
                 } else {
                     internalTime = (time - current.time) / (1 - current.time);
                 }
-                const opacity = `${calculateOpacity(keyframe, internalTime)}`;
+                const opacityValue = calculateOpacity(keyframe, internalTime)
+                const opacity = `${opacityValue}`;
+                if (opacityValue <= 0.0001) {
+                    refVal.style.visibility = 'hidden';
+                } else {
+                    refVal.style.visibility = 'unset';
+                }
+
                 refVal.style.opacity = opacity;
             } else {
                 refVal.style.opacity = '0';
@@ -212,8 +219,7 @@ export default function ThreeJsTest() {
 
 
     return <div className='marsbackground' >
-        <div style={{ width: '100vw', height: '100%', display: 'flex', position: 'absolute' }
-        } >
+        <div style={{ width: '100vw', height: '100%', display: 'flex', position: 'absolute' }} >
             <span style={{ width: '100%', height: '100%' }}>&nbsp;</span>
         </ div>
         <Canvas style={{ width: '100vw', height: '100vh', position: 'fixed' }} >
@@ -243,34 +249,49 @@ export default function ThreeJsTest() {
                     <h2 style={{ position: 'absolute', color: '#ff5353', bottom: '20px' }}>“Finance for when one world is not enough”</h2>
                 </div>
             </div>
-            <div style={{ height: '100vh' }} className='marspage' id='page2' ref={page2Ref as any}>
-                <div style={{ position: 'sticky', width: '100%', top: '5vh' }}>
-                    <h2 style={{ fontWeight: 600, fontSize: '2em', position: 'absolute', top: 0 }}>Rocket Advice</h2>
-                    <div>
-                        <p></p>
+            <div style={{ height: '120vh' }} className='marspage' id='page2' ref={page2Ref as any}>
+                <div className="section" style={{ position: 'sticky', width: '100%', top: '5vh', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                    <div className="container">
+                        <h2 style={{ fontWeight: 600, fontSize: '2em', color: '#27fcc9' }}>Rocket Advice</h2>
+                        <h3>A ticket to another world is not cheap</h3>
+                        <p>Rocket Advice provides smart, tailored financial planning
+                        that blends human versatility and advanced robo-advisors into a mix that will propel your finances to another world.</p>
+                        <div>
+                            <button style={{ backgroundColor: '#27fcc9', marginTop: '1.6em', color: '#000' }} className='button is-primary'>Start Saving</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div style={{ height: '100vh' }} ref={page3Ref as any} className='marspage' id='page3'>
-                <div style={{ position: 'sticky', width: '100%', top: '5vh' }}>
-                    <h2 style={{ fontWeight: 600, fontSize: '2em', position: 'absolute', top: 0 }}>Dome Loans</h2>
-                    <div>
-                        <p></p>
+            <div style={{ height: '120vh' }} ref={page3Ref as any} className='marspage' id='page3'>
+                <div className="section" style={{ position: 'sticky', width: '100%', top: '5vh', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                    <div className="container">
+                        <h2 style={{ fontWeight: 600, fontSize: '2em', color: '#fffdbd' }}>Dome Loans</h2>
+                        <h3>Live, Breath Mars Stylishly</h3>
+                        <p>Landing on mars is one small step for you and your family. Take the next giant leap with our competitive dome loans. Martian Money has the exclusive rights to home financing in the Muskian colonies,
+                            and every dome comes with a 2 year supply of Apple Air and Amazon H<sub>2</sub>O.</p>
+                        <div>
+                            <button style={{ backgroundColor: '#fffdbd', marginTop: '1.6em', color: '#000' }} className='button is-primary'>Apply Now</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div style={{ height: '100vh' }} className='marspage' id='page4' ref={page4Ref as any}>
-                <div style={{ position: 'sticky', width: '100%', top: '5vh' }}>
-                    <h2 style={{ fontWeight: 600, fontSize: '2em', position: 'absolute', top: 0 }}>Elevator Investments</h2>
-                    <div>
-                        <p></p>
+            <div style={{ height: '120vh' }} className='marspage' id='page4' ref={page4Ref as any}>
+                <div className="section" style={{ position: 'sticky', width: '100%', top: '5vh', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                    <div className="container">
+                        <h2 style={{ fontWeight: 600, fontSize: '2em', color: 'pink' }}>Elevator Investments</h2>
+                        <h3>Martian Derivatives, Stocks and FX</h3>
+                        <p>Our industry leading trading platform gives retail investors the power of the pros. 0% trading fees, and capped wallet funding mean a bigger piece of the pie. Our smart onboarding can get you trading in minutes.</p>
+                        <div>
+                            <button style={{ backgroundColor: 'pink', marginTop: '1.6em', color: '#000' }} className='button is-primary'>Start Trading</button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div style={{ height: '100vh' }} className='marspage' id='page5' ref={page5Ref as any}>
                 <div className='footer'>
-                    A demo by&nbsp;<a target='#' href="https://stitch.money" ><img style={{ display: 'inline', height: '0.8em' }} alt='Stitch' src='/images/stitch-logo.svg' /></a>.
-                    The source code is <a href="https://opensource.org/licenses/mit-license.php">MIT</a> licensed, while the website content is licensed <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.<br /> Copyright © 2020 Stitch Money. All Rights Reserved
+                    <p>A demo by&nbsp;<a target='#' href="https://stitch.money" ><img style={{ display: 'inline', height: '0.8em' }} alt='Stitch' src='/images/stitch-logo.svg' /></a>.
+                    The source code is <a href="https://opensource.org/licenses/mit-license.php">MIT</a> licensed, while the website content is licensed <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.</p>
+                    <p>Copyright © 2020 Stitch Money. All Rights Reserved</p>
                 </div>
             </div>
         </div>
