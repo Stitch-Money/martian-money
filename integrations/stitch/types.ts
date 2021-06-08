@@ -38,6 +38,7 @@ export type StitchRefreshTokenRequest = {
 export type BankAccountId = string & { __bankId__: null };
 export type TransactionId = string & { __transactionId__: null };
 export type DebitOrderId = string & { __transactionId__: null };
+export type StatementId = string & { __transactionId__: null };
 
 export type Money = {
     quantity: string
@@ -102,4 +103,14 @@ export type DebitOrder = {
     date: Date
     amount: Money
     reference: string
+}
+
+export type Statement = {
+    id: StatementId
+    certified: boolean
+    downloadUrl: string
+    filename: string
+    mimetype: string
+    startDate: Date
+    endDate: Date
 }

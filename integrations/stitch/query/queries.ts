@@ -78,6 +78,29 @@ export const DebitOrdersByBankAccountQuery = gql`
     }
 `;
 
+export const StatementsByBankAccountQuery = gql`
+    query StatementsByBankAccount($accountId: ID!) {
+        node(id: $accountId) {
+            ... on BankAccount {
+                statements {
+                    edges {
+                        node {
+                            certified
+                            downloadUrl
+                            filename
+                            id
+                            mimetype
+                            startDate
+                            endDate
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
+
+
 export const IdentityQuery = gql`
     query GetAccounts {
         user {

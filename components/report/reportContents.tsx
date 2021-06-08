@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
-import { DebitOrderResponse, TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
-import { DebitOrdersByBankAccountQuery, TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
+import { DebitOrderResponse, StatementResponse, TransactionsResponse } from '../../integrations/stitch/query/query-response-types';
+import { DebitOrdersByBankAccountQuery, StatementsByBankAccountQuery, TransactionsByBankAccountQuery } from '../../integrations/stitch/query/queries';
 import { IncomeExpenseChart } from './incomeExpenseChart';
 import React from 'react';
 import { Identity } from './identity';
@@ -8,6 +8,7 @@ import ChartCard from 'components/report/chart-card';
 import { BankAccount } from 'integrations/stitch/types';
 import TopExpensesCard from './top-expenses-card';
 import TopDebitOrderCard from 'components/report/top-debit-order-card';
+import TopStatementsCard from './statements';
 
 export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
@@ -21,6 +22,14 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
     });
 
     const debitOrders = debitOrderResponse.data?.node.debitOrderPayments.edges.map(x => x.node) ?? [];
+
+    const statementResponse = useQuery<StatementResponse>(StatementsByBankAccountQuery, {
+        variables: { accountId: props.bankAccount.id }
+    });
+
+    const statements = statementResponse.data?.node.statements.edges.map(x => x.node) ?? [];
+
+    console.log(JSON.stringify(statements));
 
     return (
         <>
@@ -56,6 +65,9 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
                 </div>
                 <div className="column is-one-third-desktop">
                     <TopDebitOrderCard debitOrders={debitOrders} />
+                </div>
+                <div className="column is-one-third-desktop">
+                    <TopStatementsCard statements={statements} />
                 </div>
             </div>
         </>
