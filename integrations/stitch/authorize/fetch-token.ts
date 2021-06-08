@@ -14,7 +14,6 @@ export async function retrieveTokenUsingAuthorizationCode(
     if (clientId === null) {
         throw new Error('ClientId was not found in storage. It needs to be set before the authorization redirect. This allows us to determine whether the real or test client was used.');
     }
-    console.log('using client id:', clientId);
 
     const body: StitchAccessTokenRequest = {
         grant_type: 'authorization_code',
@@ -33,7 +32,6 @@ export async function retrieveTokenUsingAuthorizationCode(
     });
 
     const tokenResponse = await response.json() as StitchAccessTokenResponse;
-    console.log('Token: ', tokenResponse);
 
     if ('error' in tokenResponse) {
         throw new Error('Oh no! Failed to fetch token!' + tokenResponse.error);
@@ -64,10 +62,8 @@ export async function refreshAuthorizationCode(refreshToken: string) {
     });
 
     const responseBody = await response.json();
-    console.log('Tokens: ', responseBody);
 
     const stitchAccessToken = responseBody as StitchAccessTokenResponse;
-    console.log('Tokens: ', stitchAccessToken);
 
     return stitchAccessToken;
 }

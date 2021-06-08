@@ -1,8 +1,14 @@
-import { BankAccount, DebitOrder, Identity, Transaction, TransactionCategory } from '../types';
+import { BankAccount, BankAccountHolder, DebitOrder, Identity, Transaction, TransactionCategory } from '../types';
 
 export type IdentityResponse = {
     user: {
         identity: Identity
+    }
+};
+
+export type AccountHolderResponse = {
+    user: {
+        bankAccounts: BankAccountHolder[]
     }
 };
 
