@@ -97,6 +97,10 @@ export type BankAccount = {
     currentBalance: Money
 };
 
+export type BankAccountHolder = {
+    accountHolder: Identity
+};
+
 export type DebitOrder = {
     id: DebitOrderId
     date: Date

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { IdentityResponse } from '../../integrations/stitch/query/query-response-types';
-import { IdentityQuery } from '../../integrations/stitch/query/queries';
+import { AccountHolderResponse } from '../../integrations/stitch/query/query-response-types';
+import { AccountHolderQuery } from '../../integrations/stitch/query/queries';
 
 export function Identity(): JSX.Element {
-    const identityQuery = useQuery<IdentityResponse>(IdentityQuery);
-    const identity = identityQuery.data?.user.identity;
+    const accountHolderQuery = useQuery<AccountHolderResponse>(AccountHolderQuery);
+    const identity = accountHolderQuery.data?.user.bankAccounts.find(b => b.accountHolder != null)?.accountHolder;
     if (identity) {
         return (
             <>
@@ -36,7 +36,8 @@ export function Identity(): JSX.Element {
 }
 
 function IdentityTableRow(props: { heading: string, value: string | undefined }): JSX.Element {
-    return <div className="field">
+    const display = props.value ? "block" : "none";
+    return <div style={{ display: `${display}` }} className="field">
         <span className="is-block has-text-grey has-text-weight-light is-size-7">{props.heading}</span>
         <span className="is-size-5 has-text-black">{props.value}</span>
     </div>;

@@ -104,3 +104,35 @@ export const IdentityQuery = gql`
         }
     }
 `;
+
+export const AccountHolderQuery = gql`
+    query GetAccounts {
+        user {
+            bankAccounts {
+                accountHolder {
+                    ... on Individual {
+                        gender
+                        fullName
+                        dateOfBirth
+                        email
+                        familyName
+                        givenName
+                        identifyingDocument {
+                            ... on IdentityDocument {
+                            __typename
+                            country
+                            number
+                            }
+                        }
+                        middleName
+                        nickname
+                        contact {
+                            name
+                            phoneNumber
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;

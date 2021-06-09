@@ -15,6 +15,11 @@ export default function Index() {
     const verifier = getSessionVerifier();
 
     useEffect(() => {
+        // User cancelled SSO flow so we should route the to select a new experience 
+        if (!code || !verifier) {
+            router.push('/select-experience').then(_ => {}, _ => {});
+        }
+
         async function retrieveToken(): Promise<void> {
             if (code && verifier) {
                 const response = await retrieveTokenUsingAuthorizationCode(`${code}`, verifier);
