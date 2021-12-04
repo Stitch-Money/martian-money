@@ -54,7 +54,9 @@ export type Identity = {
     gender?: string
     givenName?: string
     contact?: Contact
-    identifyingDocument?: IdentifyingDocument
+    identifyingDocument?: IdentifyingDocument,
+    name?: string
+    registrationNumber?: string
 };
 
 export type Contact = {
