@@ -19,10 +19,10 @@ export function ReportContents(props: { bankAccounts: BankAccount[]}): JSX.Eleme
                 <div className="columns is-12 mb-6">
                     <div className="column is-full">
                         <div className="level-item is-center">
-                            <img src="./images/approved-tick.svg" height="50px" width="100px" alt=""/>
+                            <img src="./images/logo.svg" height="50px" width="100px" alt=""/>
                         </div>
                         <div className="level-item is-center">
-                            <p className="approved is-size-2">DENIED</p>
+                            <p className="rejected is-size-2">DENIED</p>
                         </div>
                         <div className="level-item is-center">
                             <div className="column is-6">
