@@ -8,16 +8,40 @@ import ChartCard from 'components/report/chart-card';
 import { BankAccount } from 'integrations/stitch/types';
 import TopExpensesCard from './top-expenses-card';
 import TopDebitOrderCard from 'components/report/top-debit-order-card';
+import AccountsCard from './bank-accounts';
 
-export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element {
+export function ReportContents(props: { bankAccounts: BankAccount[]}): JSX.Element {
+    const bankAccounts = props.bankAccounts.filter(x => x.accountType === 'cheque' || x.accountType === 'current') ?? props.bankAccounts.find(x => x.accountType === 'savings');
+    const bankAccount = bankAccounts.sort(b => b.currentBalance.quantity).reverse()[0];
+    if (!bankAccount) {
+        return (
+            <>
+                <div className="columns is-12 mb-6">
+                    <div className="column is-full">
+                        <div className="level-item is-center">
+                            <img src="./images/approved-tick.svg" height="50px" width="100px" alt=""/>
+                        </div>
+                        <div className="level-item is-center">
+                            <p className="approved is-size-2">DENIED</p>
+                        </div>
+                        <div className="level-item is-center">
+                            <div className="column is-6">
+                                <p className="is-size-5 has-text-black has-text-centered">Your application for a dome-loan on Mars has failed, please try again!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </>
+        ); 
+    }
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
-        variables: { accountId: props.bankAccount.id }
+        variables: { accountId: bankAccount.id }
     });
 
     const transactions = transactionsResponse.data?.node.transactions.edges.map(x => x.node) ?? [];
 
     const debitOrderResponse = useQuery<DebitOrderResponse>(DebitOrdersByBankAccountQuery, {
-        variables: { accountId: props.bankAccount.id }
+        variables: { accountId: bankAccount.id }
     });
 
     const debitOrders = debitOrderResponse.data?.node.debitOrderPayments.edges.map(x => x.node) ?? [];
@@ -56,6 +80,9 @@ export function ReportContents(props: { bankAccount: BankAccount }): JSX.Element
                 </div>
                 <div className="column is-one-third-desktop">
                     <TopDebitOrderCard debitOrders={debitOrders} />
+                </div>
+                <div className="column is-one-third-desktop">
+                    <AccountsCard bankAccounts={props.bankAccounts} />
                 </div>
             </div>
         </>

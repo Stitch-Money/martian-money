@@ -40,7 +40,7 @@ export type TransactionId = string & { __transactionId__: null };
 export type DebitOrderId = string & { __transactionId__: null };
 
 export type Money = {
-    quantity: string
+    quantity: number
     currency: string
 };
 
