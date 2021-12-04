@@ -7,6 +7,8 @@ export function AccountsLine(account: BankAccount) {
             <div className="content">
                 { account.name }<br/>
                 <span className="has-text-grey has-text-weight-light is-size-7">{ (account.accountNumber) }</span>
+                <br></br>
+                <span className="has-text-grey has-text-weight-light is-size-7">{ (account.accountType) }</span>
             </div>
         </div>
         <div className="column"><strong>{ account.currentBalance.quantity }</strong></div>
