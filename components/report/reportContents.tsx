@@ -10,7 +10,7 @@ import TopExpensesCard from './top-expenses-card';
 import TopDebitOrderCard from 'components/report/top-debit-order-card';
 import AccountsCard from './bank-accounts';
 
-export function ReportContents(props: { bankAccounts: BankAccount[]}): JSX.Element {
+export function ReportContents(props: { bankAccounts: BankAccount[] }): JSX.Element {
     const bankAccounts = props.bankAccounts.filter(x => x.accountType === 'cheque' || x.accountType === 'current') ?? props.bankAccounts.find(x => x.accountType === 'savings');
     const bankAccount = bankAccounts.sort(b => b.currentBalance.quantity).reverse()[0];
     if (!bankAccount) {
