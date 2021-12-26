@@ -8,7 +8,7 @@ export type TransactionCategorySummary = {
 export type TransactionCategoriesSummary = TransactionCategorySummary[];
 
 function summarize(summary: TransactionCategoriesSummary, transaction: TransactionCategory): TransactionCategoriesSummary {
-    const quantity = Number.parseFloat(transaction.amount.quantity);
+    const quantity = (transaction.amount.quantity);
     const category = transaction.category;
     if (!category || quantity > 0) {
         // Only including expenses with categories.

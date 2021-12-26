@@ -31,7 +31,7 @@ function summarize(summary: IncomeExpenseSummary, transaction: Transaction): Inc
         summary.push(monthSummary);
     }
 
-    const quantity = Number.parseFloat(transaction.amount.quantity);
+    const quantity = (transaction.amount.quantity);
     if (quantity < 0) {
         monthSummary.expenses -= quantity;
     } else {
