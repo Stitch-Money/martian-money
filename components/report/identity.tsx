@@ -6,7 +6,6 @@ import { AccountHolderQuery } from '../../integrations/stitch/query/queries';
 export function Identity(): JSX.Element {
     const accountHolderQuery = useQuery<AccountHolderResponse>(AccountHolderQuery);
     const identity = accountHolderQuery.data?.user.bankAccounts.find(b => b.accountHolder != null)?.accountHolder;
-    console.log(JSON.stringify(identity));
     if (identity) {
         return (
             <>
@@ -29,7 +28,7 @@ export function Identity(): JSX.Element {
                 </article>
                 <IdentityTableRow heading="Communicator" value={identity.contact?.phoneNumber}/>
                 <IdentityTableRow heading="Email" value={identity.email}/>
-                <IdentityTableRow heading="Identifier" value={identity.identifyingDocument?.number ?? identity.registrationNumber}/>
+                <IdentityTableRow heading={identity.identifyingDocument?.number ? 'ID Number' : 'Registration Number'} value={identity.identifyingDocument?.number ?? identity.registrationNumber}/>
             </>
         );
     }
