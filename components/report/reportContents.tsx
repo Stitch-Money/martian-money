@@ -14,7 +14,7 @@ export function ReportContents(props: { bankAccounts: BankAccount[] }): JSX.Elem
     const chequeOrCurrentAccounts = props.bankAccounts.filter(x => x.accountType === 'cheque' || x.accountType === 'current');
     const savingsAccounts = props.bankAccounts.filter(x => x.accountType === 'savings');
     const bankAccounts = chequeOrCurrentAccounts.length !== 0 ? chequeOrCurrentAccounts : savingsAccounts;
-    const bankAccount = bankAccounts.sort(a, b => b.currentBalance.quantity - a.currentBalance.quantity)[0];
+    const bankAccount = bankAccounts.sort(b => b.currentBalance.quantity).reverse()[0];
     if (!bankAccount) {
         return (
             <>
@@ -34,7 +34,7 @@ export function ReportContents(props: { bankAccounts: BankAccount[] }): JSX.Elem
                     </div>
                 </div>
             </>
-        ); 
+        );
     }
     const transactionsResponse = useQuery<TransactionsResponse>(TransactionsByBankAccountQuery, {
         variables: { accountId: bankAccount.id }
