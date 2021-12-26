@@ -13,7 +13,7 @@ export function Identity(): JSX.Element {
                     <figure className="media-left ml-0">
                         <p className="image is-128x128">
                             <img className="is-rounded"
-                                src={`https://robohash.org/${encodeURIComponent(identity.fullName)}`}
+                                src={`https://robohash.org/${encodeURIComponent(identity.fullName ?? identity.name)}`}
                                 alt="Placeholder image"/>
                         </p>
                     </figure>
@@ -21,14 +21,14 @@ export function Identity(): JSX.Element {
                         <div className="content has-text-weight-light is-large">
                             <p>
                                 <span className="is-size-6">Earth Name</span><br/>
-                                <strong className="">{identity.fullName}</strong>
+                                <strong className="">{identity.fullName ?? identity.name}</strong>
                             </p>
                         </div>
                     </div>
                 </article>
                 <IdentityTableRow heading="Communicator" value={identity.contact?.phoneNumber}/>
                 <IdentityTableRow heading="Email" value={identity.email}/>
-                <IdentityTableRow heading="Identifier" value={identity.identifyingDocument?.number}/>
+                <IdentityTableRow heading={identity.identifyingDocument?.number ? 'ID Number' : 'Registration Number'} value={identity.identifyingDocument?.number ?? identity.registrationNumber}/>
             </>
         );
     }

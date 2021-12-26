@@ -131,6 +131,10 @@ export const AccountHolderQuery = gql`
                             phoneNumber
                         }
                     }
+                    ... on Business {
+                        registrationNumber
+                        name
+                    }
                 }
             }
         }

@@ -13,13 +13,12 @@ export default function Reports() {
         return <progress className="progress is-large is-info" max="100">60%</progress>;
     }
 
-    const bankAccount = bankAccountResponse.data?.user.bankAccounts.find(x => x.accountType === 'cheque') ??
-        bankAccountResponse.data?.user.bankAccounts[0];
+    const bankAccounts = bankAccountResponse.data?.user.bankAccounts;
 
-    if (bankAccount === undefined) {
+    if (bankAccounts === undefined) {
         throw new Error('No bank accounts retrieved from Stitch.');
     }
     return (
-        <ReportContents bankAccount={bankAccount} />
+        <ReportContents bankAccounts={bankAccounts} />
     );
 }

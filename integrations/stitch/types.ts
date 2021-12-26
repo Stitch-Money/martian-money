@@ -40,7 +40,7 @@ export type TransactionId = string & { __transactionId__: null };
 export type DebitOrderId = string & { __transactionId__: null };
 
 export type Money = {
-    quantity: string
+    quantity: number
     currency: string
 };
 
@@ -54,7 +54,9 @@ export type Identity = {
     gender?: string
     givenName?: string
     contact?: Contact
-    identifyingDocument?: IdentifyingDocument
+    identifyingDocument?: IdentifyingDocument,
+    name?: string
+    registrationNumber?: string
 };
 
 export type Contact = {
