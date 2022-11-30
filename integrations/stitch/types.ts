@@ -27,12 +27,14 @@ export type StitchAccessTokenRequest = {
     code: string
     redirect_uri: string
     code_verifier: string
+    client_secret: string | undefined
 };
 
 export type StitchRefreshTokenRequest = {
     grant_type: 'refresh_token'
     client_id: string
     refresh_token: string
+    client_secret: string | undefined
 };
 
 export type BankAccountId = string & { __bankId__: null };

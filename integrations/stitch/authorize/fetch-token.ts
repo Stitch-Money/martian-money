@@ -7,7 +7,7 @@ export async function retrieveTokenUsingAuthorizationCode(
     authorizationCode: string,
     codeVerifier: string
 ): Promise<StitchAccessTokenResponse> {
-    const { redirectUri, identityServerUri } = StitchConfiguration;
+    const { redirectUri, identityServerUri, clientSecret } = StitchConfiguration;
 
     const clientId = getClientIdForSession();
 
@@ -20,7 +20,8 @@ export async function retrieveTokenUsingAuthorizationCode(
         client_id: clientId,
         code: authorizationCode,
         redirect_uri: redirectUri,
-        code_verifier: codeVerifier
+        code_verifier: codeVerifier,
+        client_secret: clientSecret
     };
 
     const bodyString = getUrlEncodedFormData(body);
@@ -46,12 +47,13 @@ export async function retrieveTokenUsingAuthorizationCode(
  *   Refresh tokens are not used in the demo, but we've added an example below
  */
 export async function refreshAuthorizationCode(refreshToken: string) {
-    const { clientId, identityServerUri } = StitchConfiguration;
+    const { clientId, identityServerUri, clientSecret } = StitchConfiguration;
 
     const body: StitchRefreshTokenRequest = {
         grant_type: 'refresh_token',
         client_id: clientId,
-        refresh_token: refreshToken
+        refresh_token: refreshToken,
+        client_secret: clientSecret
     };
     const bodyString = Object.entries(body).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
 
@@ -63,7 +65,5 @@ export async function refreshAuthorizationCode(refreshToken: string) {
 
     const responseBody = await response.json();
 
-    const stitchAccessToken = responseBody as StitchAccessTokenResponse;
-
-    return stitchAccessToken;
+    return responseBody as StitchAccessTokenResponse;
 }
