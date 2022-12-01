@@ -6,7 +6,7 @@ import {
 import { StitchAuthorizationUrlParameters } from '../types';
 import { StitchConfiguration } from '../client';
 
-const stitchScopes: string[] = ['accountholders', 'balances', 'transactions', 'accounts', 'offline_access', 'openid'];
+const stitchScopes: string[] = ['accountholders', 'balances', 'transactions', 'accounts', 'openid'];
 
 export async function getStitchAuthorizationCodeUrl() {
     const clientId = StitchConfiguration.clientId;
