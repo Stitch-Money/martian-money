@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import CryptoJS from 'crypto-js';
 
 import { getUrlEncodedFormData } from '../../../integrations/stitch/authorize/utils';
 import { StitchConfiguration } from '../../../integrations/stitch/client';
@@ -39,6 +40,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         if ('error' in data) {
             throw new Error(`Failed to fetch token. ${data.error}`);
         }
+
+        const encryptedAccessToken = CryptoJS.AES.encrypt(
+            data.access_token, process.env.NEXT_PUBLIC_ENCRYPT_KEY
+        ).toString();
+        data.access_token = encryptedAccessToken;
 
         return res.status(200).json(data);
     } catch (e) {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { stitchClient } from 'integrations/stitch/query/stitch-api-client';
 import { ApolloClient } from '@apollo/client/core';
+import CryptoJS from 'crypto-js';
 import { getStitchAccessToken } from '../../integrations/storage/session-storage';
 
 export function StitchProvider(props: { children: JSX.Element | JSX.Element[] }): JSX.Element {
@@ -10,7 +11,12 @@ export function StitchProvider(props: { children: JSX.Element | JSX.Element[] })
 
     useEffect(() => {
         if (token) {
-            const client = stitchClient(token);
+            const decryptedToken = CryptoJS.AES.decrypt(
+                token,
+                process.env.NEXT_PUBLIC_ENCRYPT_KEY
+            ).toString(CryptoJS.enc.Utf8);
+
+            const client = stitchClient(decryptedToken);
             setClient(client);
         }
     }, [token]);

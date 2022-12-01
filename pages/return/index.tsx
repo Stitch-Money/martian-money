@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import {
-    getSessionVerifier,
-    getStitchAccessToken,
-    setStitchAccessToken
-} from '../../integrations/storage/session-storage';
+import { getSessionVerifier, setStitchAccessToken } from '../../integrations/storage/session-storage';
 import Layout from '../../components/layout';
 import Dome from '../../components/dome';
 
@@ -40,11 +36,7 @@ export default function Index() {
         }
 
         retrieveToken().then(_ => {
-            const token = getStitchAccessToken();
-
-            if (token) {
-                router.push('/report').then(_ => {}, _ => {});
-            }
+            router.push('/report').then(_ => {}, _ => {});
         }, () => {});
     }, [router, code, verifier]);
 
