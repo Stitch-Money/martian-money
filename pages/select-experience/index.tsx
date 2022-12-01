@@ -23,11 +23,11 @@ export default function SelectExperiencePage(): JSX.Element {
 
         <div className="buttons is-centered">
             <PrimaryButton href={testAuthorizeData.data?.url}
-                onClick={() => setAuthSessionVariables(StitchConfiguration.testClientId, testAuthorizeData.data?.nonce, testAuthorizeData.data?.verifier)}>Apply
+                onClick={() => setAuthSessionVariables(StitchConfiguration.testClientId, 'demo', testAuthorizeData.data?.nonce, testAuthorizeData.data?.verifier)}>Apply
                 with
                 demo info</PrimaryButton>
             <SecondaryButton href={authorizeData.data?.url}
-                onClick={() => setAuthSessionVariables(StitchConfiguration.clientId, authorizeData.data?.nonce, authorizeData.data?.verifier)}>Apply with
+                onClick={() => setAuthSessionVariables(StitchConfiguration.clientId, 'real', authorizeData.data?.nonce, authorizeData.data?.verifier)}>Apply with
                 my
                 info</SecondaryButton>
         </div>

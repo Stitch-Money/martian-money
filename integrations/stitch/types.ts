@@ -8,7 +8,7 @@ export type StitchAuthorizationUrlParameters = {
     redirect_uri: string
     state: string
     nonce: string
-    client_id: string
+    client_id: string | undefined
     code_challenge: string
 };
 
@@ -23,7 +23,7 @@ export type StitchAccessTokenResponse = {
 
 export type StitchAccessTokenRequest = {
     grant_type: 'authorization_code'
-    client_id: string
+    client_id: string | undefined
     code: string
     redirect_uri: string
     code_verifier: string
@@ -32,7 +32,7 @@ export type StitchAccessTokenRequest = {
 
 export type StitchRefreshTokenRequest = {
     grant_type: 'refresh_token'
-    client_id: string
+    client_id: string | undefined
     refresh_token: string
     client_secret: string | undefined
 };

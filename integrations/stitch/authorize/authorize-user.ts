@@ -18,11 +18,11 @@ export async function getStitchTestClientAuthorizationCodeUrl() {
     return await buildStitchAuthorizationCodeUrl(clientId);
 }
 
-export async function buildStitchAuthorizationCodeUrl(clientId: string) {
+export async function buildStitchAuthorizationCodeUrl(clientId: string | undefined) {
     return await buildAuthorizationUrl(clientId);
 }
 
-async function buildAuthorizationUrl(clientId: string): Promise<{ url: string, nonce: string, verifier: string }> {
+async function buildAuthorizationUrl(clientId: string | undefined): Promise<{ url: string, nonce: string, verifier: string }> {
     const state = generateRandomStateOrNonce();
     const nonce = generateRandomStateOrNonce();
     const [verifier, challenge] = await generateVerifierChallengePair();

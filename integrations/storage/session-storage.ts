@@ -31,14 +31,23 @@ export function getStitchAccessToken(): string | null {
     return getItem('stitchToken');
 }
 
-export function setClientIdForSession(clientId: string) {
+export function setClientIdForSession(clientId: string | undefined) {
     setItem('clientId', clientId);
 }
 
-export function setAuthSessionVariables(clientId: string, nonce?: string, verifier?: string) {
+export function setSessionExperience(sessionExperience: string) {
+    setItem('sessionExperience', sessionExperience);
+}
+
+export function getSessionExperience() {
+    return getItem('sessionExperience');
+}
+
+export function setAuthSessionVariables(clientId: string | undefined, sessionExperience: string, nonce?: string, verifier?: string) {
     setSessionNonce(nonce ?? '');
     setSessionVerifier(verifier ?? '');
     setClientIdForSession(clientId);
+    setSessionExperience(sessionExperience);
 }
 
 export function getClientIdForSession() {

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { retrieveTokenUsingAuthorizationCode } from 'integrations/stitch/authorize/fetch-token';
 import {
     getSessionVerifier,
     getStitchAccessToken,
@@ -22,13 +21,21 @@ export default function Index() {
 
         async function retrieveToken(): Promise<void> {
             if (code && verifier) {
-                const response = await retrieveTokenUsingAuthorizationCode(`${code}`, verifier);
+                const response = await fetch('/api/stitch/retrieve-token', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        authorization_code: code,
+                        code_verifier: verifier
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
 
-                if ('error' in response) {
-                    throw new Error('Failed to fetch token.' + response.error);
+                if (response.status === 200) {
+                    const data = await response.json();
+                    setStitchAccessToken(data.access_token);
                 }
-
-                setStitchAccessToken(response.access_token);
             }
         }
 
