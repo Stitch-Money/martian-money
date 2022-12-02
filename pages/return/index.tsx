@@ -16,7 +16,7 @@ export default function Index() {
 
     useEffect(() => {
         // User cancelled SSO flow, so we should route them to select a new experience
-        if (!code && !verifier) {
+        if (!code || !verifier) {
             router.push('/select-experience').then(_ => {}, _ => {});
         }
 
