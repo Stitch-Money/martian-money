@@ -1,13 +1,15 @@
-import { getSessionExperience } from '../../../integrations/storage/session-storage';
 import { StitchConfiguration } from '../../../integrations/stitch/client';
+import { SessionExperience } from '../../../util/enums';
 
-export function fetchClientConfig() {
+export function fetchClientConfig(sessionExperience: string | null): [string, any, any] {
     const {
         identityServerUri, testClientId, clientId, testClientSecret, clientSecret
     } = StitchConfiguration;
-    const sessionExperience = getSessionExperience();
-    const reqClientId = sessionExperience === 'demo' ? testClientId : clientId;
-    const reqClientSecret = sessionExperience === 'demo' ? testClientSecret : clientSecret;
+
+    const isDemo = sessionExperience === SessionExperience.demo;
+
+    const reqClientId = isDemo ? testClientId : clientId;
+    const reqClientSecret = isDemo ? testClientSecret : clientSecret;
 
     return [identityServerUri, reqClientId, reqClientSecret];
 }

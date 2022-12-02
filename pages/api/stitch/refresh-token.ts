@@ -6,6 +6,7 @@ import {
     StitchRefreshTokenRequest
 } from '../../../integrations/stitch/types';
 import { fetchClientConfig } from './utils';
+import { getSessionExperience } from '../../../integrations/storage/session-storage';
 
 /*
  *   Refresh tokens are not used in the demo, but we've added an example below
@@ -16,7 +17,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         return res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 
-    const [identityServerUri, clientId, clientSecret] = fetchClientConfig();
+    const session_experience = getSessionExperience();
+    const [identityServerUri, clientId, clientSecret] = fetchClientConfig(session_experience);
 
     const body: StitchRefreshTokenRequest = {
         grant_type: 'refresh_token',

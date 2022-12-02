@@ -1,12 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import CryptoJS from 'crypto-js';
 
 import { getUrlEncodedFormData } from '../../../integrations/stitch/authorize/utils';
 import { StitchConfiguration } from '../../../integrations/stitch/client';
-import {
-    StitchAccessTokenRequest,
-    StitchAccessTokenResponse
-} from '../../../integrations/stitch/types';
+import { StitchAccessTokenRequest, StitchAccessTokenResponse } from '../../../integrations/stitch/types';
 import { fetchClientConfig } from './utils';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<StitchAccessTokenResponse>) {
@@ -15,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         return res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 
-    const [identityServerUri, clientId, clientSecret] = fetchClientConfig();
+    const [identityServerUri, clientId, clientSecret] = fetchClientConfig(req.body.session_experience);
 
     const body: StitchAccessTokenRequest = {
         grant_type: 'authorization_code',
@@ -28,27 +24,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     const bodyString = getUrlEncodedFormData(body);
 
-    try {
-        const result = await fetch(`${identityServerUri}/connect/token`, {
-            method: req.method,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: bodyString
-        });
+    const result = await fetch(`${identityServerUri}/connect/token`, {
+        method: req.method,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: bodyString
+    });
 
-        const data = await result.json();
+    const data = await result.json();
 
-        if ('error' in data) {
-            throw new Error(`Failed to fetch token. ${data.error}`);
-        }
-
-        const encryptedAccessToken = CryptoJS.AES.encrypt(
-            data.access_token, process.env.NEXT_PUBLIC_ENCRYPT_KEY
-        ).toString();
-        data.access_token = encryptedAccessToken;
-
-        return res.status(200).json(data);
-    } catch (e) {
-        console.error(e);
-        res.status(500).end(e);
+    if ('error' in data) {
+        return res.status(500).json(data);
     }
+
+    return res.status(200).json(data);
 }

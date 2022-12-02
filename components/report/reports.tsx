@@ -12,7 +12,6 @@ export default function Reports() {
     }
 
     if (error) {
-        // usually an expired or invalid token
         console.error(error.message);
         throw new Error(error.message);
     }

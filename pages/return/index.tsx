@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getSessionVerifier, setStitchAccessToken } from '../../integrations/storage/session-storage';
+import {
+    getSessionExperience,
+    getSessionVerifier,
+    getStitchAccessToken,
+    setStitchAccessToken
+} from '../../integrations/storage/session-storage';
 import Layout from '../../components/layout';
 import Dome from '../../components/dome';
 
@@ -17,26 +22,35 @@ export default function Index() {
 
         async function retrieveToken(): Promise<void> {
             if (code && verifier) {
-                const response = await fetch('/api/stitch/retrieve-token', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        authorization_code: code,
-                        code_verifier: verifier
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
+                const session_experience = getSessionExperience();
 
-                if (response.status === 200) {
+                try {
+                    const response = await fetch('/api/stitch/retrieve-token', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            authorization_code: code,
+                            code_verifier: verifier,
+                            session_experience
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
                     const data = await response.json();
                     setStitchAccessToken(data.access_token);
+                } catch (e) {
+                    console.error(e);
                 }
             }
         }
 
         retrieveToken().then(_ => {
-            router.push('/report').then(_ => {}, _ => {});
+            const token = getStitchAccessToken();
+
+            if (token) {
+                router.push('/report').then(_ => {}, _ => {});
+            }
         }, () => {});
     }, [router, code, verifier]);
 

@@ -16,7 +16,6 @@
     "@fortawesome/react-fontawesome": "^0.1.11",
     "@react-three/drei": "^2.2.3",
     "bulma": "^0.9.1",
-    "crypto-js": "^4.1.1",
     "date-fns": "^2.11.1",
     "decimal.js": "^10.2.1",
     "graphql": "^15.3.0",

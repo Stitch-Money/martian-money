@@ -1,3 +1,5 @@
+import { SessionExperience } from '../../util/enums';
+
 export function setSessionNonce(nonce: string) {
     if (typeof window !== 'undefined') {
         sessionStorage.setItem('stitchNonce', nonce);
@@ -31,27 +33,18 @@ export function getStitchAccessToken(): string | null {
     return getItem('stitchToken');
 }
 
-export function setClientIdForSession(clientId: string | undefined) {
-    setItem('clientId', clientId);
-}
-
-export function setSessionExperience(sessionExperience: string) {
+export function setSessionExperience(sessionExperience: SessionExperience) {
     setItem('sessionExperience', sessionExperience);
 }
 
-export function getSessionExperience() {
+export function getSessionExperience(): string | null {
     return getItem('sessionExperience');
 }
 
-export function setAuthSessionVariables(clientId: string | undefined, sessionExperience: string, nonce?: string, verifier?: string) {
+export function setAuthSessionVariables(sessionExperience: SessionExperience, nonce?: string, verifier?: string) {
     setSessionNonce(nonce ?? '');
     setSessionVerifier(verifier ?? '');
-    setClientIdForSession(clientId);
     setSessionExperience(sessionExperience);
-}
-
-export function getClientIdForSession() {
-    return getItem('clientId');
 }
 
 function setItem(key: string, value: any) {
