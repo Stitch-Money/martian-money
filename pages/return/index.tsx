@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { retrieveTokenUsingAuthorizationCode } from 'integrations/stitch/authorize/fetch-token';
 import {
+    getSessionExperience,
     getSessionVerifier,
     getStitchAccessToken,
     setStitchAccessToken
@@ -15,20 +15,33 @@ export default function Index() {
     const verifier = getSessionVerifier();
 
     useEffect(() => {
-        // TODO: User cancelled SSO flow so we should route the to select a new experience 
-        // if (!code || !verifier) {
-        //     router.push('/select-experience').then(_ => {}, _ => {});
-        // }
+        // User cancelled SSO flow, so we should route them to select a new experience
+        if (!code || !verifier) {
+            router.push('/select-experience').then(_ => {}, _ => {});
+        }
 
         async function retrieveToken(): Promise<void> {
             if (code && verifier) {
-                const response = await retrieveTokenUsingAuthorizationCode(`${code}`, verifier);
+                const session_experience = getSessionExperience();
 
-                if ('error' in response) {
-                    throw new Error('Failed to fetch token.' + response.error);
+                try {
+                    const response = await fetch('/api/stitch/retrieve-token', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            authorization_code: code,
+                            code_verifier: verifier,
+                            session_experience
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    const data = await response.json();
+                    setStitchAccessToken(data.access_token);
+                } catch (e) {
+                    console.error(e);
                 }
-
-                setStitchAccessToken(response.access_token);
             }
         }
 

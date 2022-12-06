@@ -8,7 +8,7 @@ export type StitchAuthorizationUrlParameters = {
     redirect_uri: string
     state: string
     nonce: string
-    client_id: string
+    client_id: string | undefined
     code_challenge: string
 };
 
@@ -17,22 +17,24 @@ export type StitchAccessTokenResponse = {
     access_token: string
     expires_in: number
     token_type: StitchTokenType
-    refresh_token: string
+    refresh_token?: string
     scope: StitchScope[]
 } | { error: string };
 
 export type StitchAccessTokenRequest = {
     grant_type: 'authorization_code'
-    client_id: string
+    client_id: string | undefined
     code: string
     redirect_uri: string
     code_verifier: string
+    client_secret: string | undefined
 };
 
 export type StitchRefreshTokenRequest = {
     grant_type: 'refresh_token'
-    client_id: string
+    client_id: string | undefined
     refresh_token: string
+    client_secret: string | undefined
 };
 
 export type BankAccountId = string & { __bankId__: null };

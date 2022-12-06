@@ -7,9 +7,9 @@ import useSWR from 'swr';
 import { PrimaryButton } from '../../components/buttons/primary-button';
 import { SecondaryButton } from '../../components/buttons/secondary-button';
 import { setAuthSessionVariables } from '../../integrations/storage/session-storage';
-import { StitchConfiguration } from '../../integrations/stitch/client';
 import { useRouter } from 'next/router';
 import { ExplainerLayout } from '../../components/explainer/explainer-layout';
+import { SessionExperience } from '../../util/enums';
 
 export default function SelectExperiencePage(): JSX.Element {
     const authorizeData = useSWR('stitchUrl', getStitchAuthorizationCodeUrl);
@@ -23,11 +23,11 @@ export default function SelectExperiencePage(): JSX.Element {
 
         <div className="buttons is-centered">
             <PrimaryButton href={testAuthorizeData.data?.url}
-                onClick={() => setAuthSessionVariables(StitchConfiguration.testClientId, testAuthorizeData.data?.nonce, testAuthorizeData.data?.verifier)}>Apply
+                onClick={() => setAuthSessionVariables(SessionExperience.demo, testAuthorizeData.data?.nonce, testAuthorizeData.data?.verifier)}>Apply
                 with
                 demo info</PrimaryButton>
             <SecondaryButton href={authorizeData.data?.url}
-                onClick={() => setAuthSessionVariables(StitchConfiguration.clientId, authorizeData.data?.nonce, authorizeData.data?.verifier)}>Apply with
+                onClick={() => setAuthSessionVariables(SessionExperience.real, authorizeData.data?.nonce, authorizeData.data?.verifier)}>Apply with
                 my
                 info</SecondaryButton>
         </div>
