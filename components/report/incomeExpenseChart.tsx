@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend } from 'recharts';
-import { number } from 'prop-types';
 import { Transaction } from '../../integrations/stitch/types';
 import { getIncomeAndExpenses } from '../../util/income-expense-summary';
 
@@ -11,10 +10,11 @@ export function IncomeExpenseChart(props: { transactions: Transaction[] | undefi
     );
 
     function getLabelFormatter(label: any) {
-        if (label instanceof number) {
-            return label;
+        if (typeof label === 'string') {
+            return label.charAt(0).toUpperCase() + label.slice(1);
         }
-        return label.charAt(0).toUpperCase() + label.slice(1);
+
+        return label;
     }
 
     const valueFormatter = (value: any) => `R${value}`;
